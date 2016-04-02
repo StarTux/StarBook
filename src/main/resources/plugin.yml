@@ -1,0 +1,11 @@
+name: StarBook
+description: Collection of useful Commands
+author: StarTux
+version: 0.1
+main: com.winthier.starbook.StarBookPlugin
+depend: []
+commands:
+  slap:
+    permission: 'starbook.slap'
+    usage: '/slap [-vhs] <player>'
+permissions: {}
