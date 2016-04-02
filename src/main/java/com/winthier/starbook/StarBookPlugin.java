@@ -6,5 +6,6 @@ public class StarBookPlugin extends JavaPlugin {
 
     @Override public void onEnable() {
         getCommand("slap").setExecutor(new SlapCommand());
+        getCommand("spawnmob").setExecutor(new SpawnMobCommand(this));
     }
 }

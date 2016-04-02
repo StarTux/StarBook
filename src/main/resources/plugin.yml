@@ -6,6 +6,9 @@ main: com.winthier.starbook.StarBookPlugin
 depend: []
 commands:
   slap:
-    permission: 'starbook.slap'
+    permission: starbook.slap
     usage: '/slap [-vhs] <player>'
+  spawnmob:
+    permission: starbook.spawnmob
+    usage: '/spawnmob <mob> [amount]'
 permissions: {}
