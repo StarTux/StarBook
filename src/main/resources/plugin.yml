@@ -16,4 +16,6 @@ commands:
     usage: '/spawnmob <mob> [amount]'
   cropcliff:
     permission: starbook.cropcliff
+  spawnwater:
+    permission: starbook.spawnwater
 permissions: {}
