@@ -8,5 +8,6 @@ public class StarBookPlugin extends JavaPlugin {
         getCommand("slap").setExecutor(new SlapCommand());
         getCommand("spawnmob").setExecutor(new SpawnMobCommand(this));
         getCommand("sound").setExecutor(new SoundCommand());
+        getCommand("cropcliff").setExecutor(new CropCliffCommand());
     }
 }

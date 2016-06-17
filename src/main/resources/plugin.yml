@@ -14,4 +14,6 @@ commands:
   spawnmob:
     permission: starbook.spawnmob
     usage: '/spawnmob <mob> [amount]'
+  cropcliff:
+    permission: starbook.cropcliff
 permissions: {}
