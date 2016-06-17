@@ -8,6 +8,9 @@ commands:
   slap:
     permission: starbook.slap
     usage: '/slap [-vhs] <player>'
+  sound:
+    permission: starbook.sound
+    usage: '/sound <soundname>'
   spawnmob:
     permission: starbook.spawnmob
     usage: '/spawnmob <mob> [amount]'

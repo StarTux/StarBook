@@ -12,4 +12,8 @@ class StarBookCommandException extends RuntimeException {
     static void playerExpected() {
         throw new StarBookCommandException("Player expected");
     }
+
+    static void usage(CommandContext context) {
+        throw new StarBookCommandException(context);
+    }
 }
