@@ -14,6 +14,9 @@ commands:
   spawnmob:
     permission: starbook.spawnmob
     usage: '/spawnmob <mob> [amount]'
+  playertime:
+    permission: starbook.playertime
+    usage: '/playertime reset|<time>'
   cropcliff:
     permission: starbook.cropcliff
   spawnwater:
