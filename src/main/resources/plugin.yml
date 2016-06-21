@@ -10,7 +10,7 @@ commands:
     usage: '/slap [-vhs] <player>'
   rocket:
     permission: starbook.rocket
-    usage: '/slap [-hs] <player>'
+    usage: '/rocket [-hs] <player>'
   sound:
     permission: starbook.sound
     usage: '/sound <soundname>'
