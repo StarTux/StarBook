@@ -8,6 +8,9 @@ commands:
   slap:
     permission: starbook.slap
     usage: '/slap [-vhs] <player>'
+  rocket:
+    permission: starbook.rocket
+    usage: '/slap [-hs] <player>'
   sound:
     permission: starbook.sound
     usage: '/sound <soundname>'
@@ -17,8 +20,4 @@ commands:
   playertime:
     permission: starbook.playertime
     usage: '/playertime reset|<time>'
-  cropcliff:
-    permission: starbook.cropcliff
-  spawnwater:
-    permission: starbook.spawnwater
 permissions: {}
