@@ -5,6 +5,9 @@ version: 0.1
 main: com.winthier.starbook.StarBookPlugin
 depend: []
 commands:
+  test:
+    permission: starbook.test
+    usage: '/test'
   slap:
     permission: starbook.slap
     usage: '/slap [-vhs] <player>'

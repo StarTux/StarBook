@@ -29,9 +29,9 @@ class RocketCommand extends AbstractCommand {
         if (!everybody && target == null) throw new StarBookCommandException(c);
         Vector velo;
         if (high) {
-            velo = new Vector(0.0, random.nextDouble() * 10.0, 0.0);
+            velo = new Vector(0.0, 5.0, 0.0);
         } else {
-            velo = new Vector(0.0, random.nextDouble() * 2.0, 0.0);
+            velo = new Vector(0.0, 1.0, 0.0);
         }
         String targetName;
         if (everybody) {
