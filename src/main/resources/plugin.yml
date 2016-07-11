@@ -23,4 +23,9 @@ commands:
   playertime:
     permission: starbook.playertime
     usage: '/playertime reset|<time>'
+  time:
+    permission: starbook.time
+    usage: '/time <time>'
+  cropcliff:
+    permission: starbook.cropcliff
 permissions: {}

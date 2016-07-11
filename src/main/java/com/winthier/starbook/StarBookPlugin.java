@@ -11,7 +11,8 @@ public class StarBookPlugin extends JavaPlugin {
         getCommand("spawnmob").setExecutor(new SpawnMobCommand(this));
         getCommand("sound").setExecutor(new SoundCommand());
         getCommand("playertime").setExecutor(new PlayerTimeCommand());
-        // getCommand("cropcliff").setExecutor(new CropCliffCommand());
+        getCommand("time").setExecutor(new TimeCommand());
+        getCommand("cropcliff").setExecutor(new CropCliffCommand());
         // getCommand("spawnwater").setExecutor(new SpawnWaterCommand());
     }
 }
