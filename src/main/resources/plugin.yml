@@ -25,7 +25,10 @@ commands:
     usage: '/playertime reset|<time>'
   time:
     permission: starbook.time
-    usage: '/time <time>'
+    usage: '/time [time]'
+  moon:
+    permission: starbook.moon
+    usage: '/moon'
   cropcliff:
     permission: starbook.cropcliff
 permissions: {}

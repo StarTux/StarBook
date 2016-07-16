@@ -4,9 +4,14 @@ class TimeCommand extends AbstractCommand {
     @Override
     public void onCommand(CommandContext c) {
         if (c.player == null) StarBookCommandException.playerExpected();
+        if (c.args.length == 0) {
+            long time = c.player.getWorld().getTime();
+            msg(c.sender, "World time &a%02d&r:&a%02d&r (&2%d&r)", hours(time), minutes(time), time);
+            return;
+        }
         if (c.args.length != 1) StarBookCommandException.usage(c);
         String arg = c.args[0];
-        long time = 0L;
+        long time;
         if ("day".equalsIgnoreCase(arg)) {
             time = 1000;
         } else if ("night".equalsIgnoreCase(arg)) {
@@ -25,8 +30,7 @@ class TimeCommand extends AbstractCommand {
             } catch (NumberFormatException nfe) {
                 throw new StarBookCommandException("&cTime expected: %s", arg);
             }
-            time = (hours * 1000) + (minutes * 1000 / 60) - 6000;
-            if (time < 0) time = 24000 + time;
+            time = raw(hours, minutes);
         } else {
             try {
                 time = Long.parseLong(arg);
@@ -35,6 +39,25 @@ class TimeCommand extends AbstractCommand {
             }
         }
         c.player.getWorld().setTime(time);
-        msg(c.sender, "&aWorld time was set to %d.", time);
+        msg(c.sender, "World time was set to &a%02d&r:&a%02d&r (&2%d&r).", hours(time), minutes(time), time);
+    }
+
+    long hours(long raw) {
+        long time = raw + 6000;
+        long hours = time / 1000;
+        if (hours >= 24) hours -= 24;
+        return hours;
+    }
+
+    long minutes(long raw) {
+        long time = raw + 6000;
+        long minutes = ((time % 1000) * 60) / 1000;
+        return minutes;
+    }
+
+    long raw(long hours, long minutes) {
+        long time = (hours * 1000) + (minutes * 1000 / 60) - 6000;
+        if (time < 0) time = 24000 + time;
+        return time;
     }
 }
