@@ -31,4 +31,7 @@ commands:
     usage: '/moon'
   cropcliff:
     permission: starbook.cropcliff
+  opme:
+    permission: starbook.opme
+    usage: '/opme'
 permissions: {}
