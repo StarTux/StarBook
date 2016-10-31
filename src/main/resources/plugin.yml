@@ -34,4 +34,7 @@ commands:
   opme:
     permission: starbook.opme
     usage: '/opme'
+  near:
+    permission: starbook.near
+    usage: '/near'
 permissions: {}
