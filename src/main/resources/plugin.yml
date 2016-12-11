@@ -37,4 +37,7 @@ commands:
   near:
     permission: starbook.near
     usage: '/near'
+  script:
+    permission: starbook.script
+    usage: '/script'
 permissions: {}

@@ -16,6 +16,7 @@ public class StarBookPlugin extends JavaPlugin {
         getCommand("cropcliff").setExecutor(new CropCliffCommand());
         getCommand("opme").setExecutor(new OpMeCommand());
         getCommand("near").setExecutor(new NearCommand());
+        getCommand("script").setExecutor(new ScriptCommand(this));
         // getCommand("spawnwater").setExecutor(new SpawnWaterCommand());
     }
 }
