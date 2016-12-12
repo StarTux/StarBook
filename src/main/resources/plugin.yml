@@ -16,7 +16,7 @@ commands:
     usage: '/rocket [-hs] <player>'
   sound:
     permission: starbook.sound
-    usage: '/sound <soundname>'
+    usage: '/sound <soundname> [volume] [pitch] [target]'
   spawnmob:
     permission: starbook.spawnmob
     usage: '/spawnmob <mob> [amount]'
