@@ -45,4 +45,7 @@ commands:
     aliases: [ wehl ]
     permission: starbook.wehl
     usage: '/wehl'
+  getblock:
+    permission: starbook.getblock
+    usage: '/getblock'
 permissions: {}

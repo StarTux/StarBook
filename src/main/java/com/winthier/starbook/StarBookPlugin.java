@@ -18,6 +18,7 @@ public class StarBookPlugin extends JavaPlugin {
         getCommand("near").setExecutor(new NearCommand());
         getCommand("script").setExecutor(new ScriptCommand(this));
         getCommand("worldedithighlight").setExecutor(new WorldEditHighlightCommand(this));
+        getCommand("getblock").setExecutor(new GetBlockCommand(this));
         // getCommand("spawnwater").setExecutor(new SpawnWaterCommand());
     }
 }
