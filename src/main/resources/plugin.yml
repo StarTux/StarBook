@@ -48,4 +48,10 @@ commands:
   getblock:
     permission: starbook.getblock
     usage: '/getblock'
+  listdepends:
+    permission: starbook.listdepends
+    aliases: [ listdepend, lsdepends, lsdepend ]
+    usage: |-
+      /listdepends <plugin>
+      /listdepends database
 permissions: {}
