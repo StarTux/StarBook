@@ -20,6 +20,7 @@ public class StarBookPlugin extends JavaPlugin {
         getCommand("worldedithighlight").setExecutor(new WorldEditHighlightCommand(this));
         getCommand("getblock").setExecutor(new GetBlockCommand(this));
         getCommand("plugininfo").setExecutor(new PluginInfoCommand());
+        getCommand("poof").setExecutor(new PoofCommand(this));
         // getCommand("spawnwater").setExecutor(new SpawnWaterCommand());
     }
 }

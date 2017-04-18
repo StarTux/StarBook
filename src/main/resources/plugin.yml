@@ -56,4 +56,8 @@ commands:
       /plugininfo depends <plugin>
       /plugininfo database
       /plugininfo author <name>
+  poof:
+    permission: starbook.poof
+    aliases: [ vanish ]
+    usage: /poof - vanish/reappear
 permissions: {}
