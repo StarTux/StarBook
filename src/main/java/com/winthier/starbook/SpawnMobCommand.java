@@ -56,6 +56,6 @@ class SpawnMobCommand extends AbstractCommand {
             if (!result) break;
             count += 1;
         }
-        msg(c.player, "&eSpaned %d times!", count);
+        msg(c.player, "&eSpawned %d times!", count);
     }
 }
