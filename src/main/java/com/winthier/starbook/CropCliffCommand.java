@@ -22,7 +22,7 @@ class CropCliffCommand extends AbstractCommand {
                 Block block = loc.getWorld().getBlockAt(x, y, z);
                 Material mat = block.getType();
                 if (mat == Material.AIR ||
-                    (!mat.isOccluding() && !mat.isSolid())) {
+                    (!mat.isOccluding() && !mat.isSolid() && !block.isLiquid())) {
                     Block b2 = loc.getWorld().getBlockAt(x, y - 1, z);
                     Material m2 = b2.getType();
                     if (m2.isOccluding() &&
