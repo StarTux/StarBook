@@ -4,7 +4,7 @@ author: StarTux
 version: 0.1
 main: com.winthier.starbook.StarBookPlugin
 depend: []
-softdepend: [WorldEdit]
+softdepend: [ WorldEdit, PlayerCache ]
 commands:
   test:
     permission: starbook.test
