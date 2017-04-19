@@ -17,11 +17,11 @@ class PoofCommand extends AbstractCommand {
         if (c.player.getGameMode() == GameMode.SPECTATOR) {
             restoreGameMode(c.player);
             if (c.player.getGameMode() == GameMode.SPECTATOR) c.player.setGameMode(GameMode.SURVIVAL);
-            msg(c.player, "&eYou vanished!");
+            msg(c.player, "&eYou reappeared!");
         } else {
             storeGameMode(c.player);
             c.player.setGameMode(GameMode.SPECTATOR);
-            msg(c.player, "&eYou reappeared!");
+            msg(c.player, "&eYou vanished!");
         }
     }
 
