@@ -12,6 +12,6 @@ class GetBlockCommand extends AbstractCommand {
         if (c.player == null) StarBookCommandException.playerExpected();
         Block block = c.player.getLocation().getBlock();
         int data = (int)block.getData();
-        msg(c.player, "%s:%d (%s)", block.getType(), data, Integer.toBinaryString(data));
+        msg(c.player, "%s:%d (%d:%d) [%s]", block.getType(), data, block.getType().getId(), data, Integer.toBinaryString(data));
     }
 }
