@@ -17,7 +17,7 @@ public abstract class AbstractCommand implements TabExecutor {
             if (sbce.isUsage()) {
                 return false;
             } else {
-                msg(sender, "&cUsage: %s", sbce.getMessage());
+                msg(sender, "&c%s", sbce.getMessage());
             }
         }
         return true;
