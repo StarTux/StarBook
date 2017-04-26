@@ -1,7 +1,10 @@
 package com.winthier.starbook;
 
-class StarBookCommandException extends RuntimeException {
-    boolean usage;
+import lombok.Getter;
+
+@Getter
+final class StarBookCommandException extends RuntimeException {
+    private boolean usage;
 
     StarBookCommandException(String msg, Object... args) {
         super(AbstractCommand.format(msg, args));

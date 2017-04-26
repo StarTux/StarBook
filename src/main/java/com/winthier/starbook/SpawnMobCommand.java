@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 @RequiredArgsConstructor
-class SpawnMobCommand extends AbstractCommand {
+final class SpawnMobCommand extends AbstractCommand {
     final StarBookPlugin plugin;
 
     Map<String, String> getMobs() {
@@ -18,7 +18,7 @@ class SpawnMobCommand extends AbstractCommand {
         }
         return mobs;
     }
-    
+
     @Override
     public void onCommand(CommandContext c) {
         if (c.player == null) StarBookCommandException.playerExpected();

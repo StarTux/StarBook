@@ -4,7 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 
-class SpawnWaterCommand extends AbstractCommand {
+final class SpawnWaterCommand extends AbstractCommand {
     @Override
     public void onCommand(CommandContext c) {
         if (c.player == null) StarBookCommandException.playerExpected();
@@ -34,8 +34,8 @@ class SpawnWaterCommand extends AbstractCommand {
         while (true) {
             block = block.getRelative(0, -1, 0);
             if (block.getY() < 0) return;
-            if (block.getType() == Material.AIR ||
-                block.getType() == Material.STATIONARY_WATER) {
+            if (block.getType() == Material.AIR
+                || block.getType() == Material.STATIONARY_WATER) {
                 block.setType(Material.WATER, false);
             }
         }

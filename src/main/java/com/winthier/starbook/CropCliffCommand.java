@@ -4,7 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 
-class CropCliffCommand extends AbstractCommand {
+final class CropCliffCommand extends AbstractCommand {
     @Override
     public void onCommand(CommandContext c) {
         if (c.player == null) StarBookCommandException.playerExpected();
@@ -21,12 +21,11 @@ class CropCliffCommand extends AbstractCommand {
             for (int x = cx - radius; x <= cx + radius; ++x) {
                 Block block = loc.getWorld().getBlockAt(x, y, z);
                 Material mat = block.getType();
-                if (mat == Material.AIR ||
-                    (!mat.isOccluding() && !mat.isSolid() && !block.isLiquid())) {
+                if (mat == Material.AIR
+                    || (!mat.isOccluding() && !mat.isSolid() && !block.isLiquid())) {
                     Block b2 = loc.getWorld().getBlockAt(x, y - 1, z);
                     Material m2 = b2.getType();
-                    if (m2.isOccluding() &&
-                        m2.isSolid()) {
+                    if (m2.isOccluding() && m2.isSolid()) {
                         clearLine(b2);
                         count += 1;
                     }

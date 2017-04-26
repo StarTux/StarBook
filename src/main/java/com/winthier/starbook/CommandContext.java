@@ -1,18 +1,15 @@
 package com.winthier.starbook;
 
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import java.util.List;
 
-class CommandContext {
-    CommandSender sender;
-    Command command;
-    Player player;
-    String label;
-    String[] args;
-    List<String> tabCompletions = null;
+final class CommandContext {
+    final CommandSender sender;
+    final Command command;
+    final Player player;
+    final String label;
+    final String[] args;
 
     CommandContext(CommandSender sender, Command command, String label, String[] args) {
         this.sender = sender;

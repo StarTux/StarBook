@@ -1,11 +1,12 @@
 package com.winthier.starbook;
 
-import org.bukkit.Sound;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 @RequiredArgsConstructor
-class SoundCommand extends AbstractCommand {
+final class SoundCommand extends AbstractCommand {
     final StarBookPlugin plugin;
 
     @Override
@@ -47,14 +48,15 @@ class SoundCommand extends AbstractCommand {
     }
 
     @Override
-    public void onTabComplete(CommandContext c) {
-        if (c.args.length != 1) return;
-        c.tabCompletions = emptyTabList();
+    public List<String> onTabComplete(CommandContext c) {
+        if (c.args.length != 1) return null;
+        List<String> result = emptyTabList();
         String cmd = c.args[0].toLowerCase();
         for (Sound sound: Sound.values()) {
             if (sound.name().toLowerCase().startsWith(cmd)) {
-                c.tabCompletions.add(sound.name());
+                result.add(sound.name());
             }
         }
+        return result;
     }
 }
