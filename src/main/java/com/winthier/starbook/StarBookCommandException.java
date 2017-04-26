@@ -1,12 +1,15 @@
 package com.winthier.starbook;
 
 class StarBookCommandException extends RuntimeException {
+    boolean usage;
+
     StarBookCommandException(String msg, Object... args) {
         super(AbstractCommand.format(msg, args));
     }
 
     StarBookCommandException(CommandContext context) {
         super(context.command.getUsage());
+        this.usage = true;
     }
 
     static void playerExpected() {

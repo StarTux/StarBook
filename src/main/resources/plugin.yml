@@ -60,4 +60,10 @@ commands:
     permission: starbook.poof
     aliases: [ vanish ]
     usage: /poof - vanish/reappear
+  heal:
+    permission: starbook.heal
+    usage: /heal <player> - Fill health bar
+  feed:
+    permission: starbook.feed
+    usage: /feed <player> - Fill hunger bar
 permissions: {}

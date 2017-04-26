@@ -15,7 +15,11 @@ public abstract class AbstractCommand implements TabExecutor {
         try {
             onCommand(context);
         } catch (StarBookCommandException sbce) {
-            msg(sender, "&cUsage: %s", sbce.getMessage());
+            if (sbce.usage) {
+                return false;
+            } else {
+                msg(sender, "&cUsage: %s", sbce.getMessage());
+            }
         }
         return true;
     }

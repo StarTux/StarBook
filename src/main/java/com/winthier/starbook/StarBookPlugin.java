@@ -21,6 +21,8 @@ public class StarBookPlugin extends JavaPlugin {
         getCommand("getblock").setExecutor(new GetBlockCommand(this));
         getCommand("plugininfo").setExecutor(new PluginInfoCommand());
         getCommand("poof").setExecutor(new PoofCommand(this));
+        getCommand("heal").setExecutor(new HealCommand());
+        getCommand("feed").setExecutor(new HealCommand());
         // getCommand("spawnwater").setExecutor(new SpawnWaterCommand());
     }
 }
