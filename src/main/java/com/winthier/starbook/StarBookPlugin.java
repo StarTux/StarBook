@@ -23,6 +23,7 @@ public class StarBookPlugin extends JavaPlugin {
         getCommand("poof").setExecutor(new PoofCommand(this));
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("feed").setExecutor(new HealCommand());
+        getCommand("starve").setExecutor(new HealCommand());
         // getCommand("spawnwater").setExecutor(new SpawnWaterCommand());
     }
 }

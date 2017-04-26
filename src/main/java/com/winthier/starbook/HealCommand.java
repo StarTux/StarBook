@@ -19,6 +19,10 @@ final class HealCommand extends AbstractCommand {
             target.setFoodLevel(20);
             target.setSaturation(20.0f);
             msg(c.sender, "%s fed.", target.getName());
+        } else if (c.label.equalsIgnoreCase("starve")) {
+            target.setFoodLevel(0);
+            target.setSaturation(0.0f);
+            msg(c.sender, "%s starved.", target.getName());
         } else {
             target.setHealth(target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
             msg(c.sender, "%s healed.", target.getName());

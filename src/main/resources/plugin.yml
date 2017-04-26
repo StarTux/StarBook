@@ -66,4 +66,7 @@ commands:
   feed:
     permission: starbook.feed
     usage: /feed <player> - Fill hunger bar
+  starve:
+    permission: starbook.starve
+    usage: /starve <player> - Empty hunger bar
 permissions: {}
