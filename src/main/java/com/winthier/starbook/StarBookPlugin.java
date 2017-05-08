@@ -25,5 +25,11 @@ public class StarBookPlugin extends JavaPlugin {
         getCommand("feed").setExecutor(new HealCommand());
         getCommand("starve").setExecutor(new HealCommand());
         // getCommand("spawnwater").setExecutor(new SpawnWaterCommand());
+        getCommand("winthier").setExecutor(new ServerCommand(this));
+        getCommand("winnilla").setExecutor(new ServerCommand(this));
+        getCommand("creative").setExecutor(new ServerCommand(this));
+        getCommand("hub").setExecutor(new ServerCommand(this));
+        getCommand("museum").setExecutor(new ServerCommand(this));
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }
 }

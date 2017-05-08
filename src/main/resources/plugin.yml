@@ -69,4 +69,14 @@ commands:
   starve:
     permission: starbook.starve
     usage: /starve <player> - Empty hunger bar
+  winthier:
+    permission: starbook.server
+  winnilla:
+    permission: starbook.server
+  creative:
+    permission: starbook.server
+  hub:
+    permission: starbook.server
+  museum:
+    permission: starbook.server
 permissions: {}
