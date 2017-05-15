@@ -51,6 +51,14 @@ final class PluginInfoCommand extends AbstractCommand {
                     count += 1;
                 }
             }
+        } else if (cmd.equals("nauthor") && arg != null) {
+            c.sender.sendMessage("Plugins not being (co)authored by " + arg + ":");
+            for (Plugin plugin: Bukkit.getServer().getPluginManager().getPlugins()) {
+                if (!plugin.getDescription().getAuthors().contains(arg)) {
+                    c.sender.sendMessage("- " + plugin.getName());
+                    count += 1;
+                }
+            }
         } else {
             StarBookCommandException.usage(c);
         }
