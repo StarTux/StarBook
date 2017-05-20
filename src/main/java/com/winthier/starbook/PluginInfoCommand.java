@@ -1,7 +1,9 @@
 package com.winthier.starbook;
 
 import org.bukkit.Bukkit;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.RegisteredListener;
 
 final class PluginInfoCommand extends AbstractCommand {
     @Override
@@ -58,6 +60,21 @@ final class PluginInfoCommand extends AbstractCommand {
                     c.sender.sendMessage("- " + plugin.getName());
                     count += 1;
                 }
+            }
+        } else if (cmd.equals("listen") && arg != null) {
+            HandlerList handlers;
+            try {
+                Class clazz = Class.forName(arg);
+                handlers = (HandlerList)clazz.getMethod("getHandlerList").invoke(null);
+            } catch (Exception e) {
+                e.printStackTrace();
+                c.sender.sendMessage("Event class not found: " + arg + ". See console.");
+                return;
+            }
+            c.sender.sendMessage("Plugins not being listening to " + arg + ":");
+            for (RegisteredListener listener: handlers.getRegisteredListeners()) {
+                c.sender.sendMessage("- " + listener.getPlugin().getName() + " (" + listener.getPriority() + ")");
+                count += 1;
             }
         } else {
             StarBookCommandException.usage(c);

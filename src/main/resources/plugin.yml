@@ -53,10 +53,11 @@ commands:
     aliases: [ pluginfo ]
     usage: |-
       /plugininfo list
-      /plugininfo depends <plugin>
+      /plugininfo depend <plugin>
       /plugininfo database
       /plugininfo author <name>
       /plugininfo nauthor <name>
+      /plugininfo listen <event>
   poof:
     permission: starbook.poof
     aliases: [ vanish ]
