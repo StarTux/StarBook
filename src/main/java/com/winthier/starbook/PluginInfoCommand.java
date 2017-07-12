@@ -25,14 +25,6 @@ final class PluginInfoCommand extends AbstractCommand {
                 c.sender.sendMessage("- " + plugin.getName());
                 count += 1;
             }
-        } else if (cmd.equals("database") && arg == null) {
-            c.sender.sendMessage("Plugins with database enabled:");
-            for (Plugin plugin: Bukkit.getServer().getPluginManager().getPlugins()) {
-                if (plugin.getDescription().isDatabaseEnabled()) {
-                    c.sender.sendMessage("- " + plugin.getName());
-                    count += 1;
-                }
-            }
         } else if ((cmd.equals("depend") || cmd.equals("depends")) && arg != null) {
             c.sender.sendMessage("Plugins depending on " + arg + ":");
             for (Plugin plugin: Bukkit.getServer().getPluginManager().getPlugins()) {
