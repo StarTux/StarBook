@@ -1,9 +1,12 @@
 package com.winthier.starbook;
 
+import org.bukkit.ChatColor;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class StarBookPlugin extends JavaPlugin {
-
+public class StarBookPlugin extends JavaPlugin implements Listener {
     @Override public void onEnable() {
         getCommand("test").setExecutor(new TestCommand());
         getCommand("slap").setExecutor(new SlapCommand());
@@ -31,5 +34,20 @@ public class StarBookPlugin extends JavaPlugin {
         getCommand("hub").setExecutor(new ServerCommand(this));
         getCommand("museum").setExecutor(new ServerCommand(this));
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        getServer().getPluginManager().registerEvents(this, this);
+    }
+
+    @EventHandler
+    public void onSignChange(SignChangeEvent event) {
+        if (!event.getPlayer().hasPermission("starbook.signcolor")) return;
+        for (int i = 0; i < 4; i += 1) {
+            String line = event.getLine(i);
+            if (line == null) continue;
+            line = ChatColor.translateAlternateColorCodes('&', line);
+            if (!event.getPlayer().hasPermission("starbook.signcolor.magic")) {
+                line = line.replace(ChatColor.MAGIC.toString(), "");
+            }
+            event.setLine(i, line);
+        }
     }
 }
