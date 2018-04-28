@@ -12,6 +12,6 @@ class GetBlockCommand extends AbstractCommand {
         if (c.player == null) StarBookCommandException.playerExpected();
         Block block = c.player.getLocation().getBlock();
         int data = (int)block.getData();
-        msg(c.player, "%s:%d (%d:%d[%s]) light=%d (sky=%d block=%d)", block.getType(), data, block.getType().getId(), data, Integer.toBinaryString(data), block.getLightLevel(), block.getLightFromSky(), block.getLightFromBlocks());
+        msg(c.player, "%s:%d (%d:%d) l=%d (sky=%d b=%d) t=%.2f", block.getType(), data, block.getType().getId(), data, block.getLightLevel(), block.getLightFromSky(), block.getLightFromBlocks(), block.getTemperature());
     }
 }
