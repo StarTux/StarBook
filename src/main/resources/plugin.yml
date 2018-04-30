@@ -60,6 +60,7 @@ commands:
       /plugininfo nauthor <name>
       /plugininfo listen <event>
       /plugininfo permission <permission>
+      /plugininfo command <cmd>
   poof:
     permission: starbook.poof
     aliases: [ vanish ]

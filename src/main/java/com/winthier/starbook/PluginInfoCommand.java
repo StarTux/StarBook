@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.bukkit.Bukkit;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.event.HandlerList;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.Plugin;
@@ -114,6 +115,22 @@ final class PluginInfoCommand extends AbstractCommand {
                 }
                 Set ps = perm.getPermissibles();
                 c.sender.sendMessage("Permissibles: " + (ps == null ? 0 : ps.size()));
+            }
+        } else if ((cmd.equals("command") || cmd.equals("cmd")) && arg != null) {
+            PluginCommand pcmd = Bukkit.getServer().getPluginCommand(arg);
+            if (pcmd == null) {
+                c.sender.sendMessage("Plugin command not found: " + arg);
+            } else {
+                count = 1;
+                c.sender.sendMessage("Name: " + pcmd.getName());
+                c.sender.sendMessage("Plugin: " + pcmd.getPlugin().getName());
+                c.sender.sendMessage("Aliases: " + pcmd.getAliases());
+                c.sender.sendMessage("Description: " + pcmd.getDescription());
+                c.sender.sendMessage("Label: " + pcmd.getLabel());
+                c.sender.sendMessage("Permission: " + pcmd.getPermission());
+                c.sender.sendMessage("PermissionMessage: " + pcmd.getPermissionMessage());
+                c.sender.sendMessage("Usage: " + pcmd.getUsage());
+                c.sender.sendMessage("Registered: " + pcmd.isRegistered());
             }
         } else {
             StarBookCommandException.usage(c);
