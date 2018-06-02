@@ -4,7 +4,7 @@ author: StarTux
 version: 0.1
 main: com.winthier.starbook.StarBookPlugin
 depend: []
-softdepend: [ WorldEdit, PlayerCache ]
+softdepend: [ WorldEdit, PlayerCache, Vault, Connect ]
 commands:
   test:
     permission: starbook.test
@@ -30,6 +30,11 @@ commands:
     permission: starbook.playertime
     description: Change the time for your client
     usage: '/playertime reset|<time>'
+  who:
+    aliases: [ list, ls, online ]
+    permission: starbook.who
+    description: List players on all servers
+    usage: '/who'
   time:
     permission: starbook.time
     usage: '/time [time]'

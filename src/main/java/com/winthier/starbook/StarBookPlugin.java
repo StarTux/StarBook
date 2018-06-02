@@ -4,10 +4,15 @@ import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class StarBookPlugin extends JavaPlugin implements Listener {
+    private WhoCommand whoCommand = null;
+
     @Override public void onEnable() {
+        reloadConfig();
+        saveDefaultConfig();
         getCommand("test").setExecutor(new TestCommand());
         getCommand("slap").setExecutor(new SlapCommand());
         getCommand("rocket").setExecutor(new RocketCommand());
@@ -35,6 +40,8 @@ public class StarBookPlugin extends JavaPlugin implements Listener {
         getCommand("hub").setExecutor(new ServerCommand(this));
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         getServer().getPluginManager().registerEvents(this, this);
+        whoCommand = new WhoCommand(this);
+        getCommand("who").setExecutor(whoCommand);
     }
 
     @EventHandler
@@ -48,6 +55,15 @@ public class StarBookPlugin extends JavaPlugin implements Listener {
                 line = line.replace(ChatColor.MAGIC.toString(), "");
             }
             event.setLine(i, line);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        if (getConfig().getBoolean("who.ShowOnLogin")) {
+            if (event.getPlayer().hasPermission("starbook.who")) {
+                whoCommand.showOnlineList(event.getPlayer());
+            }
         }
     }
 }
