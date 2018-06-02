@@ -78,17 +78,25 @@ final class WhoCommand extends AbstractCommand {
         Msg.msg(player, "&9%s Player List (&f%d&9)", Connect.getInstance().getServer().getDisplayName(), totalCount);
         for (String serverName: serverNames) {
             OnlinePlayer[] playerArray = serverList.get(serverName).toArray(new OnlinePlayer[0]);
-            if (playerArray.length == 0 && !player.hasPermission("starbook.server." + serverName.toLowerCase())) continue;
+            String perm = "starbook.server." + serverName.toLowerCase();
+            if (playerArray.length == 0 && !player.hasPermission(perm)) continue;
             Arrays.sort(playerArray, new Comparator<OnlinePlayer>() {
                     @Override public int compare(OnlinePlayer a, OnlinePlayer b) { return String.CASE_INSENSITIVE_ORDER.compare(a.getName(), b.getName()); }
                     @Override public boolean equals(Object o) { return this == o; }
                 });
             List<Object> json = new ArrayList<>();
             json.add(" ");
-            json.add(Msg.button(ChatColor.BLUE,
-                                Msg.format("&7%s(&f%d&7)", serverName, playerArray.length),
-                                serverName + " Server\n&7&o/" + serverName.toLowerCase(),
-                                "/" + serverName.toLowerCase() + " "));
+            if (player.isPermissionSet(perm) && player.hasPermission(perm)) {
+                json.add(Msg.button(ChatColor.BLUE,
+                                    Msg.format("&7%s(&f%d&7)", serverName, playerArray.length),
+                                    serverName + " Server\n&7&o/" + serverName.toLowerCase(),
+                                    "/" + serverName.toLowerCase() + " "));
+            } else {
+                json.add(Msg.button(ChatColor.BLUE,
+                                    Msg.format("&7%s(&f%d&7)", serverName, playerArray.length),
+                                    serverName + " Server",
+                                    null));
+            }
             for (OnlinePlayer online: playerArray) {
                 json.add(" ");
                 if (isStaff(online.getUuid())) {
