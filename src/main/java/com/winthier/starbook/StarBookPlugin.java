@@ -13,6 +13,7 @@ public class StarBookPlugin extends JavaPlugin implements Listener {
         getCommand("rocket").setExecutor(new RocketCommand());
         getCommand("spawnmob").setExecutor(new SpawnMobCommand(this));
         getCommand("sound").setExecutor(new SoundCommand(this));
+        getCommand("particles").setExecutor(new ParticleCommand(this));
         getCommand("playertime").setExecutor(new PlayerTimeCommand());
         getCommand("time").setExecutor(new TimeCommand());
         getCommand("moon").setExecutor(new MoonCommand());
@@ -32,7 +33,6 @@ public class StarBookPlugin extends JavaPlugin implements Listener {
         getCommand("winnilla").setExecutor(new ServerCommand(this));
         getCommand("creative").setExecutor(new ServerCommand(this));
         getCommand("hub").setExecutor(new ServerCommand(this));
-        getCommand("museum").setExecutor(new ServerCommand(this));
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         getServer().getPluginManager().registerEvents(this, this);
     }

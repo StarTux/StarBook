@@ -11,7 +11,6 @@ final class SoundCommand extends AbstractCommand {
 
     @Override
     public void onCommand(CommandContext c) {
-        if (c.player == null) StarBookCommandException.playerExpected();
         if (c.args.length < 1) StarBookCommandException.usage(c);
         Sound sound;
         try {
@@ -39,12 +38,26 @@ final class SoundCommand extends AbstractCommand {
             if (pitch <= 0.0f || pitch > 2.0f) throw new StarBookCommandException("Bad pitch arg: %.2f", pitch);
         }
         Player target = c.player;
+        boolean everyone = false;
         if (c.args.length >= 4) {
-            target = plugin.getServer().getPlayerExact(c.args[3]);
-            if (target == null) throw new StarBookCommandException("Player not found: %s", c.args[3]);
+            if ("*".equals(c.args[3])) {
+                everyone = true;
+            } else {
+                target = plugin.getServer().getPlayerExact(c.args[3]);
+                if (target == null) throw new StarBookCommandException("Player not found: %s", c.args[3]);
+            }
+        } else {
+            if (c.player == null) StarBookCommandException.playerExpected();
         }
-        target.playSound(target.getEyeLocation(), sound, volume, pitch);
-        msg(c.sender, "Playing sound for %s: %s volume=%.2f pitch=%.2f", target.getName(), sound.name(), volume, pitch);
+        if (everyone) {
+            for (Player target2: plugin.getServer().getOnlinePlayers()) {
+                target2.playSound(target2.getEyeLocation(), sound, volume, pitch);
+                msg(c.sender, "Playing sound for %s: %s volume=%.2f pitch=%.2f", target2.getName(), sound.name(), volume, pitch);
+            }
+        } else {
+            target.playSound(target.getEyeLocation(), sound, volume, pitch);
+            msg(c.sender, "Playing sound for %s: %s volume=%.2f pitch=%.2f", target.getName(), sound.name(), volume, pitch);
+        }
     }
 
     @Override

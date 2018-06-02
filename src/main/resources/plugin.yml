@@ -17,12 +17,18 @@ commands:
     usage: '/rocket [-hs] <player>'
   sound:
     permission: starbook.sound
+    description: Play sound effects in your ears
     usage: '/sound <soundname> [volume] [pitch] [target]'
+  particles:
+    permission: starbook.particles
+    description: Show particles in front of your face
+    usage: '/particles <particle> [count] [offset] [extra] [data]'
   spawnmob:
     permission: starbook.spawnmob
     usage: '/spawnmob <mob> [amount]'
   playertime:
     permission: starbook.playertime
+    description: Change the time for your client
     usage: '/playertime reset|<time>'
   time:
     permission: starbook.time
@@ -75,13 +81,18 @@ commands:
     permission: starbook.starve
     usage: /starve <player> - Empty hunger bar
   winthier:
-    permission: starbook.server
+    permission: starbook.server.winthier
   winnilla:
-    permission: starbook.server
+    permission: starbook.server.winnilla
   creative:
-    permission: starbook.server
+    permission: starbook.server.creative
   hub:
-    permission: starbook.server
-  museum:
-    permission: starbook.server
-permissions: {}
+    permission: starbook.server.hub
+permissions:
+  starbook.server.*:
+    default: op
+    children:
+      starbook.server.winthier: true
+      starbook.server.winnilla: true
+      starbook.server.creative: true
+      starbook.server.hub: true
