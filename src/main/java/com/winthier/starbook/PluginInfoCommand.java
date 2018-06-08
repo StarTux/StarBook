@@ -89,7 +89,9 @@ final class PluginInfoCommand extends AbstractCommand {
             HandlerList handlers;
             try {
                 Class clazz = Class.forName(arg);
-                handlers = (HandlerList)clazz.getMethod("getHandlerList").invoke(null);
+                @SuppressWarnings("unchecked")
+                HandlerList tmp = (HandlerList)clazz.getMethod("getHandlerList").invoke(null);
+                handlers = tmp;
             } catch (Exception e) {
                 e.printStackTrace();
                 c.sender.sendMessage("Event class not found: " + arg + ". See console.");
