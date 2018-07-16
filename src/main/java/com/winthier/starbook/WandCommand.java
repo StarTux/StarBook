@@ -60,7 +60,9 @@ final class WandCommand extends AbstractCommand implements Listener {
                     msg(c.player, "&eSelection wand disabled, selection cleared");
                 } else {
                     c.player.setMetadata(WAND_KEY, new FixedMetadataValue(plugin, true));
-                    c.player.getInventory().addItem(new ItemStack(Material.WOODEN_SHOVEL));
+                    if (!c.player.getInventory().contains(Material.WOODEN_SHOVEL)) {
+                        c.player.getInventory().addItem(new ItemStack(Material.WOODEN_SHOVEL));
+                    }
                     msg(c.player, "&eSelection wand (wooden shovel) enabled");
                 }
             }
