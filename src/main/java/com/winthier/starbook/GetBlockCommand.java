@@ -1,7 +1,9 @@
 package com.winthier.starbook;
 
+import com.winthier.custom.util.Dirty;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.block.Block;
+import org.json.simple.JSONValue;
 
 @RequiredArgsConstructor
 class GetBlockCommand extends AbstractCommand {
@@ -11,6 +13,8 @@ class GetBlockCommand extends AbstractCommand {
     public void onCommand(CommandContext c) {
         if (c.player == null) StarBookCommandException.playerExpected();
         Block block = c.player.getLocation().getBlock();
-        msg(c.player, "%s:%d l=%d (sky=%d b=%d) t=%.2f", block.getType(), (int)block.getData(), block.getLightLevel(), block.getLightFromSky(), block.getLightFromBlocks(), block.getTemperature());
+        Object json = Dirty.getBlockTag(block);
+        String jsonstr = json == null ? "{}" : JSONValue.toJSONString(json);
+        msg(c.player, "%s %s l=%d (sky=%d b=%d) t=%.2f", block.getBlockData().getAsString(), jsonstr, block.getLightLevel(), block.getLightFromSky(), block.getLightFromBlocks(), block.getTemperature());
     }
 }
