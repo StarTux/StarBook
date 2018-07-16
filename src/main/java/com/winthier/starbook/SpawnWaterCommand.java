@@ -20,7 +20,7 @@ final class SpawnWaterCommand extends AbstractCommand {
         for (int z = cz - radius; z <= cz + radius; ++z) {
             for (int x = cx - radius; x <= cx + radius; ++x) {
                 Block block = loc.getWorld().getBlockAt(x, y - 1, z);
-                if (block.getType() == Material.STAINED_GLASS) {
+                if (block.getType() == Material.WHITE_STAINED_GLASS) {
                         fillColumn(block);
                         count += 1;
                 }
@@ -35,7 +35,7 @@ final class SpawnWaterCommand extends AbstractCommand {
             block = block.getRelative(0, -1, 0);
             if (block.getY() < 0) return;
             if (block.getType() == Material.AIR
-                || block.getType() == Material.STATIONARY_WATER) {
+                || block.getType() == Material.WATER) {
                 block.setType(Material.WATER, false);
             }
         }

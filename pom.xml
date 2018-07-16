@@ -45,7 +45,7 @@
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
-      <version>1.12.2-R0.1-SNAPSHOT</version>
+      <version>1.13-pre7-R0.1-SNAPSHOT</version>
     </dependency>
     <!-- Lombok -->
     <dependency>
@@ -69,8 +69,8 @@
     <!-- Connect -->
     <dependency>
       <groupId>com.winthier.connect</groupId>
-      <artifactId>connect</artifactId>
-      <version>0.1</version>
+      <artifactId>connect-core</artifactId>
+      <version>0.1-SNAPSHOT</version>
     </dependency>
     <!-- Vault -->
     <dependency>

@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class StarBookPlugin extends JavaPlugin implements Listener {
     private WhoCommand whoCommand = null;
+    private WandCommand wandCommand = null;
 
     @Override public void onEnable() {
         reloadConfig();
@@ -42,6 +43,12 @@ public class StarBookPlugin extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
         whoCommand = new WhoCommand(this);
         getCommand("who").setExecutor(whoCommand);
+        wandCommand = new WandCommand(this);
+        getCommand("wand").setExecutor(wandCommand);
+        getCommand("sel").setExecutor(wandCommand);
+        getCommand("sel1").setExecutor(wandCommand);
+        getCommand("sel2").setExecutor(wandCommand);
+        getServer().getPluginManager().registerEvents(wandCommand, this);
     }
 
     @EventHandler

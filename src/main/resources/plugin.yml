@@ -2,6 +2,7 @@ name: StarBook
 description: Collection of useful Commands
 author: StarTux
 version: 0.1
+api-version: 1.13
 main: com.winthier.starbook.StarBookPlugin
 depend: []
 softdepend: [ WorldEdit, PlayerCache, Vault, Connect ]
@@ -93,6 +94,14 @@ commands:
     permission: starbook.server.creative
   hub:
     permission: starbook.server.hub
+  wand:
+    permission: starbook.wand
+  sel:
+    permission: starbook.wand
+  sel1:
+    permission: starbook.wand
+  sel2:
+    permission: starbook.wand
 permissions:
   starbook.server.*:
     default: op
