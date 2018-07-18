@@ -4,9 +4,9 @@
   <groupId>com.winthier.starbook</groupId>
   <artifactId>starbook</artifactId>
   <packaging>jar</packaging>
-  <version>0.1</version>
+  <version>0.1-SNAPSHOT</version>
   <name>StarBook</name>
-  <url>http://www.winthier.com</url>
+  <url>http://cavetale.com</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -64,7 +64,7 @@
     <dependency>
       <groupId>com.winthier.playercache</groupId>
       <artifactId>playercache</artifactId>
-      <version>0.1</version>
+      <version>0.1-SNAPSHOT</version>
     </dependency>
     <!-- Connect -->
     <dependency>

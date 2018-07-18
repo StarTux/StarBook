@@ -3,6 +3,7 @@ description: Collection of useful Commands
 author: StarTux
 version: 0.1
 api-version: 1.13
+website: http://cavetale.com
 main: com.winthier.starbook.StarBookPlugin
 depend: []
 softdepend: [ WorldEdit, PlayerCache, Vault, Connect ]
