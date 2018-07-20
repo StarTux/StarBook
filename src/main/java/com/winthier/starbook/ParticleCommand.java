@@ -5,9 +5,9 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.MaterialData;
 
 @RequiredArgsConstructor
 final class ParticleCommand extends AbstractCommand {
@@ -81,10 +81,10 @@ final class ParticleCommand extends AbstractCommand {
             final Class<?> dataClass = particle.getDataType();
             if (dataClass == null || dataClass.equals(Void.class)) {
                 throw new StarBookCommandException("Unexpected data argument for particle %s", particle.name());
-            } else if (dataClass.equals(MaterialData.class)) {
+            } else if (dataClass.equals(BlockData.class)) {
                 try {
                     Material mat = Material.valueOf(arg.toUpperCase());
-                    data = new MaterialData(mat);
+                    data = mat.createBlockData();
                 } catch (IllegalArgumentException iae) {
                     throw new StarBookCommandException("Bad material argument: %s", arg);
                 }
@@ -94,6 +94,16 @@ final class ParticleCommand extends AbstractCommand {
                     data = new ItemStack(mat);
                 } catch (IllegalArgumentException iae) {
                     throw new StarBookCommandException("Bad material argument: %s", arg);
+                }
+            } else if (dataClass.equals(Particle.DustOptions.class)) {
+                try {
+                    String[] toks = arg.split(",", 4);
+                    data = new Particle.DustOptions(org.bukkit.Color.fromRGB(Integer.parseInt(toks[0]),
+                                                                             Integer.parseInt(toks[1]),
+                                                                             Integer.parseInt(toks[2])),
+                                                    Float.parseFloat(toks[3]));
+                } catch (Exception e) {
+                    throw new StarBookCommandException("Bad dust options argument: %s", arg);
                 }
             } else {
                 throw new StarBookCommandException("Unsupported data argument type: %s", dataClass.getName());
