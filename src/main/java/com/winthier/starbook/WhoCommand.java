@@ -52,6 +52,12 @@ final class WhoCommand extends AbstractCommand {
     }
 
     void showOnlineList(CommandSender sender) {
+        if (plugin.getServer().getPluginManager().getPlugin("Connect") == null) {
+            StringBuilder sb = new StringBuilder("" + plugin.getServer().getOnlinePlayers().size() + " Online Players:");
+            for (Player player: plugin.getServer().getOnlinePlayers()) sb.append(" ").append(player.getName());
+            sender.sendMessage(sb.toString());
+            return;
+        }
         Map<String, List<OnlinePlayer>> serverList = new HashMap<>();
         int totalCount = 0;
         for (ServerConnection con: new ArrayList<>(Connect.getInstance().getServer().getConnections())) {
