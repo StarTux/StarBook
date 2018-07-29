@@ -6,7 +6,7 @@ api-version: 1.13
 website: http://cavetale.com
 main: com.winthier.starbook.StarBookPlugin
 depend: []
-softdepend: [ WorldEdit, PlayerCache, Vault, Connect ]
+softdepend: [ WorldEdit, PlayerCache, Connect, GenericEvents ]
 commands:
   test:
     permission: starbook.test
