@@ -17,9 +17,9 @@ import org.bukkit.metadata.MetadataValue;
 @RequiredArgsConstructor
 final class WandCommand extends AbstractCommand implements Listener {
     private final StarBookPlugin plugin;
-    private final String WAND_KEY = "Wand";
-    private final String SELECTION_A_KEY = "SelectionA";
-    private final String SELECTION_B_KEY = "SelectionB";
+    private static final String WAND_KEY = "Wand";
+    private static final String SELECTION_A_KEY = "SelectionA";
+    private static final String SELECTION_B_KEY = "SelectionB";
 
     boolean hasWand(Player player) {
         for (MetadataValue v: player.getMetadata(WAND_KEY)) {
