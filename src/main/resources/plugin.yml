@@ -111,3 +111,6 @@ permissions:
       starbook.server.winnilla: true
       starbook.server.creative: true
       starbook.server.hub: true
+  onlinelist.staff:
+    default: op
+    description: Be highlighted as staff on the online list

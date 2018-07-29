@@ -4,6 +4,7 @@ import com.winthier.connect.Client;
 import com.winthier.connect.Connect;
 import com.winthier.connect.OnlinePlayer;
 import com.winthier.connect.ServerConnection;
+import com.winthier.generic_events.GenericEventsPlugin;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,17 +12,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
-import net.milkbowl.vault.permission.Permission;
 import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.RegisteredServiceProvider;
 
 @RequiredArgsConstructor
 final class WhoCommand extends AbstractCommand {
     private final StarBookPlugin plugin;
-    private Permission permission;
 
     @Override
     void onCommand(CommandContext context) {
@@ -29,26 +26,10 @@ final class WhoCommand extends AbstractCommand {
         showOnlineList(context.sender);
     }
 
-    private Permission getPermission() {
-        if (permission == null) {
-            RegisteredServiceProvider<Permission> permissionProvider = plugin.getServer().getServicesManager().getRegistration(Permission.class);
-            if (permissionProvider != null) {
-                permission = permissionProvider.getProvider();
-            }
-        }
-        return permission;
-    }
-
     private boolean isStaff(UUID uuid) {
         Player bukkitPlayer = plugin.getServer().getPlayer(uuid);
-        if (bukkitPlayer != null) {
-            return bukkitPlayer.hasPermission("onlinelist.staff");
-        } else {
-            getPermission();
-            if (permission == null) return false;
-            OfflinePlayer off = plugin.getServer().getOfflinePlayer(uuid);
-            return permission.playerHas((String)null, off, "onlinelist.staff");
-        }
+        if (bukkitPlayer != null) return bukkitPlayer.hasPermission("onlinelist.staff");
+        return GenericEventsPlugin.getInstance().playerHasPermission(uuid, "onlinelist.staff");
     }
 
     void showOnlineList(CommandSender sender) {
