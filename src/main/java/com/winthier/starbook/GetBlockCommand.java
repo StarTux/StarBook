@@ -1,6 +1,6 @@
 package com.winthier.starbook;
 
-import com.winthier.custom.util.Dirty;
+import com.cavetale.dirty.Dirty;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.block.Block;
 import org.json.simple.JSONValue;

@@ -35,6 +35,7 @@ final class WandCommand extends AbstractCommand implements Listener {
         String key = i == 0 ? SELECTION_A_KEY : SELECTION_B_KEY;
         for (MetadataValue v: player.getMetadata(key)) {
             if (v.getOwningPlugin() == plugin) {
+                @SuppressWarnings("unchecked")
                 List<Integer> list = (List<Integer>)v.value();
                 result = player.getWorld().getBlockAt(list.get(0), list.get(1), list.get(2));
             }
