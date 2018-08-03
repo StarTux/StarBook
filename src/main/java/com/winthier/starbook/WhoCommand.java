@@ -4,7 +4,7 @@ import com.winthier.connect.Client;
 import com.winthier.connect.Connect;
 import com.winthier.connect.OnlinePlayer;
 import com.winthier.connect.ServerConnection;
-import com.winthier.generic_events.GenericEventsPlugin;
+import com.winthier.generic_events.GenericEvents;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,7 +29,7 @@ final class WhoCommand extends AbstractCommand {
     private boolean isStaff(UUID uuid) {
         Player bukkitPlayer = plugin.getServer().getPlayer(uuid);
         if (bukkitPlayer != null) return bukkitPlayer.hasPermission("onlinelist.staff");
-        return GenericEventsPlugin.getInstance().playerHasPermission(uuid, "onlinelist.staff");
+        return GenericEvents.playerHasPermission(uuid, "onlinelist.staff");
     }
 
     void showOnlineList(CommandSender sender) {
