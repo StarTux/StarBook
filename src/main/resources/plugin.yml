@@ -87,14 +87,6 @@ commands:
   starve:
     permission: starbook.starve
     usage: /starve <player> - Empty hunger bar
-  winthier:
-    permission: starbook.server.winthier
-  winnilla:
-    permission: starbook.server.winnilla
-  creative:
-    permission: starbook.server.creative
-  hub:
-    permission: starbook.server.hub
   wand:
     permission: starbook.wand
   sel:
@@ -104,13 +96,6 @@ commands:
   sel2:
     permission: starbook.wand
 permissions:
-  starbook.server.*:
-    default: op
-    children:
-      starbook.server.winthier: true
-      starbook.server.winnilla: true
-      starbook.server.creative: true
-      starbook.server.hub: true
   onlinelist.staff:
     default: op
     description: Be highlighted as staff on the online list
