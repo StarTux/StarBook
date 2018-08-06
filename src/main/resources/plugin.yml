@@ -8,9 +8,6 @@ main: com.winthier.starbook.StarBookPlugin
 depend: [ GenericEvents ]
 softdepend: [ WorldEdit, Connect ]
 commands:
-  test:
-    permission: starbook.test
-    usage: '/test'
   slap:
     permission: starbook.slap
     usage: '/slap [-vhs] <player>'

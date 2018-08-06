@@ -14,7 +14,6 @@ public class StarBookPlugin extends JavaPlugin implements Listener {
     @Override public void onEnable() {
         reloadConfig();
         saveDefaultConfig();
-        getCommand("test").setExecutor(new TestCommand());
         getCommand("slap").setExecutor(new SlapCommand());
         getCommand("rocket").setExecutor(new RocketCommand());
         getCommand("spawnmob").setExecutor(new SpawnMobCommand(this));
