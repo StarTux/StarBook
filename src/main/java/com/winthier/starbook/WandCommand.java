@@ -124,6 +124,7 @@ final class WandCommand extends AbstractCommand implements Listener {
                     c.player.removeMetadata(SELECTION_BX, plugin);
                     c.player.removeMetadata(SELECTION_BY, plugin);
                     c.player.removeMetadata(SELECTION_BZ, plugin);
+                    c.player.getInventory().removeItem(new ItemStack(Material.WOODEN_SHOVEL));
                     msg(c.player, "&eSelection wand disabled, selection cleared");
                 } else {
                     c.player.setMetadata(WAND_KEY, new FixedMetadataValue(plugin, true));
