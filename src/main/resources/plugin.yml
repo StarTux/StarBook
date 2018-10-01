@@ -92,6 +92,9 @@ commands:
     permission: starbook.wand
   sel2:
     permission: starbook.wand
+  reloaddata:
+    description: Reload data packs
+    permission: starbook.datareload
 permissions:
   onlinelist.staff:
     default: op

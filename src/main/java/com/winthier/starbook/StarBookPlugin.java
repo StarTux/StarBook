@@ -42,6 +42,11 @@ public class StarBookPlugin extends JavaPlugin implements Listener {
         getCommand("sel").setExecutor(wandCommand);
         getCommand("sel1").setExecutor(wandCommand);
         getCommand("sel2").setExecutor(wandCommand);
+        getCommand("reloaddata").setExecutor((s, c, l, a) -> {
+                getServer().reloadData();
+                s.sendMessage("Data packs reloaded");
+                return true;
+            });
         getServer().getPluginManager().registerEvents(wandCommand, this);
     }
 
