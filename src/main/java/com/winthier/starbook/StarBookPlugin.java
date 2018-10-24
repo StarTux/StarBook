@@ -1,5 +1,6 @@
 package com.winthier.starbook;
 
+import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,8 +11,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class StarBookPlugin extends JavaPlugin implements Listener {
     private WhoCommand whoCommand = null;
     private WandCommand wandCommand = null;
+    @Getter private static StarBookPlugin instance;
 
     @Override public void onEnable() {
+        instance = this;
         reloadConfig();
         saveDefaultConfig();
         getCommand("slap").setExecutor(new SlapCommand());

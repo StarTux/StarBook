@@ -6,6 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
 
 public abstract class AbstractCommand implements TabExecutor {
     @Override
@@ -17,7 +18,11 @@ public abstract class AbstractCommand implements TabExecutor {
             if (sbce.isUsage()) {
                 return false;
             } else {
-                msg(sender, "&c%s", sbce.getMessage());
+                if (sender instanceof Player) {
+                    msg(sender, "&c%s", sbce.getMessage());
+                } else {
+                    StarBookPlugin.getInstance().getLogger().info(String.format("&c%s", sbce.getMessage()));
+                }
             }
         }
         return true;
