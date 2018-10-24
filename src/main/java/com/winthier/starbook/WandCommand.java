@@ -1,7 +1,5 @@
 package com.winthier.starbook;
 
-import java.util.Arrays;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import org.bukkit.Material;
