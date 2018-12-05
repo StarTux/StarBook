@@ -1,9 +1,7 @@
 package com.winthier.starbook;
 
-import com.winthier.connect.Client;
 import com.winthier.connect.Connect;
 import com.winthier.connect.OnlinePlayer;
-import com.winthier.connect.ServerConnection;
 import com.winthier.generic_events.GenericEvents;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,26 +37,13 @@ final class WhoCommand extends AbstractCommand {
             sender.sendMessage(sb.toString());
             return;
         }
-        Map<String, List<OnlinePlayer>> serverList = new HashMap<>();
+        Map<String, List<OnlinePlayer>> serverList = Connect.getInstance().listPlayers();
         int totalCount = 0;
-        for (ServerConnection con: new ArrayList<>(Connect.getInstance().getServer().getConnections())) {
-            List<OnlinePlayer> conList = new ArrayList<>(con.getOnlinePlayers());
-            String displayName = con.getName();
-            Client client = Connect.getInstance().getClient(displayName);
-            if (client != null) displayName = client.getDisplayName();
-            List<OnlinePlayer> playerList = serverList.get(displayName);
-            if (playerList == null) {
-                playerList = new ArrayList<>();
-                serverList.put(displayName, playerList);
-            }
-            playerList.addAll(conList);
-            totalCount += conList.size();
-        }
         String[] serverNames = serverList.keySet().toArray(new String[0]);
         Arrays.sort(serverNames, (a, b) -> Integer.compare(serverList.get(b).size(), serverList.get(a).size()));
         if (sender instanceof Player) {
             Player player = (Player)sender;
-            Msg.msg(player, "&9%s Player List (&f%d&9)", Connect.getInstance().getServer().getDisplayName(), totalCount);
+            Msg.msg(player, "&9%s Player List (&f%d&9)", Connect.getInstance().getServerName(), totalCount);
             for (String serverName: serverNames) {
                 OnlinePlayer[] playerArray = serverList.get(serverName).toArray(new OnlinePlayer[0]);
                 String perm = "starbook.server." + serverName.toLowerCase();
