@@ -10,7 +10,6 @@ import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class StarBookPlugin extends JavaPlugin implements Listener {
@@ -92,8 +91,7 @@ public class StarBookPlugin extends JavaPlugin implements Listener {
         //
         ItemStack item = event.getItem();
         if (item == null) return;
-        if (!item.hasItemMeta()) return;
-        if (!(item.getItemMeta() instanceof SpawnEggMeta)) return;
+        if (!item.getType().name().endsWith("_SPAWN_EGG")) return;
         //
         event.setCancelled(true);
         event.getPlayer().sendMessage("NO");
