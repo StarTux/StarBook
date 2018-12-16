@@ -2,10 +2,15 @@ package com.winthier.starbook;
 
 import lombok.Getter;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class StarBookPlugin extends JavaPlugin implements Listener {
@@ -74,5 +79,23 @@ public class StarBookPlugin extends JavaPlugin implements Listener {
                 whoCommand.showOnlineList(event.getPlayer());
             }
         }
+    }
+
+    @EventHandler
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        if (!event.hasBlock()) return;
+        if (!event.hasItem()) return;
+        //
+        Block block = event.getClickedBlock();
+        if (block == null) return;
+        if (block.getType() != Material.SPAWNER) return;
+        //
+        ItemStack item = event.getItem();
+        if (item == null) return;
+        if (!item.hasItemMeta()) return;
+        if (!(item.getItemMeta() instanceof SpawnEggMeta)) return;
+        //
+        event.setCancelled(true);
+        event.getPlayer().sendMessage("NO");
     }
 }
