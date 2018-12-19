@@ -122,12 +122,12 @@ final class WandCommand extends AbstractCommand implements Listener {
                     c.player.removeMetadata(SELECTION_BX, plugin);
                     c.player.removeMetadata(SELECTION_BY, plugin);
                     c.player.removeMetadata(SELECTION_BZ, plugin);
-                    c.player.getInventory().removeItem(new ItemStack(Material.WOODEN_SHOVEL));
+                    c.player.getInventory().removeItem(new ItemStack(Material.WOOD_SPADE));
                     msg(c.player, "&eSelection wand disabled, selection cleared");
                 } else {
                     c.player.setMetadata(WAND_KEY, new FixedMetadataValue(plugin, true));
-                    if (!c.player.getInventory().contains(Material.WOODEN_SHOVEL)) {
-                        c.player.getInventory().addItem(new ItemStack(Material.WOODEN_SHOVEL));
+                    if (!c.player.getInventory().contains(Material.WOOD_SPADE)) {
+                        c.player.getInventory().addItem(new ItemStack(Material.WOOD_SPADE));
                     }
                     msg(c.player, "&eSelection wand (wooden shovel) enabled");
                 }
@@ -163,9 +163,8 @@ final class WandCommand extends AbstractCommand implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (!hasWand(player)) return;
-        if (event.getHand() != EquipmentSlot.HAND) return;
-        ItemStack hand = player.getInventory().getItemInMainHand();
-        if (hand == null || hand.getType() != Material.WOODEN_SHOVEL) return;
+        ItemStack hand = player.getInventory().getItemInHand();
+        if (hand == null || hand.getType() != Material.WOOD_SPADE) return;
         switch (event.getAction()) {
         case LEFT_CLICK_BLOCK:
             Selection sel = makeSelection(player, 0, event.getClickedBlock());

@@ -16,55 +16,19 @@
       <id>spigot-repo</id>
       <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
     </repository>
-    <!-- WorldEdit Repo -->
-    <repository>
-      <id>sk89q-snapshots</id>
-      <url>http://maven.sk89q.com/artifactory/repo</url>
-      <releases>
-        <enabled>true</enabled> <!-- releases enabled: this specific repository also hosts release versions -->
-      </releases>
-      <snapshots>
-        <enabled>true</enabled> <!-- snapshots enabled: we declare a SNAPSHOT repository because we need to download a SNAPSHOT dependency -->
-      </snapshots>
-    </repository>
   </repositories>
   <dependencies>
     <!-- Spigot-API -->
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
-      <version>1.13.2-R0.1-SNAPSHOT</version>
+      <version>1.8.8-R0.1-SNAPSHOT</version>
     </dependency>
     <!-- Lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.14.8</version>
-      <scope>provided</scope>
-    </dependency>
-    <!-- WorldEdit -->
-    <dependency>
-      <groupId>com.sk89q.worldedit</groupId>
-      <artifactId>worldedit-bukkit</artifactId>
-      <version>6.1.1-SNAPSHOT</version>
-    </dependency>
-    <!-- Connect -->
-    <dependency>
-      <groupId>com.winthier.connect</groupId>
-      <artifactId>connect-core</artifactId>
-      <version>0.1-SNAPSHOT</version>
-    </dependency>
-    <!-- Dirty -->
-    <dependency>
-      <groupId>com.cavetale.dirty</groupId>
-      <artifactId>dirty</artifactId>
-      <version>0.1-SNAPSHOT</version>
-    </dependency>
-    <!-- GenericEvents -->
-    <dependency>
-      <groupId>com.winthier.generic_events</groupId>
-      <artifactId>generic_events</artifactId>
-      <version>0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

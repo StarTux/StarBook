@@ -1,7 +1,6 @@
 package com.winthier.starbook;
 
 import org.bukkit.Bukkit;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
 final class HealCommand extends AbstractCommand {
@@ -24,7 +23,7 @@ final class HealCommand extends AbstractCommand {
             target.setSaturation(0.0f);
             msg(c.sender, "%s starved.", target.getName());
         } else {
-            target.setHealth(target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+            target.setHealth(target.getMaxHealth());
             msg(c.sender, "%s healed.", target.getName());
         }
     }

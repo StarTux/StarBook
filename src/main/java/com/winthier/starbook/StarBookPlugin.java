@@ -25,22 +25,18 @@ public class StarBookPlugin extends JavaPlugin implements Listener {
         getCommand("rocket").setExecutor(new RocketCommand());
         getCommand("spawnmob").setExecutor(new SpawnMobCommand(this));
         getCommand("sound").setExecutor(new SoundCommand(this));
-        getCommand("particles").setExecutor(new ParticleCommand(this));
         getCommand("playertime").setExecutor(new PlayerTimeCommand());
         getCommand("time").setExecutor(new TimeCommand());
         getCommand("moon").setExecutor(new MoonCommand());
-        getCommand("cropcliff").setExecutor(new CropCliffCommand());
         getCommand("opme").setExecutor(new OpMeCommand());
         getCommand("near").setExecutor(new NearCommand());
         getCommand("script").setExecutor(new ScriptCommand(this));
-        getCommand("worldedithighlight").setExecutor(new WorldEditHighlightCommand(this));
         getCommand("getblock").setExecutor(new GetBlockCommand(this));
         getCommand("plugininfo").setExecutor(new PluginInfoCommand());
         getCommand("poof").setExecutor(new PoofCommand(this));
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("feed").setExecutor(new HealCommand());
         getCommand("starve").setExecutor(new HealCommand());
-        // getCommand("spawnwater").setExecutor(new SpawnWaterCommand());
         getServer().getPluginManager().registerEvents(this, this);
         whoCommand = new WhoCommand(this);
         getCommand("who").setExecutor(whoCommand);
@@ -49,11 +45,6 @@ public class StarBookPlugin extends JavaPlugin implements Listener {
         getCommand("sel").setExecutor(wandCommand);
         getCommand("sel1").setExecutor(wandCommand);
         getCommand("sel2").setExecutor(wandCommand);
-        getCommand("reloaddata").setExecutor((s, c, l, a) -> {
-                getServer().reloadData();
-                s.sendMessage("Data packs reloaded");
-                return true;
-            });
         getServer().getPluginManager().registerEvents(wandCommand, this);
     }
 
@@ -78,22 +69,5 @@ public class StarBookPlugin extends JavaPlugin implements Listener {
                 whoCommand.showOnlineList(event.getPlayer());
             }
         }
-    }
-
-    @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent event) {
-        if (!event.hasBlock()) return;
-        if (!event.hasItem()) return;
-        //
-        Block block = event.getClickedBlock();
-        if (block == null) return;
-        if (block.getType() != Material.SPAWNER) return;
-        //
-        ItemStack item = event.getItem();
-        if (item == null) return;
-        if (!item.getType().name().endsWith("_SPAWN_EGG")) return;
-        //
-        event.setCancelled(true);
-        event.getPlayer().sendMessage("NO");
     }
 }

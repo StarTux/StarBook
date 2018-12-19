@@ -5,8 +5,8 @@ version: 0.1
 api-version: 1.13
 website: http://cavetale.com
 main: com.winthier.starbook.StarBookPlugin
-depend: [ GenericEvents ]
-softdepend: [ WorldEdit, Connect ]
+depend: []
+softdepend: []
 commands:
   slap:
     permission: starbook.slap
@@ -40,8 +40,6 @@ commands:
   moon:
     permission: starbook.moon
     usage: '/moon'
-  cropcliff:
-    permission: starbook.cropcliff
   opme:
     permission: starbook.opme
     usage: '/opme'
