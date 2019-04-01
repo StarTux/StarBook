@@ -13,7 +13,6 @@ public class StarBookPlugin extends PluginBase implements Listener {
 
     @Override public void onEnable() {
         instance = this;
-        reloadConfig();
         saveDefaultConfig();
         ((PluginCommand)getCommand("slap")).setExecutor(new SlapCommand());
         ((PluginCommand)getCommand("rocket")).setExecutor(new RocketCommand());
