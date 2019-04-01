@@ -1,8 +1,8 @@
 package com.winthier.starbook;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import cn.nukkit.Player;
+import cn.nukkit.command.Command;
+import cn.nukkit.command.CommandSender;
 
 final class CommandContext {
     final CommandSender sender;

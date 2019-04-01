@@ -1,9 +1,8 @@
 package com.winthier.starbook;
 
+import cn.nukkit.Player;
+import cn.nukkit.Server;
 import java.util.Random;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
 
 class RocketCommand extends AbstractCommand {
     final Random random = new Random(System.currentTimeMillis());
@@ -22,31 +21,26 @@ class RocketCommand extends AbstractCommand {
                 everybody = true;
             } else {
                 if (target != null) throw new StarBookCommandException(c);
-                target = Bukkit.getServer().getPlayer(arg);
+                target = Server.getInstance().getPlayer(arg);
                 if (target == null) throw new StarBookCommandException("Player not found: %s", arg);
             }
         }
         if (!everybody && target == null) throw new StarBookCommandException(c);
-        Vector velo;
-        if (high) {
-            velo = new Vector(0.0, 5.0, 0.0);
-        } else {
-            velo = new Vector(0.0, 1.0, 0.0);
-        }
+        double y = high ? 5.0 : 1.0;
         String targetName;
         if (everybody) {
             targetName = "everybody";
-            for (Player online: Bukkit.getServer().getOnlinePlayers()) {
-                online.setVelocity(velo);
+            for (Player online: Server.getInstance().getOnlinePlayers().values()) {
+                online.addMotion(0.0, y, 0.0);
             }
         } else {
             targetName = target.getName();
-            target.setVelocity(velo);
+            target.addMotion(0.0, y, 0.0);
         }
         if (silent) {
             msg(c.sender, "&eYou rocketed %s!", targetName);
         } else {
-            for (Player recipient: Bukkit.getServer().getOnlinePlayers()) {
+            for (Player recipient: Server.getInstance().getOnlinePlayers().values()) {
                 msg(recipient, "&e%s rocketed %s", c.sender.getName(), targetName);
             }
         }

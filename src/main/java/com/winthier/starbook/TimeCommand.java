@@ -5,7 +5,7 @@ class TimeCommand extends AbstractCommand {
     public void onCommand(CommandContext c) {
         if (c.player == null) StarBookCommandException.playerExpected();
         if (c.args.length == 0) {
-            long time = c.player.getWorld().getTime();
+            long time = c.player.getLevel().getTime();
             msg(c.sender, "World time &a%02d&r:&a%02d&r (&2%d&r)", hours(time), minutes(time), time);
             return;
         }
@@ -38,7 +38,7 @@ class TimeCommand extends AbstractCommand {
                 throw new StarBookCommandException("&cTime expected: %s", arg);
             }
         }
-        c.player.getWorld().setTime(time);
+        c.player.getLevel().setTime((int)time);
         msg(c.sender, "World time was set to &a%02d&r:&a%02d&r (&2%d&r).", hours(time), minutes(time), time);
     }
 

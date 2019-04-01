@@ -6,7 +6,7 @@ api-version: 1.13
 website: http://cavetale.com
 main: com.winthier.starbook.StarBookPlugin
 depend: [ GenericEvents ]
-softdepend: [ WorldEdit, Connect ]
+softdepend: [ Connect ]
 commands:
   slap:
     permission: starbook.slap
@@ -14,21 +14,6 @@ commands:
   rocket:
     permission: starbook.rocket
     usage: '/rocket [-hs] <player>'
-  sound:
-    permission: starbook.sound
-    description: Play sound effects in your ears
-    usage: '/sound <soundname> [volume] [pitch] [target]'
-  particles:
-    permission: starbook.particles
-    description: Show particles in front of your face
-    usage: '/particles <particle> [count] [offset] [extra] [data]'
-  spawnmob:
-    permission: starbook.spawnmob
-    usage: '/spawnmob <mob> [amount]'
-  playertime:
-    permission: starbook.playertime
-    description: Change the time for your client
-    usage: '/playertime reset|<time>'
   who:
     aliases: [ list, ls, online ]
     permission: starbook.who
@@ -40,24 +25,12 @@ commands:
   moon:
     permission: starbook.moon
     usage: '/moon'
-  cropcliff:
-    permission: starbook.cropcliff
   opme:
     permission: starbook.opme
     usage: '/opme'
   near:
     permission: starbook.near
     usage: '/near'
-  script:
-    permission: starbook.script
-    usage: '/script'
-  worldedithighlight:
-    aliases: [ wehl ]
-    permission: starbook.wehl
-    usage: '/wehl'
-  getblock:
-    permission: starbook.getblock
-    usage: '/getblock'
   plugininfo:
     permission: starbook.plugininfo
     aliases: [ pluginfo ]
@@ -84,17 +57,6 @@ commands:
   starve:
     permission: starbook.starve
     usage: /starve <player> - Empty hunger bar
-  wand:
-    permission: starbook.wand
-  sel:
-    permission: starbook.wand
-  sel1:
-    permission: starbook.wand
-  sel2:
-    permission: starbook.wand
-  reloaddata:
-    description: Reload data packs
-    permission: starbook.datareload
 permissions:
   onlinelist.staff:
     default: op

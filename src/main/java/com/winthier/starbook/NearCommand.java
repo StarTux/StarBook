@@ -1,11 +1,11 @@
 package com.winthier.starbook;
 
+import cn.nukkit.Player;
+import cn.nukkit.level.Location;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
 
 class NearCommand extends AbstractCommand {
     @Override
@@ -13,7 +13,7 @@ class NearCommand extends AbstractCommand {
         if (c.player == null) return;
         List<Prox> proxies = new ArrayList<>();
         Location loc = c.player.getLocation();
-        for (Player player: c.player.getWorld().getPlayers()) {
+        for (Player player: c.player.getLevel().getPlayers().values()) {
             if (player.equals(c.player)) continue;
             proxies.add(new Prox(player.getName(), loc.distance(player.getLocation())));
         }

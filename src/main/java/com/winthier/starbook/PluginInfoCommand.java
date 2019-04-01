@@ -1,16 +1,16 @@
 package com.winthier.starbook;
 
+import cn.nukkit.Server;
+import cn.nukkit.command.PluginCommand;
+import cn.nukkit.event.HandlerList;
+import cn.nukkit.permission.Permission;
+import cn.nukkit.plugin.Plugin;
+import cn.nukkit.plugin.PluginDescription;
+import cn.nukkit.plugin.RegisteredListener;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.bukkit.Bukkit;
-import org.bukkit.command.PluginCommand;
-import org.bukkit.event.HandlerList;
-import org.bukkit.permissions.Permission;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.RegisteredListener;
 
 final class PluginInfoCommand extends AbstractCommand {
     @Override
@@ -28,17 +28,17 @@ final class PluginInfoCommand extends AbstractCommand {
         int count = 0;
         if (cmd.equals("list") && arg == null) {
             c.sender.sendMessage("Plugins loaded:");
-            for (Plugin plugin: Bukkit.getServer().getPluginManager().getPlugins()) {
+            for (Plugin plugin: Server.getInstance().getPluginManager().getPlugins().values()) {
                 c.sender.sendMessage("- " + plugin.getName());
                 count += 1;
             }
         } else if (cmd.equals("dump") && arg != null) {
-            Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin(arg);
+            Plugin plugin = Server.getInstance().getPluginManager().getPlugin(arg);
             if (plugin == null) {
                 c.sender.sendMessage("Plugin not found: " + arg);
             } else {
                 count = 1;
-                PluginDescriptionFile desc = plugin.getDescription();
+                PluginDescription desc = plugin.getDescription();
                 c.sender.sendMessage("Name: " + desc.getName());
                 c.sender.sendMessage("Version: " + desc.getVersion());
                 c.sender.sendMessage("Main: " + desc.getMain());
@@ -46,7 +46,7 @@ final class PluginInfoCommand extends AbstractCommand {
                 c.sender.sendMessage("Description: " + desc.getDescription());
                 c.sender.sendMessage("Website: " + desc.getWebsite());
                 c.sender.sendMessage("Prefix: " + desc.getPrefix());
-                c.sender.sendMessage("Load: " + desc.getLoad());
+                c.sender.sendMessage("LoadBefore: " + desc.getLoadBefore());
                 c.sender.sendMessage("Depend: " + desc.getDepend());
                 c.sender.sendMessage("SoftDepend: " + desc.getSoftDepend());
                 c.sender.sendMessage("LoadBefore: " + desc.getLoadBefore());
@@ -54,12 +54,10 @@ final class PluginInfoCommand extends AbstractCommand {
                 c.sender.sendMessage("Commands: " + (commands == null ? "[]" : commands.keySet()));
                 Collection<Permission> permissions = desc.getPermissions();
                 c.sender.sendMessage("Permissions: " + (permissions == null ? "[]" : permissions.stream().map(a -> a.getName()).collect(Collectors.toList())));
-                c.sender.sendMessage("PermissionDefault: " + desc.getPermissionDefault());
-                c.sender.sendMessage("Awareness: " + desc.getAwareness());
             }
         } else if ((cmd.equals("depend") || cmd.equals("depends")) && arg != null) {
             c.sender.sendMessage("Plugins depending on " + arg + ":");
-            for (Plugin plugin: Bukkit.getServer().getPluginManager().getPlugins()) {
+            for (Plugin plugin: Server.getInstance().getPluginManager().getPlugins().values()) {
                 if (plugin.getDescription().getDepend().contains(arg)) {
                     c.sender.sendMessage("- " + plugin.getName());
                     count += 1;
@@ -71,7 +69,7 @@ final class PluginInfoCommand extends AbstractCommand {
             }
         } else if (cmd.equals("author") && arg != null) {
             c.sender.sendMessage("Plugins being (co)authored by " + arg + ":");
-            for (Plugin plugin: Bukkit.getServer().getPluginManager().getPlugins()) {
+            for (Plugin plugin: Server.getInstance().getPluginManager().getPlugins().values()) {
                 if (plugin.getDescription().getAuthors().contains(arg)) {
                     c.sender.sendMessage("- " + plugin.getName());
                     count += 1;
@@ -79,7 +77,7 @@ final class PluginInfoCommand extends AbstractCommand {
             }
         } else if (cmd.equals("nauthor") && arg != null) {
             c.sender.sendMessage("Plugins not being (co)authored by " + arg + ":");
-            for (Plugin plugin: Bukkit.getServer().getPluginManager().getPlugins()) {
+            for (Plugin plugin: Server.getInstance().getPluginManager().getPlugins().values()) {
                 if (!plugin.getDescription().getAuthors().contains(arg)) {
                     c.sender.sendMessage("- " + plugin.getName());
                     count += 1;
@@ -103,7 +101,7 @@ final class PluginInfoCommand extends AbstractCommand {
                 count += 1;
             }
         } else if ((cmd.equals("permission") || cmd.equals("perm")) && arg != null) {
-            Permission perm = Bukkit.getServer().getPluginManager().getPermission(arg);
+            Permission perm = Server.getInstance().getPluginManager().getPermission(arg);
             if (perm == null) {
                 c.sender.sendMessage("Permission not found: " + arg);
             } else {
@@ -119,7 +117,7 @@ final class PluginInfoCommand extends AbstractCommand {
                 c.sender.sendMessage("Permissibles: " + (ps == null ? 0 : ps.size()));
             }
         } else if ((cmd.equals("command") || cmd.equals("cmd")) && arg != null) {
-            PluginCommand pcmd = Bukkit.getServer().getPluginCommand(arg);
+            PluginCommand pcmd = (PluginCommand)Server.getInstance().getPluginCommand(arg);
             if (pcmd == null) {
                 c.sender.sendMessage("Plugin command not found: " + arg);
             } else {

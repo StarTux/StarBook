@@ -1,8 +1,7 @@
 package com.winthier.starbook;
 
-import org.bukkit.Bukkit;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.Player;
+import cn.nukkit.Player;
+import cn.nukkit.Server;
 
 final class HealCommand extends AbstractCommand {
     @Override
@@ -10,22 +9,21 @@ final class HealCommand extends AbstractCommand {
         if (c.args.length > 1) StarBookCommandException.usage(c);
         Player target;
         if (c.args.length >= 1) {
-            target = Bukkit.getServer().getPlayerExact(c.args[0]);
+            target = Server.getInstance().getPlayerExact(c.args[0]);
         } else {
             target = c.player;
         }
         if (target == null) StarBookCommandException.playerExpected();
         if (c.label.equalsIgnoreCase("feed")) {
-            target.setFoodLevel(20);
-            target.setSaturation(20.0f);
+            target.getFoodData().setFoodLevel(20);
+            target.getFoodData().setFoodSaturationLevel(20.0f);
             msg(c.sender, "%s fed.", target.getName());
         } else if (c.label.equalsIgnoreCase("starve")) {
-            target.setFoodLevel(0);
-            target.setSaturation(0.0f);
+            target.getFoodData().setFoodLevel(0);
+            target.getFoodData().setFoodSaturationLevel(0.0f);
             msg(c.sender, "%s starved.", target.getName());
         } else {
-            target.setHealth(target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-            msg(c.sender, "%s healed.", target.getName());
+            target.setHealth(target.getMaxHealth());
         }
     }
 }
