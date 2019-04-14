@@ -5,7 +5,6 @@ import com.winthier.connect.OnlinePlayer;
 import com.winthier.generic_events.GenericEvents;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -33,23 +32,25 @@ final class WhoCommand extends AbstractCommand {
     void showOnlineList(CommandSender sender) {
         if (plugin.getServer().getPluginManager().getPlugin("Connect") == null) {
             StringBuilder sb = new StringBuilder("" + plugin.getServer().getOnlinePlayers().size() + " Online Players:");
-            for (Player player: plugin.getServer().getOnlinePlayers()) sb.append(" ").append(player.getName());
+            for (Player player : plugin.getServer().getOnlinePlayers()) sb.append(" ").append(player.getName());
             sender.sendMessage(sb.toString());
             return;
         }
         Map<String, List<OnlinePlayer>> serverList = Connect.getInstance().listPlayers();
-        int totalCount = 0;
         String[] serverNames = serverList.keySet().toArray(new String[0]);
         Arrays.sort(serverNames, (a, b) -> Integer.compare(serverList.get(b).size(), serverList.get(a).size()));
         if (sender instanceof Player) {
             Player player = (Player)sender;
-            Msg.msg(player, "&9%s Player List (&f%d&9)", Connect.getInstance().getServerName(), totalCount);
-            for (String serverName: serverNames) {
+            int totalCount = 0;
+            List<List<Object>> msgs = new ArrayList<>();
+            for (String serverName : serverNames) {
                 OnlinePlayer[] playerArray = serverList.get(serverName).toArray(new OnlinePlayer[0]);
                 String perm = "starbook.server." + serverName.toLowerCase();
                 if (playerArray.length == 0 && !player.hasPermission(perm)) continue;
                 Arrays.sort(playerArray, (a, b) -> String.CASE_INSENSITIVE_ORDER.compare(a.getName(), b.getName()));
                 List<Object> json = new ArrayList<>();
+                msgs.add(json);
+                totalCount += playerArray.length;
                 json.add(" ");
                 if (player.isPermissionSet(perm) && player.hasPermission(perm)) {
                     json.add(Msg.button(ChatColor.BLUE,
@@ -62,7 +63,7 @@ final class WhoCommand extends AbstractCommand {
                                         serverName + " Server",
                                         null));
                 }
-                for (OnlinePlayer online: playerArray) {
+                for (OnlinePlayer online : playerArray) {
                     json.add(" ");
                     if (isStaff(online.getUuid())) {
                         json.add(Msg.button(ChatColor.GOLD,
@@ -76,13 +77,14 @@ final class WhoCommand extends AbstractCommand {
                                             "/msg " + online.getName() + " "));
                     }
                 }
-                Msg.raw(player, json);
             }
+            Msg.msg(player, "&9%s Player List (&f%d&9)", Connect.getInstance().getServerName(), totalCount);
+            for (List<Object> json : msgs) Msg.raw(player, json);
         } else {
-            for (String serverName: serverNames) {
+            for (String serverName : serverNames) {
                 OnlinePlayer[] playerArray = serverList.get(serverName).toArray(new OnlinePlayer[0]);
                 StringBuilder sb = new StringBuilder(serverName).append("(").append(playerArray.length).append(")");
-                for (OnlinePlayer p: playerArray) sb.append(" ").append(p.getName());
+                for (OnlinePlayer p : playerArray) sb.append(" ").append(p.getName());
                 sender.sendMessage(sb.toString());
             }
         }
