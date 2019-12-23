@@ -95,6 +95,10 @@ commands:
   reloaddata:
     description: Reload data packs
     permission: starbook.datareload
+  god:
+    aliases: [ungod]
+    description: Toggle god mode
+    permission: starbook.god
 permissions:
   onlinelist.staff:
     default: op
