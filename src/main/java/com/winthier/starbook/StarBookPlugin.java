@@ -88,6 +88,7 @@ public class StarBookPlugin extends JavaPlugin implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (!event.hasBlock()) return;
         if (!event.hasItem()) return;
+        if (event.getPlayer().isOp()) return;
         //
         Block block = event.getClickedBlock();
         if (block == null) return;
