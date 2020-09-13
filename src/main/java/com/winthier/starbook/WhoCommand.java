@@ -40,7 +40,7 @@ final class WhoCommand extends AbstractCommand {
         String[] serverNames = serverList.keySet().toArray(new String[0]);
         Arrays.sort(serverNames, (a, b) -> Integer.compare(serverList.get(b).size(), serverList.get(a).size()));
         if (sender instanceof Player) {
-            Player player = (Player)sender;
+            Player player = (Player) sender;
             int totalCount = 0;
             List<List<Object>> msgs = new ArrayList<>();
             for (String serverName : serverNames) {

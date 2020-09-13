@@ -6,11 +6,11 @@ import lombok.Getter;
 final class StarBookCommandException extends RuntimeException {
     private boolean usage;
 
-    StarBookCommandException(String msg, Object... args) {
+    StarBookCommandException(final String msg, final Object... args) {
         super(AbstractCommand.format(msg, args));
     }
 
-    StarBookCommandException(CommandContext context) {
+    StarBookCommandException(final CommandContext context) {
         super(context.command.getUsage());
         this.usage = true;
     }

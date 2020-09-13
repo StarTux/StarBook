@@ -90,7 +90,7 @@ final class PluginInfoCommand extends AbstractCommand {
             try {
                 Class clazz = Class.forName(arg);
                 @SuppressWarnings("unchecked")
-                HandlerList tmp = (HandlerList)clazz.getMethod("getHandlerList").invoke(null);
+                HandlerList tmp = (HandlerList) clazz.getMethod("getHandlerList").invoke(null);
                 handlers = tmp;
             } catch (Exception e) {
                 e.printStackTrace();

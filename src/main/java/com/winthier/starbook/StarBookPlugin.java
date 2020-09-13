@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class StarBookPlugin extends JavaPlugin implements Listener {
+public final class StarBookPlugin extends JavaPlugin implements Listener {
     private WhoCommand whoCommand = null;
     private WandCommand wandCommand = null;
     private GodCommand godCommand = new GodCommand(this);

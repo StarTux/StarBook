@@ -103,8 +103,8 @@ final class Msg {
 
     static String progressBar(int has, int needs) {
         final int len = 20;
-        double percentage = Math.min(100.0, (double)has / (double)needs);
-        has = (int)(percentage * (double)len);
+        double percentage = Math.min(100.0, (double) has / (double) needs);
+        has = (int) (percentage * (double) len);
         StringBuilder sb = new StringBuilder();
         sb.append("&3[&f");
         for (int i = 0; i < len; ++i) {

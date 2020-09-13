@@ -26,13 +26,14 @@ final class WorldEditHighlightCommand extends AbstractCommand {
     }
 
     WorldEditPlugin getWorldEdit() {
-        return (WorldEditPlugin)Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
+        return (WorldEditPlugin) Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
     }
 
     @RequiredArgsConstructor
     class HighlightTask extends BukkitRunnable {
         private final Player player;
-        private final Block a, b;
+        private final Block a;
+        private final Block b;
         private int iter = 0;
         private int count = 0;
         @Override

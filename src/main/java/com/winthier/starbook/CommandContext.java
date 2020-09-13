@@ -11,9 +11,9 @@ final class CommandContext {
     final String label;
     final String[] args;
 
-    CommandContext(CommandSender sender, Command command, String label, String[] args) {
+    CommandContext(final CommandSender sender, final Command command, final String label, final String[] args) {
         this.sender = sender;
-        this.player = sender instanceof Player ? (Player)sender : null;
+        this.player = sender instanceof Player ? (Player) sender : null;
         this.command = command;
         this.label = label;
         this.args = args;

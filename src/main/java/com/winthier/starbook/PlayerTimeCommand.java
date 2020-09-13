@@ -22,7 +22,8 @@ class PlayerTimeCommand extends AbstractCommand {
         } else if (arg.contains(":")) {
             String[] arr = arg.split(":");
             if (arr.length != 2) throw new StarBookCommandException("&cTime expected: %s", arg);
-            long hours, minutes;
+            long hours;
+            long minutes;
             try {
                 hours = Long.parseLong(arr[0]);
                 minutes = Long.parseLong(arr[1]);

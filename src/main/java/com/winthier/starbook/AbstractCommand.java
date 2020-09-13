@@ -8,9 +8,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
+/**
+ * Superclass for all commands.
+ */
 public abstract class AbstractCommand implements TabExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public final boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         CommandContext context = new CommandContext(sender, command, label, args);
         try {
             onCommand(context);
@@ -29,7 +32,7 @@ public abstract class AbstractCommand implements TabExecutor {
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+    public final List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         return onTabComplete(new CommandContext(sender, command, label, args));
     }
 

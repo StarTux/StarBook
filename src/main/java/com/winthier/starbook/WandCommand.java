@@ -53,7 +53,12 @@ final class WandCommand extends AbstractCommand implements Listener {
     // --- Selection utility
 
     @Value static class Selection {
-        private final int ax, ay, az, bx, by, bz;
+        private final int ax;
+        private final int ay;
+        private final int az;
+        private final int bx;
+        private final int by;
+        private final int bz;
     }
 
     public Selection getSelection(Player player) {

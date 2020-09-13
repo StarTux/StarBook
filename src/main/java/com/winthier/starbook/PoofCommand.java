@@ -32,7 +32,7 @@ class PoofCommand extends AbstractCommand {
     void restoreGameMode(Player player) {
         for (MetadataValue meta: player.getMetadata(METADATA_KEY)) {
             if (meta.getOwningPlugin() != plugin) continue;
-            GameMode gm = (GameMode)meta.value();
+            GameMode gm = (GameMode) meta.value();
             player.setGameMode(gm);
         }
         player.removeMetadata(METADATA_KEY, plugin);

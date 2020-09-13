@@ -18,7 +18,7 @@ class MoonCommand extends AbstractCommand {
         if (c.args.length != 0) StarBookCommandException.usage(c);
         long time = c.player.getWorld().getFullTime();
         long day = time / 24000;
-        int index = (int)day % phases.length;
+        int index = (int) day % phases.length;
         msg(c.player, "Moon phase: &a%s&r.", phases[index]);
     }
 }

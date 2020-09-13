@@ -32,7 +32,9 @@ final class ParticleCommand extends AbstractCommand {
             }
             if (count < 0) throw new StarBookCommandException("Bad count arg: %d", count);
         }
-        double offsetX = 0, offsetY = 0, offsetZ = 0;
+        double offsetX = 0;
+        double offsetY = 0;
+        double offsetZ = 0;
         if (count > 1) {
             offsetX = 0.25;
             offsetY = 0.25;
@@ -119,7 +121,8 @@ final class ParticleCommand extends AbstractCommand {
                                    target.getEyeLocation().add(target.getEyeLocation().getDirection().multiply(2)),
                                    count, offsetX, offsetY, offsetZ, extra, data);
         }
-        msg(c.sender, "Showing particle for %s: %dx%s offset=%.2f,%.2f,%.2f extra=%.2f data=%s", target.getName(), count, particle.name(), offsetX, offsetY, offsetZ, extra, data);
+        msg(c.sender, "Showing particle for %s: %dx%s offset=%.2f,%.2f,%.2f extra=%.2f data=%s",
+            target.getName(), count, particle.name(), offsetX, offsetY, offsetZ, extra, data);
     }
 
     @Override
