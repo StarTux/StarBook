@@ -31,7 +31,7 @@ class Prox implements Comparable<Prox> {
     Prox(final Location center, final Player player) {
         Location loc = player.getLocation();
         this.name = player.getName();
-        this.dist = loc.distance(loc);
+        this.dist = loc.distance(center);
         StringBuilder sb = new StringBuilder();
         double dz = loc.getZ() - center.getZ();
         if (Math.abs(dz) >= 1.0) {
