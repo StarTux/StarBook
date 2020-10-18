@@ -15,7 +15,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class StarBookPlugin extends JavaPlugin implements Listener {
     private WhoCommand whoCommand = null;
     private WandCommand wandCommand = null;
-    private GodCommand godCommand = new GodCommand(this);
     @Getter private static StarBookPlugin instance;
     Meta meta = new Meta(this);
 
@@ -57,8 +56,6 @@ public final class StarBookPlugin extends JavaPlugin implements Listener {
                 return true;
             });
         getServer().getPluginManager().registerEvents(wandCommand, this);
-        getCommand("god").setExecutor(godCommand);
-        getServer().getPluginManager().registerEvents(godCommand, this);
     }
 
     @EventHandler
