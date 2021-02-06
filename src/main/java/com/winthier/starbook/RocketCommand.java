@@ -27,21 +27,15 @@ class RocketCommand extends AbstractCommand {
             }
         }
         if (!everybody && target == null) throw new StarBookCommandException(c);
-        Vector velo;
-        if (high) {
-            velo = new Vector(0.0, 5.0, 0.0);
-        } else {
-            velo = new Vector(0.0, 1.0, 0.0);
-        }
         String targetName;
         if (everybody) {
             targetName = "everybody";
             for (Player online: Bukkit.getServer().getOnlinePlayers()) {
-                online.setVelocity(velo);
+                online.setVelocity(getVelo(high));
             }
         } else {
             targetName = target.getName();
-            target.setVelocity(velo);
+            target.setVelocity(getVelo(high));
         }
         if (silent) {
             msg(c.sender, "&eYou rocketed %s!", targetName);
@@ -49,6 +43,14 @@ class RocketCommand extends AbstractCommand {
             for (Player recipient: Bukkit.getServer().getOnlinePlayers()) {
                 msg(recipient, "&e%s rocketed %s", c.sender.getName(), targetName);
             }
+        }
+    }
+
+    Vector getVelo(boolean high) {
+        if (high) {
+            return new Vector(0.0, 5.0, 0.0);
+        } else {
+            return new Vector(0.0, 1.0, 0.0);
         }
     }
 }

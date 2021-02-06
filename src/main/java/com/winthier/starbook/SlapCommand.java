@@ -29,23 +29,15 @@ class SlapCommand extends AbstractCommand {
             }
         }
         if (!everybody && target == null) throw new StarBookCommandException(c);
-        Vector velo;
-        if (violent) {
-            velo = new Vector(random.nextDouble() * 10.0 - 5.0, random.nextDouble() * 10.0, random.nextDouble() * 10.0 - 5.0);
-        } else if (high) {
-            velo = new Vector(random.nextDouble() * 5.0 - 2.5, random.nextDouble() * 5.0, random.nextDouble() * 5.0 - 2.5);
-        } else {
-            velo = new Vector(random.nextDouble() * 2.0 - 1.0, random.nextDouble() * 1.0, random.nextDouble() * 2.0 - 1.0);
-        }
         String targetName;
         if (everybody) {
             targetName = "everybody";
             for (Player online: Bukkit.getServer().getOnlinePlayers()) {
-                online.setVelocity(velo);
+                online.setVelocity(getVelo(violent, high));
             }
         } else {
             targetName = target.getName();
-            target.setVelocity(velo);
+            target.setVelocity(getVelo(violent, high));
         }
         if (silent) {
             msg(c.sender, "&eYou slapped %s!", targetName);
@@ -53,6 +45,16 @@ class SlapCommand extends AbstractCommand {
             for (Player recipient: Bukkit.getServer().getOnlinePlayers()) {
                 msg(recipient, "&e%s slapped %s", c.sender.getName(), targetName);
             }
+        }
+    }
+
+    Vector getVelo(boolean violent, boolean high) {
+        if (violent) {
+            return new Vector(random.nextDouble() * 10.0 - 5.0, random.nextDouble() * 10.0, random.nextDouble() * 10.0 - 5.0);
+        } else if (high) {
+            return new Vector(random.nextDouble() * 5.0 - 2.5, random.nextDouble() * 5.0, random.nextDouble() * 5.0 - 2.5);
+        } else {
+            return new Vector(random.nextDouble() * 2.0 - 1.0, random.nextDouble() * 1.0, random.nextDouble() * 2.0 - 1.0);
         }
     }
 }
