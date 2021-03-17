@@ -4,12 +4,14 @@ import com.winthier.connect.Connect;
 import com.winthier.connect.OnlinePlayer;
 import com.winthier.generic_events.GenericEvents;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -37,33 +39,38 @@ final class WhoCommand extends AbstractCommand {
             return;
         }
         Map<String, List<OnlinePlayer>> serverList = Connect.getInstance().listPlayers();
-        String[] serverNames = serverList.keySet().toArray(new String[0]);
-        Arrays.sort(serverNames, (a, b) -> Integer.compare(serverList.get(b).size(), serverList.get(a).size()));
+        List<String> serverNames = new ArrayList<>(serverList.keySet());
+        Collections.sort(serverNames, (a, b) -> Integer.compare(serverList.get(b).size(), serverList.get(a).size()));
         if (sender instanceof Player) {
             Player player = (Player) sender;
             int totalCount = 0;
             List<List<Object>> msgs = new ArrayList<>();
             for (String serverName : serverNames) {
-                OnlinePlayer[] playerArray = serverList.get(serverName).toArray(new OnlinePlayer[0]);
+                List<OnlinePlayer> playerList = new ArrayList<>(serverList.get(serverName));
+                playerList.removeIf(it -> {
+                        Player online = Bukkit.getPlayer(it.getUuid());
+                        return online != null && (online.getGameMode() == GameMode.SPECTATOR || !player.canSee(online));
+                    });
+                serverList.put(serverName, playerList);
                 String perm = "starbook.server." + serverName.toLowerCase();
-                if (playerArray.length == 0 && !player.hasPermission(perm)) continue;
-                Arrays.sort(playerArray, (a, b) -> String.CASE_INSENSITIVE_ORDER.compare(a.getName(), b.getName()));
+                if (playerList.size() == 0) continue;
+                Collections.sort(playerList, (a, b) -> String.CASE_INSENSITIVE_ORDER.compare(a.getName(), b.getName()));
                 List<Object> json = new ArrayList<>();
                 msgs.add(json);
-                totalCount += playerArray.length;
+                totalCount += playerList.size();
                 json.add(" ");
                 if (player.isPermissionSet(perm) && player.hasPermission(perm)) {
                     json.add(Msg.button(ChatColor.BLUE,
-                                        Msg.format("&7%s(&f%d&7)", serverName, playerArray.length),
+                                        Msg.format("&7%s(&f%d&7)", serverName, playerList.size()),
                                         serverName + " Server\n&7&o/" + serverName.toLowerCase(),
                                         "/" + serverName.toLowerCase() + " "));
                 } else {
                     json.add(Msg.button(ChatColor.BLUE,
-                                        Msg.format("&7%s(&f%d&7)", serverName, playerArray.length),
+                                        Msg.format("&7%s(&f%d&7)", serverName, playerList.size()),
                                         serverName + " Server",
                                         null));
                 }
-                for (OnlinePlayer online : playerArray) {
+                for (OnlinePlayer online : playerList) {
                     json.add(" ");
                     if (isStaff(online.getUuid())) {
                         json.add(Msg.button(ChatColor.GOLD,
