@@ -49,7 +49,7 @@ final class WhoCommand extends AbstractCommand {
                 List<OnlinePlayer> playerList = new ArrayList<>(serverList.get(serverName));
                 playerList.removeIf(it -> {
                         Player online = Bukkit.getPlayer(it.getUuid());
-                        return online != null && (online.getGameMode() == GameMode.SPECTATOR || !player.canSee(online));
+                        return online != null && ((online.getGameMode() == GameMode.SPECTATOR && online.hasPermission("chat.invisible")) || !player.canSee(online));
                     });
                 serverList.put(serverName, playerList);
                 String perm = "starbook.server." + serverName.toLowerCase();
