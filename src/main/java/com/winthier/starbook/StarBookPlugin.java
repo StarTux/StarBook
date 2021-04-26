@@ -55,6 +55,7 @@ public final class StarBookPlugin extends JavaPlugin implements Listener {
                 s.sendMessage("Data packs reloaded");
                 return true;
             });
+        getCommand("findsign").setExecutor(new FindSignCommand());
         getServer().getPluginManager().registerEvents(wandCommand, this);
     }
 
