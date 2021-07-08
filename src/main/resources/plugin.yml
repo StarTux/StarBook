@@ -84,14 +84,6 @@ commands:
   starve:
     permission: starbook.starve
     usage: /starve <player> - Empty hunger bar
-  wand:
-    permission: starbook.wand
-  sel:
-    permission: starbook.wand
-  sel1:
-    permission: starbook.wand
-  sel2:
-    permission: starbook.wand
   reloaddata:
     description: Reload data packs
     permission: starbook.reloaddata

@@ -14,7 +14,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class StarBookPlugin extends JavaPlugin implements Listener {
     private WhoCommand whoCommand = null;
-    private WandCommand wandCommand = null;
     @Getter private static StarBookPlugin instance;
     Meta meta = new Meta(this);
 
@@ -45,11 +44,6 @@ public final class StarBookPlugin extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
         whoCommand = new WhoCommand(this);
         getCommand("who").setExecutor(whoCommand);
-        wandCommand = new WandCommand(this);
-        getCommand("wand").setExecutor(wandCommand);
-        getCommand("sel").setExecutor(wandCommand);
-        getCommand("sel1").setExecutor(wandCommand);
-        getCommand("sel2").setExecutor(wandCommand);
         getCommand("reloaddata").setExecutor((s, c, l, a) -> {
                 getServer().reloadData();
                 s.sendMessage("Data packs reloaded");
@@ -59,7 +53,6 @@ public final class StarBookPlugin extends JavaPlugin implements Listener {
         SignEditCommand signEditCommand = new SignEditCommand();
         getCommand("signedit").setExecutor(signEditCommand);
         getServer().getPluginManager().registerEvents(signEditCommand, this);
-        getServer().getPluginManager().registerEvents(wandCommand, this);
     }
 
     @EventHandler
