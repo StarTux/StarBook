@@ -59,4 +59,3 @@ public abstract class AbstractCommand implements TabExecutor {
         sender.sendMessage(format(msg, args));
     }
 }
-

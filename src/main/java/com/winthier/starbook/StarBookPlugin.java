@@ -56,6 +56,9 @@ public final class StarBookPlugin extends JavaPlugin implements Listener {
                 return true;
             });
         getCommand("findsign").setExecutor(new FindSignCommand());
+        SignEditCommand signEditCommand = new SignEditCommand();
+        getCommand("signedit").setExecutor(signEditCommand);
+        getServer().getPluginManager().registerEvents(signEditCommand, this);
         getServer().getPluginManager().registerEvents(wandCommand, this);
     }
 

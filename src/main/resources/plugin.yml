@@ -5,8 +5,8 @@ version: 0.1
 api-version: 1.13
 website: http://cavetale.com
 main: com.winthier.starbook.StarBookPlugin
-depend: [ GenericEvents ]
-softdepend: [ WorldEdit, Connect ]
+depend: [Core, GenericEvents]
+softdepend: [WorldEdit, Connect]
 commands:
   slap:
     permission: starbook.slap
@@ -94,11 +94,87 @@ commands:
     permission: starbook.wand
   reloaddata:
     description: Reload data packs
-    permission: starbook.datareload
+    permission: starbook.reloaddata
   findsign:
     description: Find a sign
     permission: starbook.findsign
+    usage: /findsigh <text> - Locate signs containing text
+  signedit:
+    description: Edit signs
+    permission: starbook.signedit
+    aliases: [signed]
+    usage: |-
+      /signedit - Open the sign
+      /signedit <#line> <text> - Edit line number
 permissions:
   onlinelist.staff:
     default: op
     description: Be highlighted as staff on the online list
+
+  starbook.slap:
+    default: op
+    description: Use /slap
+
+  starbook.rocket:
+    default: op
+    description: Use /rocket
+
+  starbook.particles:
+    default: op
+    description: Use /particles
+
+  starbook.spawnmob:
+    default: op
+    description: Use /spawnmob
+
+  starbook.playertime:
+    default: op
+    description: Use /playertime
+
+  starbook.who:
+    default: op
+    description: Use /who, /list, /online
+
+  starbook.time:
+    default: op
+    description: Use /time
+
+  starbook.poof:
+    default: op
+    description: Use /poof
+
+  starbook.heal:
+    default: op
+    description: Use /heal
+
+  starbook.feed:
+    default: op
+    description: Use /feed
+
+  starbook.starve:
+    default: op
+    description: Use /starve
+
+  starbook.reloaddata:
+    default: op
+    description: Use /reloaddata
+
+  starbook.findsign:
+    default: op
+    description: Use /findsign
+
+  starbook.signedit:
+    default: op
+    description: Use /signedit
+
+  starbook.signedit.color:
+    default: op
+    description: Use color codes in sign edits
+
+  starbook.signedit.emoji:
+    default: op
+    description: Use emoji in sign edits
+
+  starbook.signedit.emoji.hidden:
+    default: op
+    description: Use hidden emoji on signs
