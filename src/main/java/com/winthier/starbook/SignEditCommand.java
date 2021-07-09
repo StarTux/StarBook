@@ -98,7 +98,7 @@ final class SignEditCommand extends AbstractCommand implements Listener {
         player.sendMessage(message);
     }
 
-    @EventHandler(ignoreCancelled = false, priority = EventPriority.HIGHEST)
+    @EventHandler(ignoreCancelled = false, priority = EventPriority.LOWEST)
     public void onPlayerInteract(PlayerInteractEvent event) {
         switch (event.getAction()) {
         case RIGHT_CLICK_BLOCK:
@@ -109,7 +109,7 @@ final class SignEditCommand extends AbstractCommand implements Listener {
         Player player = event.getPlayer();
         Entry entry = playerComponentMap.remove(player.getUniqueId());
         if (entry == null) return;
-        if (event.isCancelled() || !player.hasPermission("starbook.signedit")) {
+        if (!player.hasPermission("starbook.signedit")) {
             cancelMessage(player);
             return;
         }
