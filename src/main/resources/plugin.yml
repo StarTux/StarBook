@@ -163,6 +163,14 @@ permissions:
     default: op
     description: Use color codes in sign edits
 
+  starbook.signedit.color.decorate:
+    default: op
+    description: Use text decorations in sign edits
+
+  starbook.signedit.color.obfuscate:
+    default: op
+    description: Use color codes in sign edits
+
   starbook.signedit.emoji:
     default: op
     description: Use emoji in sign edits

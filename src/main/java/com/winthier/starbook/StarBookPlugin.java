@@ -1,26 +1,15 @@
 package com.winthier.starbook;
 
 import lombok.Getter;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.block.SignChangeEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class StarBookPlugin extends JavaPlugin implements Listener {
+public final class StarBookPlugin extends JavaPlugin {
     private WhoCommand whoCommand = null;
     @Getter private static StarBookPlugin instance;
     Meta meta = new Meta(this);
 
     @Override public void onEnable() {
         instance = this;
-        reloadConfig();
-        saveDefaultConfig();
         getCommand("slap").setExecutor(new SlapCommand());
         getCommand("rocket").setExecutor(new RocketCommand());
         getCommand("spawnmob").setExecutor(new SpawnMobCommand(this));
@@ -41,7 +30,6 @@ public final class StarBookPlugin extends JavaPlugin implements Listener {
         getCommand("feed").setExecutor(new HealCommand());
         getCommand("starve").setExecutor(new HealCommand());
         // getCommand("spawnwater").setExecutor(new SpawnWaterCommand());
-        getServer().getPluginManager().registerEvents(this, this);
         whoCommand = new WhoCommand(this);
         getCommand("who").setExecutor(whoCommand);
         getCommand("reloaddata").setExecutor((s, c, l, a) -> {
@@ -53,46 +41,5 @@ public final class StarBookPlugin extends JavaPlugin implements Listener {
         SignEditCommand signEditCommand = new SignEditCommand();
         getCommand("signedit").setExecutor(signEditCommand);
         getServer().getPluginManager().registerEvents(signEditCommand, this);
-    }
-
-    @EventHandler
-    public void onSignChange(SignChangeEvent event) {
-        if (!event.getPlayer().hasPermission("starbook.signcolor")) return;
-        for (int i = 0; i < 4; i += 1) {
-            String line = event.getLine(i);
-            if (line == null) continue;
-            line = ChatColor.translateAlternateColorCodes('&', line);
-            if (!event.getPlayer().hasPermission("starbook.signcolor.magic")) {
-                line = line.replace(ChatColor.MAGIC.toString(), "");
-            }
-            event.setLine(i, line);
-        }
-    }
-
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        if (getConfig().getBoolean("who.ShowOnLogin")) {
-            if (event.getPlayer().hasPermission("starbook.who")) {
-                whoCommand.showOnlineList(event.getPlayer());
-            }
-        }
-    }
-
-    @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent event) {
-        if (!event.hasBlock()) return;
-        if (!event.hasItem()) return;
-        if (event.getPlayer().isOp()) return;
-        //
-        Block block = event.getClickedBlock();
-        if (block == null) return;
-        if (block.getType() != Material.SPAWNER) return;
-        //
-        ItemStack item = event.getItem();
-        if (item == null) return;
-        if (!item.getType().name().endsWith("_SPAWN_EGG")) return;
-        //
-        event.setCancelled(true);
-        event.getPlayer().sendMessage("NO");
     }
 }

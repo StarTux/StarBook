@@ -30,6 +30,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 final class SignEditCommand extends AbstractCommand implements Listener {
     private Map<UUID, Entry> playerComponentMap = new HashMap<>();
     private Component tag = Component.text("[SignEdit]", TextColor.color(0xFFFF00));
+    private boolean signChangeEventLock = false;
 
     @Value
     private final class Entry {
@@ -55,16 +56,17 @@ final class SignEditCommand extends AbstractCommand implements Listener {
             }
             String text = String.join(" ", Arrays.copyOfRange(c.args, 1, c.args.length));
             if (c.player.hasPermission("starbook.signedit.color")) {
-                text = ChatColor.translateAlternateColorCodes('&', text);
+                text = translateColors(text, c.player);
             }
-            Component component = null;
+            Component component;
             if (c.player.hasPermission("starbook.signedit.emoji")) {
                 GlyphPolicy glyphPolicy = c.player.hasPermission("starbook.signedit.emoji.hidden")
                     ? GlyphPolicy.HIDDEN
                     : GlyphPolicy.PUBLIC;
-                component = Emoji.maybeReplaceText(text, glyphPolicy, false);
+                component = Emoji.replaceText(text, glyphPolicy, false).asComponent();
+            } else {
+                component = Component.text(text);
             }
-            if (component == null) component = Component.text(text);
             StringBuilder sb = new StringBuilder();
             ComponentFlattener.textOnly().flatten(component, txt -> sb.append(txt));
             int length = sb.toString().length();
@@ -129,7 +131,9 @@ final class SignEditCommand extends AbstractCommand implements Listener {
             List<Component> lines = new ArrayList<>(sign.lines());
             lines.set(entry.linum - 1, entry.component);
             SignChangeEvent signChangeEvent = new SignChangeEvent(block, player, lines);
+            signChangeEventLock = true;
             Bukkit.getPluginManager().callEvent(signChangeEvent);
+            signChangeEventLock = false;
             if (signChangeEvent.isCancelled()) {
                 cancelMessage(player);
                 return;
@@ -149,6 +153,67 @@ final class SignEditCommand extends AbstractCommand implements Listener {
                 .build();
             player.sendMessage(message);
         }
+    }
+
+    @EventHandler(ignoreCancelled = false, priority = EventPriority.LOWEST)
+    public void onSignChange(SignChangeEvent event) {
+        if (signChangeEventLock) {
+            signChangeEventLock = false;
+            return;
+        }
+        Player player = event.getPlayer();
+        for (int i = 0; i < 4; i += 1) {
+            String line = event.getLine(i);
+            if (line == null) continue;
+            if (player.hasPermission("starbook.signedit.color")) {
+                line = translateColors(line, player);
+            }
+            Component component;
+            if (player.hasPermission("starbook.signedit.emoji")) {
+                GlyphPolicy glyphPolicy = player.hasPermission("starbook.signedit.emoji.hidden")
+                    ? GlyphPolicy.HIDDEN
+                    : GlyphPolicy.PUBLIC;
+                component = Emoji.replaceText(line, glyphPolicy, false).asComponent();
+            } else {
+                component = Component.text(line);
+            }
+            event.line(i, component);
+        }
+    }
+
+    private String translateColors(String in, Player player) {
+        return translateColors(in,
+                               player.hasPermission("starbook.signedit.color.decorate"),
+                               player.hasPermission("starbook.signedit.color.obfuscate"));
+    }
+
+    private String translateColors(String in, boolean decorate, boolean obfuscate) {
+        if (!in.contains("&")) return in;
+        StringBuilder sb = new StringBuilder();
+        String tail = in;
+        do {
+            int index = tail.indexOf('&');
+            if (index < 0 || index >= tail.length() - 1) break;
+            sb.append(tail.substring(0, index));
+            String key = tail.substring(index, index + 2);
+            tail = tail.substring(index + 2);
+            ChatColor colorCode = ChatColor.getByChar(key.charAt(1));
+            if (colorCode == null) {
+                sb.append(key);
+            } else if (colorCode.isColor()) {
+                sb.append(colorCode.toString());
+            } else if (colorCode == ChatColor.RESET) {
+                sb.append(decorate ? colorCode.toString() : key);
+            } else if (colorCode == ChatColor.MAGIC) {
+                sb.append(obfuscate ? colorCode.toString() : key);
+            } else if (colorCode.isFormat()) {
+                sb.append(decorate ? colorCode.toString() : key);
+            } else {
+                throw new IllegalStateException("colorCode=" + colorCode);
+            }
+        } while (!tail.isEmpty());
+        sb.append(tail);
+        return sb.toString();
     }
 
     protected List<String> onTabComplete(CommandContext c) {
