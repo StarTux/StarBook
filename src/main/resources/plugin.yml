@@ -8,56 +8,72 @@ main: com.winthier.starbook.StarBookPlugin
 depend: [Core, GenericEvents]
 softdepend: [WorldEdit, Connect]
 commands:
+
   slap:
     permission: starbook.slap
     usage: '/slap [-vhs] <player>'
+
   rocket:
     permission: starbook.rocket
     usage: '/rocket [-hs] <player>'
+
   sound:
     permission: starbook.sound
     description: Play sound effects in your ears
     usage: '/sound <soundname> [volume] [pitch] [target]'
+
   particles:
     permission: starbook.particles
     description: Show particles in front of your face
     usage: '/particles <particle> [count] [offset] [extra] [data]'
+
   spawnmob:
     permission: starbook.spawnmob
     usage: '/spawnmob <mob> [amount]'
+
   playertime:
     permission: starbook.playertime
     description: Change the time for your client
     usage: '/playertime reset|<time>'
+
   who:
     aliases: [ list, ls, online ]
     permission: starbook.who
     description: List players on all servers
     usage: '/who'
+
   time:
     permission: starbook.time
     usage: '/time [time]'
+
   moon:
     permission: starbook.moon
     usage: '/moon'
+
   cropcliff:
     permission: starbook.cropcliff
+
   opme:
     permission: starbook.opme
     usage: '/opme'
+
   near:
     permission: starbook.near
     usage: '/near'
+
   script:
     permission: starbook.script
     usage: '/script'
+
   worldedithighlight:
     aliases: [ wehl ]
     permission: starbook.wehl
     usage: '/wehl'
+
   getblock:
     permission: starbook.getblock
     usage: '/getblock'
+
   plugininfo:
     permission: starbook.plugininfo
     aliases: [ pluginfo ]
@@ -71,26 +87,33 @@ commands:
       /plugininfo listen <event>
       /plugininfo permission <permission>
       /plugininfo command <cmd>
+
   poof:
     permission: starbook.poof
     aliases: [ vanish ]
     usage: /poof - vanish/reappear
+
   heal:
     permission: starbook.heal
     usage: /heal <player> - Fill health bar
+
   feed:
     permission: starbook.feed
     usage: /feed <player> - Fill hunger bar
+
   starve:
     permission: starbook.starve
     usage: /starve <player> - Empty hunger bar
+
   reloaddata:
     description: Reload data packs
     permission: starbook.reloaddata
+
   findsign:
     description: Find a sign
     permission: starbook.findsign
     usage: /findsigh <text> - Locate signs containing text
+
   signedit:
     description: Edit signs
     permission: starbook.signedit
@@ -98,6 +121,7 @@ commands:
     usage: |-
       /signedit - Open the sign
       /signedit <#line> <text> - Edit line number
+
 permissions:
   onlinelist.staff:
     default: op
