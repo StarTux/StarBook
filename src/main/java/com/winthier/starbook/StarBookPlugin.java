@@ -24,7 +24,6 @@ public final class StarBookPlugin extends JavaPlugin {
         getCommand("script").setExecutor(new ScriptCommand(this));
         getCommand("worldedithighlight").setExecutor(new WorldEditHighlightCommand(this));
         getCommand("getblock").setExecutor(new GetBlockCommand(this));
-        getCommand("plugininfo").setExecutor(new PluginInfoCommand());
         getCommand("poof").setExecutor(new PoofCommand(this));
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("feed").setExecutor(new HealCommand());

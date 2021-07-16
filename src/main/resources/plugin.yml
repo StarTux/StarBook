@@ -74,20 +74,6 @@ commands:
     permission: starbook.getblock
     usage: '/getblock'
 
-  plugininfo:
-    permission: starbook.plugininfo
-    aliases: [ pluginfo ]
-    usage: |-
-      /plugininfo list
-      /plugininfo dump <plugin>
-      /plugininfo depend <plugin>
-      /plugininfo database
-      /plugininfo author <name>
-      /plugininfo nauthor <name>
-      /plugininfo listen <event>
-      /plugininfo permission <permission>
-      /plugininfo command <cmd>
-
   poof:
     permission: starbook.poof
     aliases: [ vanish ]
