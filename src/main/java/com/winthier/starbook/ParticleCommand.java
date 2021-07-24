@@ -134,7 +134,7 @@ final class ParticleCommand extends AbstractCommand {
             result = emptyTabList();
             cmd = c.args[0].toLowerCase();
             for (Particle particle: Particle.values()) {
-                if (particle.name().toLowerCase().startsWith(cmd)) {
+                if (particle.name().toLowerCase().contains(cmd)) {
                     result.add(particle.name());
                 }
             }
@@ -152,7 +152,7 @@ final class ParticleCommand extends AbstractCommand {
             result = emptyTabList();
             cmd = c.args[4].toUpperCase();
             for (Material mat: Material.values()) {
-                if (mat.name().startsWith(cmd)) result.add(mat.name());
+                if (mat.name().contains(cmd)) result.add(mat.name());
             }
             return result;
         default:

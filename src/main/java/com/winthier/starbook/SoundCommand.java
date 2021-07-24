@@ -66,7 +66,7 @@ final class SoundCommand extends AbstractCommand {
         List<String> result = emptyTabList();
         String cmd = c.args[0].toLowerCase();
         for (Sound sound: Sound.values()) {
-            if (sound.name().toLowerCase().startsWith(cmd)) {
+            if (sound.name().toLowerCase().contains(cmd)) {
                 result.add(sound.name());
             }
         }
