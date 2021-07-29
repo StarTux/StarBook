@@ -11,6 +11,12 @@
   </properties>
   <repositories>
 
+    <!-- Cavetale Repo -->
+    <repository>
+      <id>cavetale</id>
+      <url>https://cavetale.com/jenkins/plugin/repository/everything/</url>
+    </repository>
+
     <!-- Paper Repo -->
     <repository>
       <id>papermc</id>
@@ -27,12 +33,6 @@
       <snapshots>
         <enabled>true</enabled> <!-- snapshots enabled: we declare a SNAPSHOT repository because we need to download a SNAPSHOT dependency -->
       </snapshots>
-    </repository>
-
-    <!-- Cavetale Repo -->
-    <repository>
-      <id>cavetale</id>
-      <url>https://cavetale.com/jenkins/plugin/repository/everything/</url>
     </repository>
 
   </repositories>
@@ -58,7 +58,7 @@
     <dependency>
       <groupId>com.sk89q.worldedit</groupId>
       <artifactId>worldedit-bukkit</artifactId>
-      <version>7.1.0-SNAPSHOT</version>
+      <version>7.3.0-SNAPSHOT</version>
     </dependency>
 
     <!-- Connect -->
@@ -75,18 +75,18 @@
       <version>0.1-SNAPSHOT</version>
     </dependency>
 
-    <!-- GenericEvents -->
-    <dependency>
-      <groupId>com.winthier.generic_events</groupId>
-      <artifactId>generic_events</artifactId>
-      <version>0.1-SNAPSHOT</version>
-      <scope>provided</scope>
-    </dependency>
-
     <!-- Core -->
     <dependency>
       <groupId>com.cavetale.core</groupId>
       <artifactId>core</artifactId>
+      <version>0.1-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Perm -->
+    <dependency>
+      <groupId>com.winthier.perm</groupId>
+      <artifactId>perm</artifactId>
       <version>0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>

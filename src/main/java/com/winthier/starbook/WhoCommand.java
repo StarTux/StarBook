@@ -2,7 +2,7 @@ package com.winthier.starbook;
 
 import com.winthier.connect.Connect;
 import com.winthier.connect.OnlinePlayer;
-import com.winthier.generic_events.GenericEvents;
+import com.winthier.perm.Perm;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -28,7 +28,7 @@ final class WhoCommand extends AbstractCommand {
     private boolean isStaff(UUID uuid) {
         Player bukkitPlayer = plugin.getServer().getPlayer(uuid);
         if (bukkitPlayer != null) return bukkitPlayer.hasPermission("onlinelist.staff");
-        return GenericEvents.playerHasPermission(uuid, "onlinelist.staff");
+        return Perm.has(uuid, "onlinelist.staff");
     }
 
     void showOnlineList(CommandSender sender) {

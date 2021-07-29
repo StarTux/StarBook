@@ -1,8 +1,8 @@
 package com.winthier.starbook;
 
+import com.cavetale.core.event.block.PlayerCanBuildEvent;
 import com.cavetale.core.font.Emoji;
 import com.cavetale.core.font.GlyphPolicy;
-import com.winthier.generic_events.GenericEvents;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -116,7 +116,7 @@ final class SignEditCommand extends AbstractCommand implements Listener {
             return;
         }
         Block block = event.getClickedBlock();
-        if (!GenericEvents.playerCanBuild(player, block)) {
+        if (!PlayerCanBuildEvent.call(player, block)) {
             cancelMessage(player);
             return;
         }
