@@ -31,6 +31,7 @@ final class SignEditCommand extends AbstractCommand implements Listener {
     private Map<UUID, Entry> playerComponentMap = new HashMap<>();
     private Component tag = Component.text("[SignEdit]", TextColor.color(0xFFFF00));
     private boolean signChangeEventLock = false;
+    private final int maxLineLength = 20;
 
     @Value
     private final class Entry {
@@ -69,9 +70,9 @@ final class SignEditCommand extends AbstractCommand implements Listener {
             }
             StringBuilder sb = new StringBuilder();
             ComponentFlattener.textOnly().flatten(component, txt -> sb.append(txt));
-            int length = sb.toString().length();
-            if (length > 15) {
-                throw new StarBookCommandException("Text too long: " + length + ". Max 15!");
+            int length = ChatColor.stripColor(sb.toString()).length();
+            if (length > maxLineLength) {
+                throw new StarBookCommandException("Text too long: " + length + ". Max " + maxLineLength + "!");
             }
             playerComponentMap.put(c.player.getUniqueId(), new Entry(linum, component));
             Component message = Component.text()
