@@ -4,13 +4,14 @@ import com.sk89q.worldedit.LocalSession;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.Region;
+import java.util.function.Consumer;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 @RequiredArgsConstructor
 final class WorldEditHighlightCommand extends AbstractCommand {
@@ -26,7 +27,7 @@ final class WorldEditHighlightCommand extends AbstractCommand {
         World w = c.player.getWorld();
         Block a = sel.getMinBlock(w);
         Block b = sel.getMaxBlock(w);
-        new HighlightTask(c.player, a, b).runTaskTimer(plugin, 1, 1);
+        highlight(a, b, l -> l.getWorld().spawnParticle(Particle.END_ROD, l, 1, 0.0, 0.0, 0.0, 0.0));
     }
 
     public static WorldEditPlugin getWorldEdit() {
@@ -50,59 +51,39 @@ final class WorldEditHighlightCommand extends AbstractCommand {
                           max.getBlockX(), max.getBlockY(), max.getBlockZ());
     }
 
-    @RequiredArgsConstructor
-    class HighlightTask extends BukkitRunnable {
-        private final Player player;
-        private final Block a;
-        private final Block b;
-        private int iter = 0;
-        private int count = 0;
-        @Override
-        public void run() {
-            if (!player.isValid() || !player.getWorld().equals(a.getWorld())) {
-                cancel();
-                return;
-            }
-            boolean active = false;
-            if (iter <= b.getX() - a.getX()) {
-                highlight(a.getX(), a.getY(), a.getZ(), 0);
-                highlight(a.getX(), a.getY(), b.getZ(), 0);
-                highlight(a.getX(), b.getY(), a.getZ(), 0);
-                highlight(a.getX(), b.getY(), b.getZ(), 0);
-                active = true;
-            }
-            if (iter <= b.getY() - a.getY()) {
-                highlight(a.getX(), a.getY(), a.getZ(), 1);
-                highlight(a.getX(), a.getY(), b.getZ(), 1);
-                highlight(b.getX(), a.getY(), a.getZ(), 1);
-                highlight(b.getX(), a.getY(), b.getZ(), 1);
-                active = true;
-            }
-            if (iter <= b.getZ() - a.getZ()) {
-                highlight(a.getX(), a.getY(), a.getZ(), 2);
-                highlight(a.getX(), b.getY(), a.getZ(), 2);
-                highlight(b.getX(), a.getY(), a.getZ(), 2);
-                highlight(b.getX(), b.getY(), a.getZ(), 2);
-                active = true;
-            }
-            if (!active) {
-                iter = 0;
-                count += 1;
-                if (count > 2) cancel();
-            } else {
-                iter += 1;
-            }
+    public boolean highlight(Block a, Block b, Consumer<Location> callback) {
+        World world = a.getWorld();
+        final int ax = a.getX();
+        final int ay = a.getY();
+        final int az = a.getZ();
+        final int bx = b.getX();
+        final int by = b.getY();
+        final int bz = b.getZ();
+        Location loc = a.getLocation();
+        int sizeX = bx - ax + 1;
+        int sizeY = by - ay + 1;
+        int sizeZ = bz - az + 1;
+        for (int y = 0; y < sizeY; y += 1) {
+            double dy = (double) y;
+            callback.accept(loc.clone().add(0, dy, 0));
+            callback.accept(loc.clone().add(0, dy, sizeZ));
+            callback.accept(loc.clone().add(sizeX, dy, 0));
+            callback.accept(loc.clone().add(sizeX, dy, sizeZ));
         }
-
-        void highlight(int x, int y, int z, int axis) {
-            switch (axis) {
-            case 0: x += iter; break;
-            case 1: y += iter; break;
-            case 2: z += iter; break;
-            default: break;
-            }
-            Block block = a.getWorld().getBlockAt(x, y, z);
-            player.spawnParticle(Particle.CRIT, block.getLocation().add(.5, .5, .5), 3, .0, .0, .0, .0);
+        for (int z = 0; z < sizeZ; z += 1) {
+            double dz = (double) z;
+            callback.accept(loc.clone().add(0, 0, dz));
+            callback.accept(loc.clone().add(0, sizeY, dz));
+            callback.accept(loc.clone().add(sizeX, 0, dz));
+            callback.accept(loc.clone().add(sizeX, sizeY, dz));
         }
+        for (int x = 0; x < sizeX; x += 1) {
+            double dx = (double) x;
+            callback.accept(loc.clone().add(dx, 0, 0));
+            callback.accept(loc.clone().add(dx, 0, sizeZ));
+            callback.accept(loc.clone().add(dx, sizeY, 0));
+            callback.accept(loc.clone().add(dx, sizeY, sizeZ));
+        }
+        return true;
     }
 }
