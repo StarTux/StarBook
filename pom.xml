@@ -68,13 +68,6 @@
       <version>0.1-SNAPSHOT</version>
     </dependency>
 
-    <!-- Dirty -->
-    <dependency>
-      <groupId>com.cavetale.dirty</groupId>
-      <artifactId>dirty</artifactId>
-      <version>0.1-SNAPSHOT</version>
-    </dependency>
-
     <!-- Core -->
     <dependency>
       <groupId>com.cavetale.core</groupId>
