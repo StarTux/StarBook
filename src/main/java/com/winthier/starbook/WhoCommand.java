@@ -1,7 +1,7 @@
 package com.winthier.starbook;
 
 import com.winthier.connect.Connect;
-import com.winthier.connect.OnlinePlayer;
+import com.winthier.connect.payload.OnlinePlayer;
 import com.winthier.perm.Perm;
 import java.util.ArrayList;
 import java.util.Collections;
