@@ -56,7 +56,15 @@ final class SignEditCommand extends AbstractCommand implements Listener {
                 throw new StarBookCommandException("Invalid line number: " + c.args[0]);
             }
             String text = String.join(" ", Arrays.copyOfRange(c.args, 1, c.args.length));
+            NamedTextColor legacyColor = null;
             if (c.player.hasPermission("starbook.signedit.color")) {
+                if (text.length() >= 2 && text.charAt(0) == '&') {
+                    ChatColor chatColor = ChatColor.getByChar(text.charAt(1));
+                    if (chatColor != null && chatColor.isColor()) {
+                        legacyColor = NamedTextColor.NAMES.value(chatColor.name().toLowerCase());
+                        text = text.substring(2);
+                    }
+                }
                 text = translateColors(text, c.player);
             }
             Component component;
@@ -68,6 +76,7 @@ final class SignEditCommand extends AbstractCommand implements Listener {
             } else {
                 component = Component.text(text);
             }
+            if (legacyColor != null) component = component.color(legacyColor);
             StringBuilder sb = new StringBuilder();
             ComponentFlattener.textOnly().flatten(component, txt -> sb.append(txt));
             int length = ChatColor.stripColor(sb.toString()).length();
