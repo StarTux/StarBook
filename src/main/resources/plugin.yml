@@ -108,6 +108,12 @@ commands:
       /signedit - Open the sign
       /signedit <#line> <text> - Edit line number
 
+  getping:
+    description: Get your ping
+    permission: starbook.getping
+    aliases: []
+    usage: /getping
+
 permissions:
   onlinelist.staff:
     default: op
@@ -188,3 +194,11 @@ permissions:
   starbook.signedit.emoji.hidden:
     default: op
     description: Use hidden emoji on signs
+
+  starbook.getping:
+    default: op
+    description: Use /getping
+
+  starbook.getping.other:
+    default: op
+    description: Use /getping
