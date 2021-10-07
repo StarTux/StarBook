@@ -15,6 +15,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.flattener.ComponentFlattener;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
@@ -173,19 +174,20 @@ final class SignEditCommand extends AbstractCommand implements Listener {
         }
         Player player = event.getPlayer();
         for (int i = 0; i < 4; i += 1) {
-            String line = event.getLine(i);
-            if (line == null) continue;
+            Component line = event.line(i);
+            if (line == null || Component.empty().equals(line)) continue;
+            String text = PlainTextComponentSerializer.plainText().serialize(line);
             if (player.hasPermission("starbook.signedit.color")) {
-                line = translateColors(line, player);
+                text = translateColors(text, player);
             }
             Component component;
             if (player.hasPermission("starbook.signedit.emoji")) {
                 GlyphPolicy glyphPolicy = player.hasPermission("starbook.signedit.emoji.hidden")
                     ? GlyphPolicy.HIDDEN
                     : GlyphPolicy.PUBLIC;
-                component = Emoji.replaceText(line, glyphPolicy, false).asComponent();
+                component = Emoji.replaceText(text, glyphPolicy, false).asComponent();
             } else {
-                component = Component.text(line);
+                component = Component.text(text);
             }
             event.line(i, component);
         }

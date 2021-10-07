@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.JoinConfiguration;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -53,7 +53,7 @@ final class WhoCommand extends AbstractCommand {
             if (playerList.size() == 0) continue;
             Collections.sort(playerList, (a, b) -> String.CASE_INSENSITIVE_ORDER.compare(a.getName(), b.getName()));
             totalCount += playerList.size();
-            Component nameComponent = TextComponent.ofChildren(new Component[] {
+            Component nameComponent = Component.join(JoinConfiguration.noSeparators(), new Component[] {
                     Component.text(serverName, NamedTextColor.GRAY),
                     Component.text(" (", NamedTextColor.GRAY),
                     Component.text("" + playerList.size(), NamedTextColor.WHITE),
@@ -66,7 +66,7 @@ final class WhoCommand extends AbstractCommand {
                 boolean staff = isStaff(online.getUuid());
                 playerNames.add(Component.text(online.getName(), staff ? NamedTextColor.GOLD : NamedTextColor.WHITE)
                                 .clickEvent(ClickEvent.suggestCommand("/msg " + online.getName()))
-                                .hoverEvent(HoverEvent.showText(TextComponent.ofChildren(new Component[] {
+                                .hoverEvent(HoverEvent.showText(Component.join(JoinConfiguration.noSeparators(), new Component[] {
                                                 Component.text(online.getName(), (staff ? NamedTextColor.GOLD : NamedTextColor.WHITE)),
                                                 Component.newline(),
                                                 Component.text((staff ? "Staff member" : "Player"), NamedTextColor.DARK_GRAY),
@@ -74,12 +74,12 @@ final class WhoCommand extends AbstractCommand {
                                                 Component.text("/msg " + online.getName(), NamedTextColor.GRAY),
                                             }))));
             }
-            lines.add(TextComponent.ofChildren(new Component[] {
+            lines.add(Component.join(JoinConfiguration.noSeparators(), new Component[] {
                         nameComponent,
                         Component.space(),
-                        Component.join(Component.text(", ", NamedTextColor.GRAY), playerNames),
+                        Component.join(JoinConfiguration.separator(Component.text(", ", NamedTextColor.GRAY)), playerNames),
                     }));
         }
-        sender.sendMessage(Component.join(Component.newline(), lines));
+        sender.sendMessage(Component.join(JoinConfiguration.separator(Component.newline()), lines));
     }
 }

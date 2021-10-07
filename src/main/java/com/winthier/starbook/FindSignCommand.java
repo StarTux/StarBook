@@ -1,5 +1,7 @@
 package com.winthier.starbook;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.World;
@@ -17,7 +19,8 @@ final class FindSignCommand extends AbstractCommand {
                 for (BlockState bs : chunk.getTileEntities()) {
                     if (!(bs instanceof Sign)) continue;
                     Sign sign = (Sign) bs;
-                    LINES: for (String line : sign.getLines()) {
+                    LINES: for (Component component : sign.lines()) {
+                        String line = PlainTextComponentSerializer.plainText().serialize(component);
                         if (line.toLowerCase().contains(text)) {
                             count += 1;
                             c.sender.sendMessage("Sign matches: " + world.getName()
