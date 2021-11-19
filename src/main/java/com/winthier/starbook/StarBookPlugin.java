@@ -41,5 +41,7 @@ public final class StarBookPlugin extends JavaPlugin {
         getCommand("signedit").setExecutor(signEditCommand);
         getServer().getPluginManager().registerEvents(signEditCommand, this);
         getCommand("getping").setExecutor(new GetPingCommand());
+        getCommand("makebook").setExecutor(new MakeBookCommand());
+        getCommand("markblocks").setExecutor(new MarkBlocksCommand());
     }
 }

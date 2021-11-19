@@ -6,7 +6,7 @@ api-version: 1.17
 website: http://cavetale.com
 main: com.winthier.starbook.StarBookPlugin
 depend: [Core, Perm, Connect]
-softdepend: [WorldEdit]
+softdepend: [WorldEdit, WorldMarker]
 commands:
 
   slap:
@@ -114,6 +114,20 @@ commands:
     aliases: []
     usage: /getping
 
+  makebook:
+    description: Put text in book
+    permission: starbook.makebook
+    aliases: []
+    usage: /makebook <text>
+
+  markblocks:
+    description: Mark selection with WorldMarker
+    permission: starbook.markblocks
+    aliases: []
+    usage: |-
+      "/markblocks <id>" Set id
+      "/markblocks -" Reset ids
+
 permissions:
   onlinelist.staff:
     default: op
@@ -202,3 +216,7 @@ permissions:
   starbook.getping.other:
     default: op
     description: Use /getping
+
+  starbook.book:
+    default: op
+    description: Use /book
