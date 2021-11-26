@@ -49,7 +49,7 @@ final class ChangeBiomeCommand extends AbstractCommand {
                             if (y > selection.by) {
                                 cancel();
                                 c.player.sendMessage("ChangeBiome done: " + total
-                                                     + " blocks changed to + "
+                                                     + " blocks changed to "
                                                      + biome.name().toLowerCase());
                                 return;
                             }
