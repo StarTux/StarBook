@@ -113,4 +113,10 @@ public final class Cuboid {
     public Block getMaxBlock(World w) {
         return w.getBlockAt(bx, by, bz);
     }
+
+    public int volume() {
+        return (bx - ax + 1)
+            * (by - ay + 1)
+            * (bz - az + 1);
+    }
 }

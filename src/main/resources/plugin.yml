@@ -128,6 +128,11 @@ commands:
       "/markblocks <id>" Set id
       "/markblocks -" Reset ids
 
+  changebiome:
+    aliases: [chbiome]
+    description: Change biome in WE selection
+    permission: starbook.changebiome
+
 permissions:
   onlinelist.staff:
     default: op
@@ -220,3 +225,11 @@ permissions:
   starbook.book:
     default: op
     description: Use /book
+
+  starbook.markblocks:
+    default: op
+    description: Use /markblocks
+
+  starbook.changebiome:
+    default: op
+    description: Use /changebiome
