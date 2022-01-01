@@ -6,6 +6,9 @@ import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.Region;
 import java.util.function.Consumer;
 import lombok.RequiredArgsConstructor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.JoinConfiguration;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -28,6 +31,12 @@ final class WorldEditHighlightCommand extends AbstractCommand {
         Block a = sel.getMinBlock(w);
         Block b = sel.getMaxBlock(w);
         highlight(a, b, l -> l.getWorld().spawnParticle(Particle.END_ROD, l, 1, 0.0, 0.0, 0.0, 0.0));
+        c.player.sendMessage(Component.join(JoinConfiguration.noSeparators(), new Component[] {
+                    Component.text("Highlighting "),
+                    Component.text(a.getX() + " " + a.getY() + " " + a.getZ(), NamedTextColor.AQUA),
+                    Component.text(" to "),
+                    Component.text(b.getX() + " " + b.getY() + " " + b.getZ(), NamedTextColor.AQUA),
+                }).color(NamedTextColor.YELLOW));
     }
 
     public static WorldEditPlugin getWorldEdit() {
