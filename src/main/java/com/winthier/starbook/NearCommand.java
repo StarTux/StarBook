@@ -3,6 +3,8 @@ package com.winthier.starbook;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -15,6 +17,10 @@ class NearCommand extends AbstractCommand {
         for (Player player: c.player.getWorld().getPlayers()) {
             if (player.equals(c.player)) continue;
             proxies.add(new Prox(loc, player));
+        }
+        if (proxies.isEmpty()) {
+            c.player.sendMessage(Component.text("Nobody is nearby!", NamedTextColor.RED));
+            return;
         }
         Collections.sort(proxies);
         for (Prox prox: proxies) {
