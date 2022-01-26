@@ -133,6 +133,12 @@ commands:
     description: Change biome in WE selection
     permission: starbook.changebiome
 
+  setendgateway:
+    aliases: []
+    permission: starbook.setendgateway
+    description: Create an end gateway which never beams in your WE selection
+    usage: /setendgateway
+
 permissions:
   onlinelist.staff:
     default: op
@@ -233,3 +239,7 @@ permissions:
   starbook.changebiome:
     default: op
     description: Use /changebiome
+
+  starbook.setendgateway:
+    default: op
+    description: Use /setendgateway
