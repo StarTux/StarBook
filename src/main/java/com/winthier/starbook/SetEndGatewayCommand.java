@@ -54,7 +54,6 @@ class SetEndGatewayCommand extends AbstractCommand {
                     if (block.getState() instanceof EndGateway blockState) {
                         blockState.setAge(Long.MIN_VALUE);
                         blockState.update();
-                        c.player.sendMessage("age=" + blockState.getAge());
                     }
                 }
             }
