@@ -2,11 +2,11 @@ name: StarBook
 description: Collection of useful Commands
 author: StarTux
 version: 0.1
-api-version: 1.17
+api-version: 1.18
 website: http://cavetale.com
 main: com.winthier.starbook.StarBookPlugin
 depend: [Core, Perm, Connect]
-softdepend: [WorldEdit, WorldMarker]
+softdepend: [WorldEdit, WorldMarker, PlayerCache]
 commands:
 
   slap:
@@ -139,6 +139,12 @@ commands:
     description: Create an end gateway which never beams in your WE selection
     usage: /setendgateway
 
+  transferaccount:
+    aliases: []
+    permission: starbook.transferaccount
+    description: Transfer accounts
+    usage: /transferaccount <from> <to>
+
 permissions:
   onlinelist.staff:
     default: op
@@ -243,3 +249,7 @@ permissions:
   starbook.setendgateway:
     default: op
     description: Use /setendgateway
+
+  starbook.transferaccount:
+    default: op
+    description: Use /transferaccount

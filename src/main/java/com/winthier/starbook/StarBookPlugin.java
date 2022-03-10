@@ -5,7 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class StarBookPlugin extends JavaPlugin {
     private WhoCommand whoCommand = null;
-    @Getter private static StarBookPlugin instance;
+    @Getter protected static StarBookPlugin instance;
     Meta meta = new Meta(this);
 
     @Override public void onEnable() {
@@ -45,5 +45,6 @@ public final class StarBookPlugin extends JavaPlugin {
         getCommand("markblocks").setExecutor(new MarkBlocksCommand());
         getCommand("changebiome").setExecutor(new ChangeBiomeCommand());
         getCommand("setendgateway").setExecutor(new SetEndGatewayCommand());
+        getCommand("transferaccount").setExecutor(new TransferAccountCommand());
     }
 }
