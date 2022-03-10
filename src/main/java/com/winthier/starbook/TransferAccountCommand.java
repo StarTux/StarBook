@@ -31,6 +31,7 @@ class TransferAccountCommand extends AbstractCommand {
                     "photos:photoadmin transferall",
                     "shop:shopadmin transferall",
                     "tutor:tutoradmin transferall",
+                    "fam:fam transfer",
                 });
             break;
         case CREATIVE:
