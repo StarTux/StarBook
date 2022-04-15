@@ -30,7 +30,7 @@ class TransferAccountCommand extends AbstractCommand {
                     "title:titles transfer",
                     "photos:photoadmin transferall",
                     "shop:shopadmin transferall",
-                    "tutor:tutoradmin transferall",
+                    "tutor:tutoradmin transfer",
                     "fam:fam transfer",
                 });
             break;
