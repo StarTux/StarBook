@@ -37,6 +37,7 @@ public final class StarBookPlugin extends JavaPlugin {
                 return true;
             });
         getCommand("findsign").setExecutor(new FindSignCommand());
+        getCommand("findchest").setExecutor(new FindChestCommand());
         SignEditCommand signEditCommand = new SignEditCommand();
         getCommand("signedit").setExecutor(signEditCommand);
         getServer().getPluginManager().registerEvents(signEditCommand, this);

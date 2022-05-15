@@ -98,7 +98,12 @@ commands:
   findsign:
     description: Find a sign
     permission: starbook.findsign
-    usage: /findsigh <text> - Locate signs containing text
+    usage: /findsign <text> - Locate signs containing text
+
+  findchest:
+    description: Find a chest
+    permission: starbook.findchest
+    usage: /findchest <text> - Locate chests containing text
 
   signedit:
     description: Edit signs
@@ -201,6 +206,10 @@ permissions:
   starbook.findsign:
     default: op
     description: Use /findsign
+
+  starbook.findchest:
+    default: op
+    description: Use /findchest
 
   starbook.signedit:
     default: op
