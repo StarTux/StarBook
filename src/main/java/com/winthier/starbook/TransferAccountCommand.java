@@ -23,7 +23,7 @@ class TransferAccountCommand extends AbstractCommand {
                     "money:moneyadmin transfer",
                     "home:homeadmin transfer",
                     "home:claimadmin transferall",
-                    "massstorage:massstorageadmin transfer",
+                    "massstorage:massstorageadmin player transfer",
                     "inventory:inventory store transfer",
                     "inventory:inventory stash transfer",
                     "wardrobe:wardrobeadmin transfer",
