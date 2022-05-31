@@ -4,10 +4,14 @@ import com.cavetale.core.connect.ServerCategory;
 import com.winthier.playercache.PlayerCache;
 import java.util.List;
 import org.bukkit.Bukkit;
+import org.bukkit.command.ConsoleCommandSender;
 
 class TransferAccountCommand extends AbstractCommand {
     @Override
     public void onCommand(CommandContext c) {
+        if (!(c.sender instanceof ConsoleCommandSender)) {
+            throw new StarBookCommandException("Console required");
+        }
         if (c.args.length != 2) return;
         PlayerCache from = PlayerCache.forArg(c.args[0]);
         if (from == null) throw new StarBookCommandException("Player not found: " + c.args[0]);
