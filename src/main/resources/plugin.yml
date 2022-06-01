@@ -150,6 +150,30 @@ commands:
     description: Transfer accounts
     usage: /transferaccount <from> <to>
 
+  gmc:
+    aliases: []
+    permission: minecraft.command.gamemode
+    description: Set game mode to creative
+    usage: /gmc
+
+  gmp:
+    aliases: []
+    permission: minecraft.command.gamemode
+    description: Set game mode to spectator
+    usage: /gmp
+
+  gms:
+    aliases: []
+    permission: minecraft.command.gamemode
+    description: Set game mode to survival
+    usage: /gms
+
+  gma:
+    aliases: []
+    permission: minecraft.command.gamemode
+    description: Set game mode to adventure
+    usage: /gma
+
 permissions:
   onlinelist.staff:
     default: op

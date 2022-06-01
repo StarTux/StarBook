@@ -1,6 +1,7 @@
 package com.winthier.starbook;
 
 import lombok.Getter;
+import org.bukkit.GameMode;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class StarBookPlugin extends JavaPlugin {
@@ -47,5 +48,9 @@ public final class StarBookPlugin extends JavaPlugin {
         getCommand("changebiome").setExecutor(new ChangeBiomeCommand());
         getCommand("setendgateway").setExecutor(new SetEndGatewayCommand());
         getCommand("transferaccount").setExecutor(new TransferAccountCommand());
+        new GameModeCommand(this, "gmc", GameMode.CREATIVE).enable();
+        new GameModeCommand(this, "gmp", GameMode.SPECTATOR).enable();
+        new GameModeCommand(this, "gms", GameMode.SURVIVAL).enable();
+        new GameModeCommand(this, "gma", GameMode.ADVENTURE).enable();
     }
 }
