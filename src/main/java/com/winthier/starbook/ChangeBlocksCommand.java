@@ -2,23 +2,25 @@ package com.winthier.starbook;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.scheduler.BukkitRunnable;
 
 @RequiredArgsConstructor
-final class ChangeBiomeCommand extends AbstractCommand {
+final class ChangeBlocksCommand extends AbstractCommand {
     @Override
     public void onCommand(CommandContext c) {
-        if (c.player == null) throw new StarBookCommandException("[starbook:changebiome] player expected");
+        if (c.player == null) throw new StarBookCommandException("[starbook:changeblocks] player expected");
         if (c.args.length != 1) throw new StarBookCommandException(c);
-        String biomeArg = c.args[0];
-        final Biome biome;
+        String blockArg = c.args[0];
+        final BlockData blockData;
         try {
-            biome = Biome.valueOf(biomeArg.toUpperCase());
+            blockData = Bukkit.createBlockData(blockArg);
         } catch (IllegalArgumentException iae) {
-            throw new StarBookCommandException("Invalid biome: " + biomeArg);
+            throw new StarBookCommandException("Invalid block data: " + blockArg);
         }
         final World world = c.player.getWorld();
         final Cuboid selection = WorldEditHighlightCommand.getSelection(c.player);
@@ -36,8 +38,8 @@ final class ChangeBiomeCommand extends AbstractCommand {
                 do {
                     progress += 1;
                     Block block = world.getBlockAt(x, y, z);
-                    if (block.getBiome() != biome) {
-                        block.setBiome(biome);
+                    if (!block.getBlockData().matches(blockData)) {
+                        block.setBlockData(blockData, false);
                     }
                     x += 1;
                     if (x > selection.bx) {
@@ -48,9 +50,9 @@ final class ChangeBiomeCommand extends AbstractCommand {
                             y += 1;
                             if (y > selection.by) {
                                 cancel();
-                                c.player.sendMessage("ChangeBiome done: " + total
+                                c.player.sendMessage("ChangeBlocks done: " + total
                                                      + " blocks changed to "
-                                                     + biome.name().toLowerCase());
+                                                     + blockData.getAsString());
                                 return;
                             }
                         }
@@ -59,7 +61,7 @@ final class ChangeBiomeCommand extends AbstractCommand {
                     if (now - lastReport >= 5000L) {
                         lastReport = now;
                         long percent = (100L * (long) progress) / (long) total;
-                        c.player.sendMessage("ChangeBiome " + progress + "/" + total
+                        c.player.sendMessage("ChangeBlocks " + progress + "/" + total
                                              + " (" + percent + "%)");
                     }
                 } while (now - then < 20L);
@@ -72,10 +74,10 @@ final class ChangeBiomeCommand extends AbstractCommand {
         if (c.args.length != 1) return null;
         List<String> result = emptyTabList();
         String cmd = c.args[0].toLowerCase();
-        for (Biome biome : Biome.values()) {
-            String lower = biome.name().toLowerCase();
-            if (lower.contains(cmd)) {
-                result.add(lower);
+        for (Material material : Material.values()) {
+            String key = material.getKey().getKey();
+            if (key.contains(cmd)) {
+                result.add(key);
             }
         }
         return result;

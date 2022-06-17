@@ -2,7 +2,7 @@ name: StarBook
 description: Collection of useful Commands
 author: StarTux
 version: 0.1
-api-version: 1.18
+api-version: 1.19
 website: http://cavetale.com
 main: com.winthier.starbook.StarBookPlugin
 depend: [Core, Perm, Connect]
@@ -134,9 +134,14 @@ commands:
       "/markblocks -" Reset ids
 
   changebiome:
-    aliases: [chbiome]
+    aliases: []
     description: Change biome in WE selection
     permission: starbook.changebiome
+
+  changeblocks:
+    aliases: []
+    description: Change blocks in WE selection
+    permission: starbook.changeblocks
 
   setendgateway:
     aliases: []
@@ -278,6 +283,10 @@ permissions:
   starbook.changebiome:
     default: op
     description: Use /changebiome
+
+  starbook.changeblocks:
+    default: op
+    description: Use /changeblocks
 
   starbook.setendgateway:
     default: op
