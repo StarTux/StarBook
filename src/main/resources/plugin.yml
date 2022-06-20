@@ -36,12 +36,6 @@ commands:
     description: Change the time for your client
     usage: '/playertime reset|<time>'
 
-  who:
-    aliases: [ list, ls, online ]
-    permission: starbook.who
-    description: List players on all servers
-    usage: '/who'
-
   time:
     permission: starbook.time
     usage: '/time [time]'
@@ -203,10 +197,6 @@ permissions:
   starbook.playertime:
     default: op
     description: Use /playertime
-
-  starbook.who:
-    default: op
-    description: Use /who, /list, /online
 
   starbook.time:
     default: op

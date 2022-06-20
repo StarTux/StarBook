@@ -5,7 +5,7 @@ import org.bukkit.GameMode;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class StarBookPlugin extends JavaPlugin {
-    private WhoCommand whoCommand = null;
+
     @Getter protected static StarBookPlugin instance;
     Meta meta = new Meta(this);
 
@@ -30,8 +30,6 @@ public final class StarBookPlugin extends JavaPlugin {
         getCommand("feed").setExecutor(new HealCommand());
         getCommand("starve").setExecutor(new HealCommand());
         // getCommand("spawnwater").setExecutor(new SpawnWaterCommand());
-        whoCommand = new WhoCommand(this);
-        getCommand("who").setExecutor(whoCommand);
         getCommand("reloaddata").setExecutor((s, c, l, a) -> {
                 getServer().reloadData();
                 s.sendMessage("Data packs reloaded");
