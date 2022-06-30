@@ -45,6 +45,7 @@ public final class StarBookPlugin extends JavaPlugin {
         getCommand("markblocks").setExecutor(new MarkBlocksCommand());
         getCommand("changebiome").setExecutor(new ChangeBiomeCommand());
         getCommand("changeblocks").setExecutor(new ChangeBlocksCommand());
+        getCommand("clearcontainers").setExecutor(new ClearContainersCommand());
         getCommand("setendgateway").setExecutor(new SetEndGatewayCommand());
         getCommand("transferaccount").setExecutor(new TransferAccountCommand());
         new GameModeCommand(this, "gmc", GameMode.CREATIVE).enable();

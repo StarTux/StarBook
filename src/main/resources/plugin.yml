@@ -131,11 +131,19 @@ commands:
     aliases: []
     description: Change biome in WE selection
     permission: starbook.changebiome
+    usage: /changebiome <biome>
 
   changeblocks:
     aliases: []
     description: Change blocks in WE selection
     permission: starbook.changeblocks
+    usage: /changeblocks <block>
+
+  clearcontainers:
+    aliases: []
+    description: Clear selected containers
+    permission: starbook.clearcontainers
+    usage: /clearcontainers
 
   setendgateway:
     aliases: []
