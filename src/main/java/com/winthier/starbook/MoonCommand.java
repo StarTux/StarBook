@@ -1,5 +1,10 @@
 package com.winthier.starbook;
 
+import static net.kyori.adventure.text.Component.join;
+import static net.kyori.adventure.text.Component.text;
+import static net.kyori.adventure.text.JoinConfiguration.noSeparators;
+import static net.kyori.adventure.text.format.NamedTextColor.*;
+
 class MoonCommand extends AbstractCommand {
     final String[] phases = {
         "Full Moon",
@@ -19,6 +24,8 @@ class MoonCommand extends AbstractCommand {
         long time = c.player.getWorld().getFullTime();
         long day = time / 24000;
         int index = (int) day % phases.length;
-        msg(c.player, "Moon phase: &a%s&r.", phases[index]);
+        c.player.sendMessage(join(noSeparators(),
+                                  text("Moon phase: "),
+                                  text(phases[index], GREEN)));
     }
 }

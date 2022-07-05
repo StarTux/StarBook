@@ -7,6 +7,10 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import static net.kyori.adventure.text.Component.join;
+import static net.kyori.adventure.text.Component.text;
+import static net.kyori.adventure.text.JoinConfiguration.noSeparators;
+import static net.kyori.adventure.text.format.NamedTextColor.*;
 
 class NearCommand extends AbstractCommand {
     @Override
@@ -24,7 +28,10 @@ class NearCommand extends AbstractCommand {
         }
         Collections.sort(proxies);
         for (Prox prox: proxies) {
-            msg(c.player, "&e%d&r %s &7%s", (int) prox.dist, prox.name, prox.dir);
+            c.player.sendMessage(join(noSeparators(),
+                                      text((int) Math.round(prox.dist), YELLOW),
+                                      text(" " + prox.name),
+                                      text(" " + prox.dir, GRAY)));
         }
     }
 }

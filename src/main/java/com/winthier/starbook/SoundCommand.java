@@ -1,9 +1,14 @@
 package com.winthier.starbook;
 
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import static net.kyori.adventure.text.Component.join;
+import static net.kyori.adventure.text.Component.text;
+import static net.kyori.adventure.text.JoinConfiguration.noSeparators;
+import static net.kyori.adventure.text.format.NamedTextColor.*;
 
 @RequiredArgsConstructor
 final class SoundCommand extends AbstractCommand {
@@ -18,24 +23,24 @@ final class SoundCommand extends AbstractCommand {
         } catch (IllegalArgumentException iae) {
             sound = null;
         }
-        if (sound == null) throw new StarBookCommandException("Sound not found: %s", c.args[0]);
+        if (sound == null) throw new StarBookCommandException("Sound not found: " + c.args[0]);
         float volume = 1.0f;
         if (c.args.length >= 2) {
             try {
                 volume = Float.parseFloat(c.args[1]);
             } catch (IllegalArgumentException iae) {
-                throw new StarBookCommandException("Bad volume arg: %s", c.args[1]);
+                throw new StarBookCommandException("Bad volume arg: " + c.args[1]);
             }
-            if (volume <= 0.0f) throw new StarBookCommandException("Bad volume arg: %.2f", volume);
+            if (volume <= 0.0f) throw new StarBookCommandException("Bad volume arg: " + volume);
         }
         float pitch = 1.0f;
         if (c.args.length >= 3) {
             try {
                 pitch = Float.parseFloat(c.args[2]);
             } catch (IllegalArgumentException iae) {
-                throw new StarBookCommandException("Bad pitch arg: %s", c.args[2]);
+                throw new StarBookCommandException("Bad pitch arg: " + c.args[2]);
             }
-            if (pitch <= 0.0f || pitch > 2.0f) throw new StarBookCommandException("Bad pitch arg: %.2f", pitch);
+            if (pitch <= 0.0f || pitch > 2.0f) throw new StarBookCommandException("Bad pitch arg: " + pitch);
         }
         Player target = c.player;
         boolean everyone = false;
@@ -44,26 +49,46 @@ final class SoundCommand extends AbstractCommand {
                 everyone = true;
             } else {
                 target = plugin.getServer().getPlayerExact(c.args[3]);
-                if (target == null) throw new StarBookCommandException("Player not found: %s", c.args[3]);
+                if (target == null) throw new StarBookCommandException("Player not found: " + c.args[3]);
             }
         } else {
             if (c.player == null) StarBookCommandException.playerExpected();
         }
         if (everyone) {
-            for (Player target2: plugin.getServer().getOnlinePlayers()) {
+            int count = 0;
+            for (Player target2 : plugin.getServer().getOnlinePlayers()) {
                 target2.playSound(target2.getEyeLocation(), sound, volume, pitch);
-                msg(c.sender, "Playing sound for %s: %s volume=%.2f pitch=%.2f", target2.getName(), sound.name(), volume, pitch);
+                count += 1;
             }
+            c.sender.sendMessage(join(noSeparators(),
+                                      text("Playing sound for "),
+                                      text(count, GREEN),
+                                      text(" players:"),
+                                      text(" volume"),
+                                      text(":", GRAY),
+                                      text(String.format("%.2f", volume), GREEN),
+                                      text(" pitch"),
+                                      text(":", GRAY),
+                                      text(String.format("%.2f", pitch), GREEN)));
         } else {
             target.playSound(target.getEyeLocation(), sound, volume, pitch);
-            msg(c.sender, "Playing sound for %s: %s volume=%.2f pitch=%.2f", target.getName(), sound.name(), volume, pitch);
+            c.sender.sendMessage(join(noSeparators(),
+                                      text("Playing sound for "),
+                                      text(target.getName(), GREEN),
+                                      text(":"),
+                                      text(" volume"),
+                                      text(":", GRAY),
+                                      text(String.format("%.2f", volume), GREEN),
+                                      text(" pitch"),
+                                      text(":", GRAY),
+                                      text(String.format("%.2f", pitch), GREEN)));
         }
     }
 
     @Override
     public List<String> onTabComplete(CommandContext c) {
         if (c.args.length != 1) return null;
-        List<String> result = emptyTabList();
+        List<String> result = new ArrayList<>();
         String cmd = c.args[0].toLowerCase();
         for (Sound sound: Sound.values()) {
             if (sound.name().toLowerCase().contains(cmd)) {

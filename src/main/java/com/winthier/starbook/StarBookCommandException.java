@@ -6,8 +6,8 @@ import lombok.Getter;
 final class StarBookCommandException extends RuntimeException {
     private boolean usage;
 
-    StarBookCommandException(final String msg, final Object... args) {
-        super(AbstractCommand.format(msg, args));
+    StarBookCommandException(final String msg) {
+        super(msg);
     }
 
     StarBookCommandException(final CommandContext context) {
@@ -15,11 +15,11 @@ final class StarBookCommandException extends RuntimeException {
         this.usage = true;
     }
 
-    static void playerExpected() {
-        throw new StarBookCommandException("Player expected");
+    static StarBookCommandException playerExpected() {
+        return new StarBookCommandException("Player expected");
     }
 
-    static void usage(CommandContext context) {
-        throw new StarBookCommandException(context);
+    static StarBookCommandException usage(CommandContext context) {
+        return new StarBookCommandException(context);
     }
 }

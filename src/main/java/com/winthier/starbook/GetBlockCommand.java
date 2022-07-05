@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import net.kyori.adventure.text.Component;
 import org.bukkit.block.Block;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
+import static net.kyori.adventure.text.Component.join;
+import static net.kyori.adventure.text.Component.space;
+import static net.kyori.adventure.text.Component.text;
+import static net.kyori.adventure.text.JoinConfiguration.noSeparators;
+import static net.kyori.adventure.text.format.NamedTextColor.*;
 
 @RequiredArgsConstructor
 class GetBlockCommand extends AbstractCommand {
@@ -18,10 +24,19 @@ class GetBlockCommand extends AbstractCommand {
     public void onCommand(CommandContext c) {
         if (c.player == null) StarBookCommandException.playerExpected();
         Block block = c.player.getLocation().getBlock();
-        msg(c.player, "%s l=%d (sky=%d b=%d) t=%.2f bb=%s vs=%s", block.getBlockData().getAsString(),
-            block.getLightLevel(), block.getLightFromSky(), block.getLightFromBlocks(), block.getTemperature(),
-            toString(adjust(block, block.getBoundingBox())),
-            toString(block.getCollisionShape().getBoundingBoxes()));
+        Component colon = text(":", GRAY);
+        c.player.sendMessage(join(noSeparators(),
+                                  text(block.getBlockData().getAsString()),
+                                  space(),
+                                  text("l"), colon, text(block.getLightLevel(), YELLOW),
+                                  text(" (", GRAY),
+                                  text("sky"), colon, text(block.getLightFromSky(), YELLOW),
+                                  text("b"), colon, text(block.getLightFromBlocks(), YELLOW),
+                                  text(") ", GRAY),
+                                  text("temp"), colon, text(String.format("%.2f", block.getTemperature()), YELLOW),
+                                  space(),
+                                  text("bb"), colon, text(toString(adjust(block, block.getBoundingBox())), YELLOW),
+                                  text("vs"), colon, text(toString(block.getCollisionShape().getBoundingBoxes()), YELLOW)));
     }
 
     static BoundingBox adjust(Block block, BoundingBox bb) {

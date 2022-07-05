@@ -1,12 +1,11 @@
 package com.winthier.starbook;
 
-import java.util.ArrayList;
 import java.util.List;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.entity.Player;
+import static net.kyori.adventure.text.Component.text;
+import static net.kyori.adventure.text.format.NamedTextColor.RED;
 
 /**
  * Superclass for all commands.
@@ -21,11 +20,7 @@ public abstract class AbstractCommand implements TabExecutor {
             if (sbce.isUsage()) {
                 return false;
             } else {
-                if (sender instanceof Player) {
-                    msg(sender, "&c%s", sbce.getMessage());
-                } else {
-                    StarBookPlugin.getInstance().getLogger().info(String.format("&c%s", sbce.getMessage()));
-                }
+                sender.sendMessage(text(sbce.getMessage(), RED));
             }
         }
         return true;
@@ -43,19 +38,5 @@ public abstract class AbstractCommand implements TabExecutor {
      */
     protected List<String> onTabComplete(CommandContext context) {
         return null;
-    }
-
-    protected final List<String> emptyTabList() {
-        return new ArrayList<>();
-    }
-
-    static final String format(String msg, Object... args) {
-        msg = ChatColor.translateAlternateColorCodes('&', msg);
-        if (args.length > 0) msg = String.format(msg, args);
-        return msg;
-    }
-
-    static final void msg(CommandSender sender, String msg, Object... args) {
-        sender.sendMessage(format(msg, args));
     }
 }

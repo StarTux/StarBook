@@ -5,6 +5,8 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
+import static net.kyori.adventure.text.Component.text;
+import static net.kyori.adventure.text.format.NamedTextColor.*;
 
 @RequiredArgsConstructor
 class PoofCommand extends AbstractCommand {
@@ -17,11 +19,11 @@ class PoofCommand extends AbstractCommand {
         if (c.player.getGameMode() == GameMode.SPECTATOR) {
             restoreGameMode(c.player);
             if (c.player.getGameMode() == GameMode.SPECTATOR) c.player.setGameMode(GameMode.SURVIVAL);
-            msg(c.player, "&eYou reappeared!");
+            c.player.sendMessage(text("You reappeared", YELLOW));
         } else {
             storeGameMode(c.player);
             c.player.setGameMode(GameMode.SPECTATOR);
-            msg(c.player, "&eYou vanished!");
+            c.player.sendMessage(text("You vanished", GREEN));
         }
     }
 

@@ -5,7 +5,6 @@ import org.bukkit.GameMode;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class StarBookPlugin extends JavaPlugin {
-
     @Getter protected static StarBookPlugin instance;
     Meta meta = new Meta(this);
 
@@ -19,7 +18,6 @@ public final class StarBookPlugin extends JavaPlugin {
         getCommand("playertime").setExecutor(new PlayerTimeCommand());
         getCommand("time").setExecutor(new TimeCommand());
         getCommand("moon").setExecutor(new MoonCommand());
-        getCommand("cropcliff").setExecutor(new CropCliffCommand());
         getCommand("opme").setExecutor(new OpMeCommand());
         getCommand("near").setExecutor(new NearCommand());
         getCommand("script").setExecutor(new ScriptCommand(this));
@@ -29,7 +27,6 @@ public final class StarBookPlugin extends JavaPlugin {
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("feed").setExecutor(new HealCommand());
         getCommand("starve").setExecutor(new HealCommand());
-        // getCommand("spawnwater").setExecutor(new SpawnWaterCommand());
         getCommand("reloaddata").setExecutor((s, c, l, a) -> {
                 getServer().reloadData();
                 s.sendMessage("Data packs reloaded");
@@ -52,5 +49,6 @@ public final class StarBookPlugin extends JavaPlugin {
         new GameModeCommand(this, "gmp", GameMode.SPECTATOR).enable();
         new GameModeCommand(this, "gms", GameMode.SURVIVAL).enable();
         new GameModeCommand(this, "gma", GameMode.ADVENTURE).enable();
+        getCommand("tpp").setExecutor(new TPPCommand(this));
     }
 }

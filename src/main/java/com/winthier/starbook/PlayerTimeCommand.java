@@ -1,5 +1,8 @@
 package com.winthier.starbook;
 
+import static net.kyori.adventure.text.Component.text;
+import static net.kyori.adventure.text.format.NamedTextColor.GREEN;
+
 class PlayerTimeCommand extends AbstractCommand {
     @Override
     public void onCommand(CommandContext c) {
@@ -9,7 +12,7 @@ class PlayerTimeCommand extends AbstractCommand {
         long time = 0L;
         if ("reset".equalsIgnoreCase(arg) || "-r".equals(arg)) {
             c.player.resetPlayerTime();
-            msg(c.player, "&aPlayer time was reset to server time.");
+            c.player.sendMessage(text("Player time was reset to server time", GREEN));
             return;
         } else if ("day".equalsIgnoreCase(arg)) {
             time = 1000;
@@ -21,14 +24,14 @@ class PlayerTimeCommand extends AbstractCommand {
             time = 18000;
         } else if (arg.contains(":")) {
             String[] arr = arg.split(":");
-            if (arr.length != 2) throw new StarBookCommandException("&cTime expected: %s", arg);
+            if (arr.length != 2) throw new StarBookCommandException("Time expected: " + arg);
             long hours;
             long minutes;
             try {
                 hours = Long.parseLong(arr[0]);
                 minutes = Long.parseLong(arr[1]);
             } catch (NumberFormatException nfe) {
-                throw new StarBookCommandException("&cTime expected: %s", arg);
+                throw new StarBookCommandException("Time expected: " + arg);
             }
             time = (hours * 1000) + (minutes * 1000 / 60) - 6000;
             if (time < 0) time = 24000 + time;
@@ -36,10 +39,10 @@ class PlayerTimeCommand extends AbstractCommand {
             try {
                 time = Long.parseLong(arg);
             } catch (NumberFormatException nfe) {
-                throw new StarBookCommandException("&cTime expected: %s", arg);
+                throw new StarBookCommandException("Time expected: " + arg);
             }
         }
         c.player.setPlayerTime(time, false);
-        msg(c.sender, "&aPlayer time was set to %d.", time);
+        c.player.sendMessage(text("Player time was set to " + time, GREEN));
     }
 }

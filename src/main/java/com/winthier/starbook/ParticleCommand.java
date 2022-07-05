@@ -1,6 +1,6 @@
 package com.winthier.starbook;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Material;
@@ -8,6 +8,10 @@ import org.bukkit.Particle;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import static net.kyori.adventure.text.Component.join;
+import static net.kyori.adventure.text.Component.text;
+import static net.kyori.adventure.text.JoinConfiguration.noSeparators;
+import static net.kyori.adventure.text.format.NamedTextColor.*;
 
 @RequiredArgsConstructor
 final class ParticleCommand extends AbstractCommand {
@@ -21,16 +25,16 @@ final class ParticleCommand extends AbstractCommand {
         try {
             particle = Particle.valueOf(c.args[0].toUpperCase());
         } catch (IllegalArgumentException iae) {
-            throw new StarBookCommandException("Particle not found: %s", c.args[0]);
+            throw new StarBookCommandException("Particle not found: " + c.args[0]);
         }
         int count = 1;
         if (c.args.length >= 2) {
             try {
                 count = Integer.parseInt(c.args[1]);
             } catch (IllegalArgumentException iae) {
-                throw new StarBookCommandException("Bad count arg: %s", c.args[1]);
+                throw new StarBookCommandException("Bad count arg: " + c.args[1]);
             }
-            if (count < 0) throw new StarBookCommandException("Bad count arg: %d", count);
+            if (count < 0) throw new StarBookCommandException("Bad count arg: " + count);
         }
         double offsetX = 0;
         double offsetY = 0;
@@ -43,21 +47,23 @@ final class ParticleCommand extends AbstractCommand {
         if (c.args.length >= 3) {
             if (c.args[2].contains(",")) {
                 String[] toks = c.args[2].split(",");
-                if (toks.length != 3) throw new StarBookCommandException("Expected 3 comma-separated numbers, got: %s", c.args[2]);
+                if (toks.length != 3) {
+                    throw new StarBookCommandException("Expected 3 comma-separated numbers, got: " + c.args[2]);
+                }
                 try {
                     offsetX = Double.parseDouble(toks[0]);
                 } catch (NumberFormatException nfe) {
-                    throw new StarBookCommandException("Invalid x-offset: %s", toks[0]);
+                    throw new StarBookCommandException("Invalid x-offset: " + toks[0]);
                 }
                 try {
                     offsetY = Double.parseDouble(toks[1]);
                 } catch (NumberFormatException nfe) {
-                    throw new StarBookCommandException("Invalid y-offset: %s", toks[1]);
+                    throw new StarBookCommandException("Invalid y-offset: " + toks[1]);
                 }
                 try {
                     offsetZ = Double.parseDouble(toks[2]);
                 } catch (NumberFormatException nfe) {
-                    throw new StarBookCommandException("Invalid z-offset: %s", toks[2]);
+                    throw new StarBookCommandException("Invalid z-offset: " + toks[2]);
                 }
             } else {
                 try {
@@ -65,7 +71,7 @@ final class ParticleCommand extends AbstractCommand {
                     offsetY = offsetX;
                     offsetZ = offsetZ;
                 } catch (IllegalArgumentException iae) {
-                    throw new StarBookCommandException("Bad offset arg: %s", c.args[2]);
+                    throw new StarBookCommandException("Bad offset arg: " + c.args[2]);
                 }
             }
         }
@@ -74,7 +80,7 @@ final class ParticleCommand extends AbstractCommand {
             try {
                 extra = Double.parseDouble(c.args[3]);
             } catch (IllegalArgumentException iae) {
-                throw new StarBookCommandException("Bad extra arg: %s", c.args[3]);
+                throw new StarBookCommandException("Bad extra arg: " + c.args[3]);
             }
         }
         Object data = null;
@@ -82,20 +88,20 @@ final class ParticleCommand extends AbstractCommand {
             String arg = c.args[4];
             final Class<?> dataClass = particle.getDataType();
             if (dataClass == null || dataClass.equals(Void.class)) {
-                throw new StarBookCommandException("Unexpected data argument for particle %s", particle.name());
+                throw new StarBookCommandException("Unexpected data argument for particle " + particle.name());
             } else if (dataClass.equals(BlockData.class)) {
                 try {
                     Material mat = Material.valueOf(arg.toUpperCase());
                     data = mat.createBlockData();
                 } catch (IllegalArgumentException iae) {
-                    throw new StarBookCommandException("Bad material argument: %s", arg);
+                    throw new StarBookCommandException("Bad material argument: " + arg);
                 }
             } else if (dataClass.equals(ItemStack.class)) {
                 try {
                     Material mat = Material.valueOf(arg.toUpperCase());
                     data = new ItemStack(mat);
                 } catch (IllegalArgumentException iae) {
-                    throw new StarBookCommandException("Bad material argument: %s", arg);
+                    throw new StarBookCommandException("Bad material argument: " + arg);
                 }
             } else if (dataClass.equals(Particle.DustOptions.class)) {
                 try {
@@ -105,24 +111,42 @@ final class ParticleCommand extends AbstractCommand {
                                                                              Integer.parseInt(toks[2])),
                                                     Float.parseFloat(toks[3]));
                 } catch (Exception e) {
-                    throw new StarBookCommandException("Bad dust options argument: %s", arg);
+                    throw new StarBookCommandException("Bad dust options argument: " + arg);
                 }
             } else {
-                throw new StarBookCommandException("Unsupported data argument type: %s", dataClass.getName());
+                throw new StarBookCommandException("Unsupported data argument type: " + dataClass.getName());
             }
         }
         Player target = c.player;
         if (data == null) {
             target.spawnParticle(particle,
-                                   target.getEyeLocation().add(target.getEyeLocation().getDirection().multiply(2)),
-                                   count, offsetX, offsetY, offsetZ, extra);
+                                 target.getEyeLocation().add(target.getEyeLocation().getDirection().multiply(2)),
+                                 count, offsetX, offsetY, offsetZ, extra);
         } else {
             target.spawnParticle(particle,
-                                   target.getEyeLocation().add(target.getEyeLocation().getDirection().multiply(2)),
-                                   count, offsetX, offsetY, offsetZ, extra, data);
+                                 target.getEyeLocation().add(target.getEyeLocation().getDirection().multiply(2)),
+                                 count, offsetX, offsetY, offsetZ, extra, data);
         }
-        msg(c.sender, "Showing particle for %s: %dx%s offset=%.2f,%.2f,%.2f extra=%.2f data=%s",
-            target.getName(), count, particle.name(), offsetX, offsetY, offsetZ, extra, data);
+        c.sender.sendMessage(join(noSeparators(),
+                                  text("Showing particle for "),
+                                  text(target.getName(), GREEN),
+                                  text(": "),
+                                  text(count, GREEN),
+                                  text("x", GRAY),
+                                  text(particle.name(), GREEN),
+                                  text(" offset"),
+                                  text(":", GRAY),
+                                  text(String.format("%.2f", offsetX), GREEN),
+                                  text(",", GRAY),
+                                  text(String.format("%.2f", offsetY), GREEN),
+                                  text(",", GRAY),
+                                  text(String.format("%.2f", offsetZ), GREEN),
+                                  text(" extra"),
+                                  text(":", GRAY),
+                                  text(String.format("%.2f", extra), GREEN),
+                                  text(" data"),
+                                  text(":", GRAY),
+                                  text("" + data, GREEN)));
     }
 
     @Override
@@ -131,7 +155,7 @@ final class ParticleCommand extends AbstractCommand {
         String cmd;
         switch (c.args.length) {
         case 1:
-            result = emptyTabList();
+            result = new ArrayList<>();
             cmd = c.args[0].toLowerCase();
             for (Particle particle: Particle.values()) {
                 if (particle.name().toLowerCase().contains(cmd)) {
@@ -140,16 +164,16 @@ final class ParticleCommand extends AbstractCommand {
             }
             return result;
         case 2:
-            if (c.args[1].isEmpty()) return Arrays.asList("1");
+            if (c.args[1].isEmpty()) return List.of("1");
             else return null;
         case 3:
-            if (c.args[2].isEmpty()) return Arrays.asList("0,0,0");
+            if (c.args[2].isEmpty()) return List.of("0,0,0");
             else return null;
         case 4:
-            if (c.args[3].isEmpty()) return Arrays.asList("0");
+            if (c.args[3].isEmpty()) return List.of("0");
             else return null;
         case 5:
-            result = emptyTabList();
+            result = new ArrayList<>();
             cmd = c.args[4].toUpperCase();
             for (Material mat: Material.values()) {
                 if (mat.name().contains(cmd)) result.add(mat.name());

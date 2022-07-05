@@ -232,7 +232,7 @@ final class SignEditCommand extends AbstractCommand implements Listener {
         if (c.player == null) return null;
         if (c.args.length == 1) {
             return c.args[0].isEmpty()
-                ? Arrays.asList("1", "2", "3", "4")
+                ? List.of("1", "2", "3", "4")
                 : Collections.emptyList();
         } else if (c.args.length >= 2) {
             if (c.player.hasPermission("starbook.signedit.emoji")) {

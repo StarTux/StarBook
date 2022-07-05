@@ -1,16 +1,21 @@
 package com.winthier.starbook;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import static net.kyori.adventure.text.Component.join;
+import static net.kyori.adventure.text.Component.text;
+import static net.kyori.adventure.text.JoinConfiguration.noSeparators;
+import static net.kyori.adventure.text.format.NamedTextColor.*;
+import static net.kyori.adventure.text.format.TextDecoration.*;
 
 public final class GetPingCommand extends AbstractCommand {
-    protected String getPingQuality(int i) {
-        if (i == 0) return "" + ChatColor.YELLOW + "N/A";
-        if (i < 100) return "" + ChatColor.GREEN + ChatColor.BOLD + "Outstanding";
-        if (i < 250) return "" + ChatColor.GREEN + "Excellent";
-        if (i < 350) return "" + ChatColor.YELLOW + "Okay";
-        return "" + ChatColor.DARK_RED + "High network latency";
+    private Component getPingQuality(int i) {
+        if (i == 0) return text("N/A", DARK_GRAY);
+        if (i < 100) return text("Outstanding", GREEN, BOLD);
+        if (i < 250) return text("Excellent", GREEN);
+        if (i < 350) return text("Okay", YELLOW);
+        return text("High network latency", DARK_RED);
     }
 
     @Override
@@ -26,21 +31,30 @@ public final class GetPingCommand extends AbstractCommand {
             }
             Player target = Bukkit.getPlayerExact(c.args[0]);
             if (target == null) {
-                msg(c.sender, "&cPlayer not found: %s", c.args[0]);
-                return;
+                throw new StarBookCommandException("Player not found: " + c.args[0]);
             }
             int ping = target.getPing();
             if (ping < 0) ping = 0;
-            msg(c.sender, "&bPing of &3%s&b:&r %d (%s&r)",
-                target.getName(), ping, getPingQuality(ping));
+            c.sender.sendMessage(join(noSeparators(),
+                                      text("Ping of "),
+                                      text(target.getName(), GREEN),
+                                      text(" is "),
+                                      text(ping, YELLOW),
+                                      text(" ("),
+                                      getPingQuality(ping),
+                                      text(")")));
             return;
         }
         if (c.player == null) {
-            msg(c.sender, "[starbook:getping] Player expected");
-            return;
+            throw StarBookCommandException.playerExpected();
         }
         int ping = c.player.getPing();
         if (ping < 0) ping = 0;
-        msg(c.player, "&bYour ping:&r %d (%s&r)", ping, getPingQuality(ping));
+        c.sender.sendMessage(join(noSeparators(),
+                                  text("Your ping is "),
+                                  text(ping, YELLOW),
+                                  text(" ("),
+                                  getPingQuality(ping),
+                                  text(")")));
     }
 }

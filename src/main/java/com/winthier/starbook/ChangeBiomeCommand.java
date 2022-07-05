@@ -1,5 +1,6 @@
 package com.winthier.starbook;
 
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.World;
@@ -70,7 +71,7 @@ final class ChangeBiomeCommand extends AbstractCommand {
     @Override
     public List<String> onTabComplete(CommandContext c) {
         if (c.args.length != 1) return null;
-        List<String> result = emptyTabList();
+        List<String> result = new ArrayList<>();
         String cmd = c.args[0].toLowerCase();
         for (Biome biome : Biome.values()) {
             String lower = biome.name().toLowerCase();

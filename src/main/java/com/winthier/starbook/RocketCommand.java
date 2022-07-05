@@ -1,9 +1,13 @@
 package com.winthier.starbook;
 
+import com.cavetale.core.command.RemotePlayer;
+import com.cavetale.core.connect.Connect;
 import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
+import static net.kyori.adventure.text.Component.text;
+import static net.kyori.adventure.text.format.NamedTextColor.*;
 
 class RocketCommand extends AbstractCommand {
     final Random random = new Random(System.currentTimeMillis());
@@ -21,9 +25,13 @@ class RocketCommand extends AbstractCommand {
             } else if (arg.equals("*")) {
                 everybody = true;
             } else {
-                if (target != null) throw new StarBookCommandException(c);
+                if (target != null) {
+                    throw new StarBookCommandException(c);
+                }
                 target = Bukkit.getServer().getPlayer(arg);
-                if (target == null) throw new StarBookCommandException("Player not found: %s", arg);
+                if (target == null) {
+                    throw new StarBookCommandException("Player not found: " + arg);
+                }
             }
         }
         if (!everybody && target == null) throw new StarBookCommandException(c);
@@ -38,10 +46,10 @@ class RocketCommand extends AbstractCommand {
             target.setVelocity(getVelo(high));
         }
         if (silent) {
-            msg(c.sender, "&eYou rocketed %s!", targetName);
+            c.sender.sendMessage(text("You rocketed " + targetName, YELLOW));
         } else {
-            for (Player recipient: Bukkit.getServer().getOnlinePlayers()) {
-                msg(recipient, "&e%s rocketed %s", c.sender.getName(), targetName);
+            for (RemotePlayer recipient : Connect.get().getRemotePlayers()) {
+                recipient.sendMessage(text(c.sender.getName() + " rocketed " + targetName, YELLOW));
             }
         }
     }

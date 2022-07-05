@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.configuration.file.YamlConfiguration;
+import static net.kyori.adventure.text.Component.text;
+import static net.kyori.adventure.text.format.NamedTextColor.*;
 
 @RequiredArgsConstructor
 final class SpawnMobCommand extends AbstractCommand {
@@ -56,6 +58,6 @@ final class SpawnMobCommand extends AbstractCommand {
             if (!result) break;
             count += 1;
         }
-        msg(c.player, "&eSpawned %d times!", count);
+        c.player.sendMessage(text("Spawned " + tokens[0] + " " + count + " times", YELLOW));
     }
 }

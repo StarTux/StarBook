@@ -1,9 +1,13 @@
 package com.winthier.starbook;
 
+import com.cavetale.core.command.RemotePlayer;
+import com.cavetale.core.connect.Connect;
 import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
+import static net.kyori.adventure.text.Component.text;
+import static net.kyori.adventure.text.format.NamedTextColor.*;
 
 class SlapCommand extends AbstractCommand {
     final Random random = new Random(System.currentTimeMillis());
@@ -25,7 +29,7 @@ class SlapCommand extends AbstractCommand {
             } else {
                 if (target != null) throw new StarBookCommandException(c);
                 target = Bukkit.getServer().getPlayer(arg);
-                if (target == null) throw new StarBookCommandException("Player not found: %s", arg);
+                if (target == null) throw new StarBookCommandException("Player not found: " + arg);
             }
         }
         if (!everybody && target == null) throw new StarBookCommandException(c);
@@ -40,10 +44,10 @@ class SlapCommand extends AbstractCommand {
             target.setVelocity(getVelo(violent, high));
         }
         if (silent) {
-            msg(c.sender, "&eYou slapped %s!", targetName);
+            c.sender.sendMessage(text("You slapped " + targetName, YELLOW));
         } else {
-            for (Player recipient: Bukkit.getServer().getOnlinePlayers()) {
-                msg(recipient, "&e%s slapped %s", c.sender.getName(), targetName);
+            for (RemotePlayer recipient : Connect.get().getRemotePlayers()) {
+                recipient.sendMessage(text(c.sender.getName() + " slapped " + targetName, YELLOW));
             }
         }
     }

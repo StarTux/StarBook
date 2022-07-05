@@ -44,9 +44,6 @@ commands:
     permission: starbook.moon
     usage: '/moon'
 
-  cropcliff:
-    permission: starbook.cropcliff
-
   opme:
     permission: starbook.opme
     usage: '/opme'
@@ -181,6 +178,11 @@ commands:
     description: Set game mode to adventure
     usage: /gma
 
+  tpp:
+    permission: starbook.tpp
+    description: Teleport to player
+    usage: /tpp <player>
+
 permissions:
   onlinelist.staff:
     default: op
@@ -293,3 +295,7 @@ permissions:
   starbook.transferaccount:
     default: op
     description: Use /transferaccount
+
+  starbook.tpp:
+    default: op
+    description: Use /tpp
