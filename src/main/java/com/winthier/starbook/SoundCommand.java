@@ -61,7 +61,9 @@ final class SoundCommand extends AbstractCommand {
                 count += 1;
             }
             c.sender.sendMessage(join(noSeparators(),
-                                      text("Playing sound for "),
+                                      text("Playing "),
+                                      text(sound.name(), GREEN),
+                                      text(" for "),
                                       text(count, GREEN),
                                       text(" players:"),
                                       text(" volume"),
@@ -73,8 +75,10 @@ final class SoundCommand extends AbstractCommand {
         } else {
             target.playSound(target.getEyeLocation(), sound, volume, pitch);
             c.sender.sendMessage(join(noSeparators(),
-                                      text("Playing sound for "),
-                                      text(target.getName(), GREEN),
+                                      text("Playing "),
+                                      text(sound.name(), GREEN),
+                                      text(" for "),
+                                      text(target.getName()),
                                       text(":"),
                                       text(" volume"),
                                       text(":", GRAY),
