@@ -183,6 +183,11 @@ commands:
     description: Teleport to player
     usage: /tpp <player>
 
+  dumpheap:
+    permission: starbook.dumpheap
+    description: Dump the heap
+    usage: /dumpheap <file> <live>
+
 permissions:
   onlinelist.staff:
     default: op
@@ -299,3 +304,7 @@ permissions:
   starbook.tpp:
     default: op
     description: Use /tpp
+
+  starbook.dumpheap:
+    default: op
+    description: Use /dumpheap
