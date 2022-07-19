@@ -186,7 +186,7 @@ commands:
   dumpheap:
     permission: starbook.dumpheap
     description: Dump the heap
-    usage: /dumpheap <file> <live>
+    usage: /dumpheap <live>
 
 permissions:
   onlinelist.staff:
