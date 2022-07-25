@@ -1,5 +1,6 @@
 package com.winthier.starbook;
 
+import com.cavetale.core.struct.Cuboid;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Chunk;
 import org.bukkit.World;
@@ -15,7 +16,7 @@ final class ClearContainersCommand extends AbstractCommand {
         if (c.player == null) throw new StarBookCommandException("[starbook:clearcontainers] player expected");
         if (c.args.length != 0) throw new StarBookCommandException(c);
         final World world = c.player.getWorld();
-        final Cuboid selection = WorldEditHighlightCommand.getSelection(c.player);
+        final Cuboid selection = Cuboid.selectionOf(c.player);
         if (selection == null) throw new StarBookCommandException("No selection!");
         final int ax = selection.ax >> 4;
         final int az = selection.az >> 4;

@@ -1,9 +1,6 @@
 package com.winthier.starbook;
 
-import com.sk89q.worldedit.LocalSession;
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import com.sk89q.worldedit.math.BlockVector3;
-import com.sk89q.worldedit.regions.Region;
+import com.cavetale.core.struct.Cuboid;
 import java.util.function.Consumer;
 import lombok.RequiredArgsConstructor;
 import net.kyori.adventure.text.Component;
@@ -23,13 +20,11 @@ final class WorldEditHighlightCommand extends AbstractCommand {
     @Override
     public void onCommand(CommandContext c) {
         if (c.player == null) StarBookCommandException.playerExpected();
-        WorldEditPlugin we = getWorldEdit();
-        if (we == null) throw new StarBookCommandException("WorldEdit not found!");
-        Cuboid sel = getSelection(c.player);
+        Cuboid sel = Cuboid.selectionOf(c.player);
         if (sel == null) throw new StarBookCommandException("Make a selection first!");
         World w = c.player.getWorld();
-        Block a = sel.getMinBlock(w);
-        Block b = sel.getMaxBlock(w);
+        Block a = sel.getMin().toBlock(w);
+        Block b = sel.getMin().toBlock(w);
         highlight(a, b, l -> l.getWorld().spawnParticle(Particle.END_ROD, l, 1, 0.0, 0.0, 0.0, 0.0));
         c.player.sendMessage(Component.join(JoinConfiguration.noSeparators(), new Component[] {
                     Component.text("Highlighting "),
@@ -37,27 +32,6 @@ final class WorldEditHighlightCommand extends AbstractCommand {
                     Component.text(" to "),
                     Component.text(b.getX() + " " + b.getY() + " " + b.getZ(), NamedTextColor.AQUA),
                 }).color(NamedTextColor.YELLOW));
-    }
-
-    public static WorldEditPlugin getWorldEdit() {
-        return (WorldEditPlugin) Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
-    }
-
-    public static Cuboid getSelection(Player player) {
-        WorldEditPlugin we = getWorldEdit();
-        LocalSession session = we.getSession(player);
-        com.sk89q.worldedit.world.World world = session.getSelectionWorld();
-        final Region region;
-        try {
-            region = session.getSelection(world);
-        } catch (Exception e) {
-            return null;
-        }
-        if (region == null) return null;
-        BlockVector3 min = region.getMinimumPoint();
-        BlockVector3 max = region.getMaximumPoint();
-        return new Cuboid(min.getBlockX(), min.getBlockY(), min.getBlockZ(),
-                          max.getBlockX(), max.getBlockY(), max.getBlockZ());
     }
 
     public boolean highlight(Block a, Block b, Consumer<Location> callback) {

@@ -1,5 +1,6 @@
 package com.winthier.starbook;
 
+import com.cavetale.core.struct.Cuboid;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +25,9 @@ final class ChangeBlocksCommand extends AbstractCommand {
             throw new StarBookCommandException("Invalid block data: " + blockArg);
         }
         final World world = c.player.getWorld();
-        final Cuboid selection = WorldEditHighlightCommand.getSelection(c.player);
+        final Cuboid selection = Cuboid.selectionOf(c.player);
         if (selection == null) throw new StarBookCommandException("No selection!");
-        final int total = selection.volume();
+        final int total = selection.getVolume();
         new BukkitRunnable() {
             private int x = selection.ax;
             private int y = selection.ay;

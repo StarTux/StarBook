@@ -1,12 +1,16 @@
+main: com.winthier.starbook.StarBookPlugin
 name: StarBook
-description: Collection of useful Commands
-author: StarTux
+
 version: 0.1
 api-version: 1.19
+
+description: Collection of useful Commands
+author: StarTux
 website: http://cavetale.com
-main: com.winthier.starbook.StarBookPlugin
+
 depend: [Core, Perm, Connect]
-softdepend: [WorldEdit, WorldMarker, PlayerCache]
+softdepend: [WorldMarker, PlayerCache]
+
 commands:
 
   slap:
