@@ -9,7 +9,7 @@ author: StarTux
 website: http://cavetale.com
 
 depend: [Core, Perm, Connect]
-softdepend: [WorldMarker, PlayerCache]
+softdepend: [WorldMarker]
 
 commands:
 

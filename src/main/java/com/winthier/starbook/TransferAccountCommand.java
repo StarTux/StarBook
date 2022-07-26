@@ -1,7 +1,7 @@
 package com.winthier.starbook;
 
 import com.cavetale.core.connect.ServerCategory;
-import com.winthier.playercache.PlayerCache;
+import com.cavetale.core.playercache.PlayerCache;
 import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
