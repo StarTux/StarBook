@@ -22,7 +22,7 @@ final class WorldEditHighlightCommand extends AbstractCommand {
         if (sel == null) throw new StarBookCommandException("Make a selection first!");
         World w = c.player.getWorld();
         Block a = sel.getMin().toBlock(w);
-        Block b = sel.getMin().toBlock(w);
+        Block b = sel.getMax().toBlock(w);
         highlight(a, b, l -> l.getWorld().spawnParticle(Particle.END_ROD, l, 1, 0.0, 0.0, 0.0, 0.0));
         c.player.sendMessage(Component.join(JoinConfiguration.noSeparators(), new Component[] {
                     Component.text("Highlighting "),
