@@ -24,19 +24,30 @@ class GetBlockCommand extends AbstractCommand {
     public void onCommand(CommandContext c) {
         if (c.player == null) StarBookCommandException.playerExpected();
         Block block = c.player.getLocation().getBlock();
-        Component colon = text(":", GRAY);
+        Component colon = text(":", DARK_GRAY);
+        Component comma = text(",", GRAY);
+        int x = block.getX();
+        int y = block.getY();
+        int z = block.getZ();
         c.player.sendMessage(join(noSeparators(),
+                                  text(x), comma, text(y), comma, text(y),
+                                  text("/", GRAY),
+                                  text(x >> 4), comma, text(y >> 4), comma, text(y >> 4),
+                                  space(),
                                   text(block.getBlockData().getAsString()),
                                   space(),
-                                  text("l"), colon, text(block.getLightLevel(), YELLOW),
+                                  text("l", GRAY), colon, text(block.getLightLevel()),
                                   text(" (", GRAY),
-                                  text("sky"), colon, text(block.getLightFromSky(), YELLOW),
-                                  text("b"), colon, text(block.getLightFromBlocks(), YELLOW),
+                                  text("sky", GRAY), colon, text(block.getLightFromSky()),
+                                  text("b", GRAY), colon, text(block.getLightFromBlocks()),
                                   text(") ", GRAY),
-                                  text("temp"), colon, text(String.format("%.2f", block.getTemperature()), YELLOW),
+                                  text("biome", GRAY), colon, text(block.getBiome().getKey().getKey()),
                                   space(),
-                                  text("bb"), colon, text(toString(adjust(block, block.getBoundingBox())), YELLOW),
-                                  text("vs"), colon, text(toString(block.getCollisionShape().getBoundingBoxes()), YELLOW)));
+                                  text("temp", GRAY), colon, text(String.format("%.2f", block.getTemperature())),
+                                  space(),
+                                  text("bb", GRAY), colon, text(toString(adjust(block, block.getBoundingBox()))),
+                                  text("vs", GRAY), colon, text(toString(block.getCollisionShape().getBoundingBoxes())))
+                             .color(YELLOW));
     }
 
     static BoundingBox adjust(Block block, BoundingBox bb) {
