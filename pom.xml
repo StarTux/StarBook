@@ -42,25 +42,10 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Connect -->
-    <dependency>
-      <groupId>com.winthier.connect</groupId>
-      <artifactId>connect-core</artifactId>
-      <version>0.1-SNAPSHOT</version>
-    </dependency>
-
     <!-- Core -->
     <dependency>
       <groupId>com.cavetale.core</groupId>
       <artifactId>core</artifactId>
-      <version>0.1-SNAPSHOT</version>
-      <scope>provided</scope>
-    </dependency>
-
-    <!-- Perm -->
-    <dependency>
-      <groupId>com.winthier.perm</groupId>
-      <artifactId>perm</artifactId>
       <version>0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>

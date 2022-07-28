@@ -8,7 +8,7 @@ description: Collection of useful Commands
 author: StarTux
 website: http://cavetale.com
 
-depend: [Core, Perm, Connect]
+depend: [Core]
 softdepend: [WorldMarker]
 
 commands:
