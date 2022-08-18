@@ -57,7 +57,7 @@ final class SoundCommand extends AbstractCommand {
         if (everyone) {
             int count = 0;
             for (Player target2 : plugin.getServer().getOnlinePlayers()) {
-                target2.playSound(target2.getEyeLocation(), sound, volume, pitch);
+                target2.playSound(target2.getLocation(), sound, volume, pitch);
                 count += 1;
             }
             c.sender.sendMessage(join(noSeparators(),
@@ -73,7 +73,7 @@ final class SoundCommand extends AbstractCommand {
                                       text(":", GRAY),
                                       text(String.format("%.2f", pitch), GREEN)));
         } else {
-            target.playSound(target.getEyeLocation(), sound, volume, pitch);
+            target.playSound(target.getLocation(), sound, volume, pitch);
             c.sender.sendMessage(join(noSeparators(),
                                       text("Playing "),
                                       text(sound.name(), GREEN),
