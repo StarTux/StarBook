@@ -192,6 +192,11 @@ commands:
     description: Dump the heap
     usage: /dumpheap <live>
 
+  restoreitems:
+    permission: starbook.restoreitems
+    description: Restore items
+    usage: /restoreitems <code>
+
 permissions:
   onlinelist.staff:
     default: op
@@ -312,3 +317,7 @@ permissions:
   starbook.dumpheap:
     default: op
     description: Use /dumpheap
+
+  starbook.restoreitems:
+    default: op
+    description: Use /restoreitems

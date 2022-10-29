@@ -51,5 +51,6 @@ public final class StarBookPlugin extends JavaPlugin {
         new GameModeCommand(this, "gma", GameMode.ADVENTURE).enable();
         getCommand("tpp").setExecutor(new TPPCommand(this));
         getCommand("dumpheap").setExecutor(new DumpHeapCommand());
+        getCommand("restoreitems").setExecutor(new RestoreItemsCommand());
     }
 }
