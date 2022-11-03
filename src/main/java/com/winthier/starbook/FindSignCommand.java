@@ -1,12 +1,16 @@
 package com.winthier.starbook;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
+import static net.kyori.adventure.text.Component.text;
+import static net.kyori.adventure.text.event.ClickEvent.runCommand;
+import static net.kyori.adventure.text.event.HoverEvent.showText;
+import static net.kyori.adventure.text.format.NamedTextColor.*;
+import static net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer.plainText;
 
 final class FindSignCommand extends AbstractCommand {
     @Override
@@ -20,11 +24,14 @@ final class FindSignCommand extends AbstractCommand {
                     if (!(bs instanceof Sign)) continue;
                     Sign sign = (Sign) bs;
                     LINES: for (Component component : sign.lines()) {
-                        String line = PlainTextComponentSerializer.plainText().serialize(component);
+                        String line = plainText().serialize(component);
                         if (line.toLowerCase().contains(text)) {
                             count += 1;
-                            c.sender.sendMessage("Sign matches: " + world.getName()
-                                                 + " " + bs.getX() + " " + bs.getY() + " " + bs.getZ());
+                            String xyz = bs.getX() + " " + bs.getY() + " " + bs.getZ();
+                            String cmd = "/tp " + xyz;
+                            c.sender.sendMessage(text("Sign matches: " + world.getName() + " " + xyz)
+                                                 .hoverEvent(showText(text(cmd, GRAY)))
+                                                 .clickEvent(runCommand(cmd)));
                             break LINES;
                         }
                     }
