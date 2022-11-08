@@ -1,8 +1,5 @@
 package com.winthier.starbook;
 
-import com.cavetale.core.command.CommandArgCompleter;
-import com.cavetale.core.command.CommandWarn;
-import com.sun.management.HotSpotDiagnosticMXBean;
 import java.util.Base64;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
