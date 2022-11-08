@@ -3,6 +3,7 @@ package com.winthier.starbook;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.block.data.BlockData;
@@ -119,6 +120,9 @@ final class ParticleCommand extends AbstractCommand {
         }
         Player target = c.player;
         if (data == null) {
+            if (particle.getDataType() != Void.class) {
+                throw new StarBookCommandException("Data type required: " + particle.getDataType().getName());
+            }
             target.spawnParticle(particle,
                                  target.getEyeLocation().add(target.getEyeLocation().getDirection().multiply(2)),
                                  count, offsetX, offsetY, offsetZ, extra);
@@ -146,7 +150,20 @@ final class ParticleCommand extends AbstractCommand {
                                   text(String.format("%.2f", extra), GREEN),
                                   text(" data"),
                                   text(":", GRAY),
-                                  text("" + data, GREEN)));
+                                  text(stringifyData(data), GREEN)));
+    }
+
+    private static String stringifyData(Object o) {
+        if (o == null) {
+            return "-";
+        } else if (o instanceof Particle.DustOptions options) {
+            Color color = options.getColor();
+            return String.format("%d,%d,%d,%.2f",
+                                 color.getRed(), color.getGreen(), color.getBlue(),
+                                 options.getSize());
+        } else {
+            return o.toString();
+        }
     }
 
     @Override
