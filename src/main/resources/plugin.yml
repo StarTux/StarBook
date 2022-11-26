@@ -197,6 +197,11 @@ commands:
     description: Restore items
     usage: /restoreitems <code>
 
+  viewdistance:
+    permission: starbook.viewdistance
+    description: Set player view distance
+    usage: /viewdistance <value>
+
 permissions:
   onlinelist.staff:
     default: op
@@ -321,3 +326,7 @@ permissions:
   starbook.restoreitems:
     default: op
     description: Use /restoreitems
+
+  starbook.viewdistance:
+    default: op
+    description: Use /viewdistance

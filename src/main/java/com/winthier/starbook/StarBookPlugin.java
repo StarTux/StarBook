@@ -52,5 +52,6 @@ public final class StarBookPlugin extends JavaPlugin {
         getCommand("tpp").setExecutor(new TPPCommand(this));
         getCommand("dumpheap").setExecutor(new DumpHeapCommand());
         getCommand("restoreitems").setExecutor(new RestoreItemsCommand());
+        new ViewDistanceCommand(this).enable();
     }
 }
