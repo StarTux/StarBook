@@ -53,5 +53,6 @@ public final class StarBookPlugin extends JavaPlugin {
         getCommand("dumpheap").setExecutor(new DumpHeapCommand());
         getCommand("restoreitems").setExecutor(new RestoreItemsCommand());
         new ViewDistanceCommand(this).enable();
+        new RecorderCommand(this).enable();
     }
 }

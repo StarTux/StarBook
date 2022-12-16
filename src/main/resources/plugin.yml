@@ -202,6 +202,11 @@ commands:
     description: Set player view distance
     usage: /viewdistance <value>
 
+  recorder:
+    permission: starbook.recorder
+    description: Record note blocks
+    usage: /recorder
+
 permissions:
   onlinelist.staff:
     default: op
@@ -330,3 +335,7 @@ permissions:
   starbook.viewdistance:
     default: op
     description: Use /viewdistance
+
+  starbook.recorder:
+    default: op
+    description: Use /recorder
