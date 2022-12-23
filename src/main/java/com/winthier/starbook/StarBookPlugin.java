@@ -54,5 +54,6 @@ public final class StarBookPlugin extends JavaPlugin {
         getCommand("restoreitems").setExecutor(new RestoreItemsCommand());
         new ViewDistanceCommand(this).enable();
         new RecorderCommand(this).enable();
+        new MakeModelCommand(this).enable();
     }
 }

@@ -207,6 +207,11 @@ commands:
     description: Record note blocks
     usage: /recorder
 
+  makemodel:
+    permission: starbook.makemodel
+    description: Make a resource pack model
+    usage: /makemodel
+
 permissions:
   onlinelist.staff:
     default: op
@@ -339,3 +344,7 @@ permissions:
   starbook.recorder:
     default: op
     description: Use /recorder
+
+  starbook.makemodel:
+    default: op
+    description: Use /makemodel
