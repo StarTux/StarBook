@@ -55,5 +55,6 @@ public final class StarBookPlugin extends JavaPlugin {
         new ViewDistanceCommand(this).enable();
         new RecorderCommand(this).enable();
         new MakeModelCommand(this).enable();
+        new CraftCommand(this).enable();
     }
 }

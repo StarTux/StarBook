@@ -212,6 +212,11 @@ commands:
     description: Make a resource pack model
     usage: /makemodel
 
+  craft:
+    permission: starbook.craft
+    description: Open crafting bench
+    usage: /craft
+
 permissions:
   onlinelist.staff:
     default: op
@@ -348,3 +353,7 @@ permissions:
   starbook.makemodel:
     default: op
     description: Use /makemodel
+
+  starbook.craft:
+    default: op
+    descriptioN: Use /craft
