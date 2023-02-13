@@ -32,6 +32,7 @@ final class ChangeBiomeCommand extends AbstractCommand {
             private int z = selection.az;
             private int progress = 0;
             private long lastReport;
+            private int blocksChanged = 0;
             @Override public void run() {
                 long then = System.currentTimeMillis();
                 long now;
@@ -40,6 +41,7 @@ final class ChangeBiomeCommand extends AbstractCommand {
                     Block block = world.getBlockAt(x, y, z);
                     if (block.getBiome() != biome) {
                         block.setBiome(biome);
+                        blocksChanged += 1;
                     }
                     x += 1;
                     if (x > selection.bx) {
@@ -50,7 +52,7 @@ final class ChangeBiomeCommand extends AbstractCommand {
                             y += 1;
                             if (y > selection.by) {
                                 cancel();
-                                c.player.sendMessage("ChangeBiome done: " + total
+                                c.player.sendMessage("ChangeBiome done: " + blocksChanged
                                                      + " blocks changed to "
                                                      + biome.name().toLowerCase());
                                 return;
