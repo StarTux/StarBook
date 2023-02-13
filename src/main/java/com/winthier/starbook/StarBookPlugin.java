@@ -56,5 +56,6 @@ public final class StarBookPlugin extends JavaPlugin {
         new RecorderCommand(this).enable();
         new MakeModelCommand(this).enable();
         new CraftCommand(this).enable();
+        new GetLocationCommand(this).enable();
     }
 }

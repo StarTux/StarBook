@@ -217,6 +217,12 @@ commands:
     description: Open crafting bench
     usage: /craft
 
+
+  getlocation:
+    permission: starbook.getlocation
+    description: Get current location
+    usage: /getlocation
+
 permissions:
   onlinelist.staff:
     default: op
@@ -356,4 +362,8 @@ permissions:
 
   starbook.craft:
     default: op
-    descriptioN: Use /craft
+    description: Use /craft
+
+  starbook.getlocation:
+    default: Op
+    description: Use /getlocation
