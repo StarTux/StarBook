@@ -138,7 +138,7 @@ commands:
     aliases: []
     description: Change blocks in WE selection
     permission: starbook.changeblocks
-    usage: /changeblocks <block>
+    usage: /changeblocks [from] <block>
 
   clearcontainers:
     aliases: []
