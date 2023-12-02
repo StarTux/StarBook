@@ -127,7 +127,7 @@ final class SignEditCommand extends AbstractCommand implements Listener {
             return;
         }
         Block block = event.getClickedBlock();
-        if (!PlayerBlockAbilityQuery.Action.BUILD.query(player, block)) {
+        if (!player.isOp() && !PlayerBlockAbilityQuery.Action.BUILD.query(player, block)) {
             cancelMessage(player);
             return;
         }
