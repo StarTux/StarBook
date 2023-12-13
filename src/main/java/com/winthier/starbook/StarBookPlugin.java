@@ -41,6 +41,7 @@ public final class StarBookPlugin extends JavaPlugin {
         getCommand("makebook").setExecutor(new MakeBookCommand());
         getCommand("markblocks").setExecutor(new MarkBlocksCommand());
         getCommand("changebiome").setExecutor(new ChangeBiomeCommand());
+        getCommand("replacebiome").setExecutor(new ReplaceBiomeCommand());
         getCommand("changeblocks").setExecutor(new ChangeBlocksCommand());
         getCommand("clearcontainers").setExecutor(new ClearContainersCommand());
         getCommand("setendgateway").setExecutor(new SetEndGatewayCommand());

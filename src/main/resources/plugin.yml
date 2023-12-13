@@ -134,6 +134,12 @@ commands:
     permission: starbook.changebiome
     usage: /changebiome <biome>
 
+  replacebiome:
+    aliases: []
+    description: Replace biomes in WE selection
+    permission: starbook.replacebiome
+    usage: /replacebiome <from> <to>
+
   changeblocks:
     aliases: []
     description: Change blocks in WE selection
@@ -323,6 +329,10 @@ permissions:
   starbook.changebiome:
     default: op
     description: Use /changebiome
+
+  starbook.replacebiome:
+    default: op
+    description: Use /replacebiome
 
   starbook.changeblocks:
     default: op
