@@ -45,6 +45,7 @@ final class ReplaceBiomeCommand extends AbstractCommand {
                 long now;
                 do {
                     progress += 1;
+                    c.player.teleport(world.getBlockAt(x, 65, z).getLocation().add(0.5, 0.0, 0.5));
                     Block block = world.getBlockAt(x, y, z);
                     if (block.getBiome() == from) {
                         block.setBiome(to);
