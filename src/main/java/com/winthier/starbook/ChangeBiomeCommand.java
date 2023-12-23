@@ -39,6 +39,7 @@ final class ChangeBiomeCommand extends AbstractCommand {
                 do {
                     progress += 1;
                     Block block = world.getBlockAt(x, y, z);
+                    block.getChunk().load();
                     if (block.getBiome() != biome) {
                         block.setBiome(biome);
                         blocksChanged += 1;
