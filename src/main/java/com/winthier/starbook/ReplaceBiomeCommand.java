@@ -46,7 +46,10 @@ final class ReplaceBiomeCommand extends AbstractCommand {
                 do {
                     progress += 1;
                     Block block = world.getBlockAt(x, y, z);
-                    block.getChunk().load();
+                    if (!block.getChunk().isLoaded()) {
+                        block.getChunk().load();
+                        block.getChunk().addPluginChunkTicket(StarBookPlugin.getInstance());
+                    }
                     if (block.getBiome() == from) {
                         block.setBiome(to);
                         blocksChanged += 1;
@@ -60,6 +63,7 @@ final class ReplaceBiomeCommand extends AbstractCommand {
                             y += 1;
                             if (y > selection.by) {
                                 cancel();
+                                world.removePluginChunkTickets(StarBookPlugin.getInstance());
                                 c.player.sendMessage("ReplaceBiome done: " + blocksChanged
                                                      + " blocks changed from "
                                                      + from.name().toLowerCase()
