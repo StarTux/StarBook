@@ -25,7 +25,7 @@ public final class RecorderCommand extends AbstractCommand<StarBookPlugin> imple
         super(plugin, "recorder");
     }
 
-    private static record Tick(int tick, Instrument instrument, Note note) { }
+    private record Tick(int tick, Instrument instrument, Note note) { }
 
     @Override
     protected void onEnable() {
