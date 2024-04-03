@@ -223,11 +223,15 @@ commands:
     description: Open crafting bench
     usage: /craft
 
-
   getlocation:
     permission: starbook.getlocation
     description: Get current location
     usage: /getlocation
+
+  orbit:
+    permission: starbook.orbit
+    description: Orbit camera
+    usage: /orbit
 
 permissions:
   onlinelist.staff:
