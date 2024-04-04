@@ -6,6 +6,8 @@ import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
+import org.bukkit.block.sign.Side;
+import org.bukkit.block.sign.SignSide;
 import static net.kyori.adventure.text.Component.text;
 import static net.kyori.adventure.text.event.ClickEvent.runCommand;
 import static net.kyori.adventure.text.event.HoverEvent.showText;
@@ -23,16 +25,19 @@ final class FindSignCommand extends AbstractCommand {
                 for (BlockState bs : chunk.getTileEntities()) {
                     if (!(bs instanceof Sign)) continue;
                     Sign sign = (Sign) bs;
-                    LINES: for (Component component : sign.lines()) {
-                        String line = plainText().serialize(component);
-                        if (line.toLowerCase().contains(text)) {
-                            count += 1;
-                            String xyz = bs.getX() + " " + bs.getY() + " " + bs.getZ();
-                            String cmd = "/tp " + xyz;
-                            c.sender.sendMessage(text("Sign matches: " + world.getName() + " " + xyz)
-                                                 .hoverEvent(showText(text(cmd, GRAY)))
-                                                 .clickEvent(runCommand(cmd)));
-                            break LINES;
+                    LINES: for (Side side : Side.values()) {
+                        final SignSide signSide = sign.getSide(side);
+                        for (Component component : signSide.lines()) {
+                            String line = plainText().serialize(component);
+                            if (line.toLowerCase().contains(text)) {
+                                count += 1;
+                                String xyz = bs.getX() + " " + bs.getY() + " " + bs.getZ();
+                                String cmd = "/tp " + xyz;
+                                c.sender.sendMessage(text("Sign matches: " + world.getName() + " " + xyz + " " + signSide)
+                                                     .hoverEvent(showText(text(cmd, GRAY)))
+                                                     .clickEvent(runCommand(cmd)));
+                                break LINES;
+                            }
                         }
                     }
                 }
