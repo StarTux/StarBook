@@ -107,6 +107,9 @@ public final class OrbitCommand extends AbstractCommand<StarBookPlugin> implemen
     private boolean start(Player player, String[] args) {
         if (args.length != 1 && args.length != 2) return false;
         final Orbit orbit = orbit(player);
+        if (orbit.center == null) {
+            throw new CommandWarn("Center not set!");
+        }
         final double speed = CommandArgCompleter.requireDouble(args[0]);
         final double startAngle = args.length >= 2
             ? CommandArgCompleter.requireDouble(args[1])
@@ -127,8 +130,12 @@ public final class OrbitCommand extends AbstractCommand<StarBookPlugin> implemen
     }
 
     private void clear(Player player) {
-        if (orbits.remove(player.getUniqueId()) == null) {
+        final Orbit removed = orbits.remove(player.getUniqueId());
+        if (removed == null) {
             throw new CommandWarn("No orbit loaded");
+        }
+        if (removed.started) {
+            removed.stop();
         }
         player.sendMessage(text("Orbit cleared"));
     }
