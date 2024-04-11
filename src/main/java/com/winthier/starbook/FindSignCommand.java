@@ -33,7 +33,7 @@ final class FindSignCommand extends AbstractCommand {
                                 count += 1;
                                 String xyz = bs.getX() + " " + bs.getY() + " " + bs.getZ();
                                 String cmd = "/tp " + xyz;
-                                c.sender.sendMessage(text("Sign matches: " + world.getName() + " " + xyz + " " + signSide)
+                                c.sender.sendMessage(text("Sign matches: " + world.getName() + " " + xyz)
                                                      .hoverEvent(showText(text(cmd, GRAY)))
                                                      .clickEvent(runCommand(cmd)));
                                 break LINES;
