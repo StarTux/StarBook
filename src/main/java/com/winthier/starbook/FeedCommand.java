@@ -1,12 +1,11 @@
 package com.winthier.starbook;
 
 import org.bukkit.Bukkit;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import static net.kyori.adventure.text.Component.text;
 import static net.kyori.adventure.text.format.NamedTextColor.*;
 
-final class HealCommand extends AbstractCommand {
+final class FeedCommand extends AbstractCommand {
     @Override
     public void onCommand(CommandContext c) {
         if (c.args.length > 1) StarBookCommandException.usage(c);
@@ -17,7 +16,8 @@ final class HealCommand extends AbstractCommand {
             target = c.player;
         }
         if (target == null) StarBookCommandException.playerExpected();
-        target.setHealth(target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-        c.sender.sendMessage(text(target.getName() + " was healed", GREEN));
+        target.setFoodLevel(20);
+        target.setSaturation(20.0f);
+        c.sender.sendMessage(text(target.getName() + " was fed", GREEN));
     }
 }

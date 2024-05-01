@@ -25,8 +25,8 @@ public final class StarBookPlugin extends JavaPlugin {
         getCommand("getblock").setExecutor(new GetBlockCommand(this));
         getCommand("poof").setExecutor(new PoofCommand(this));
         getCommand("heal").setExecutor(new HealCommand());
-        getCommand("feed").setExecutor(new HealCommand());
-        getCommand("starve").setExecutor(new HealCommand());
+        getCommand("feed").setExecutor(new FeedCommand());
+        getCommand("starve").setExecutor(new StarveCommand());
         getCommand("reloaddata").setExecutor((s, c, l, a) -> {
                 getServer().reloadData();
                 s.sendMessage("Data packs reloaded");
