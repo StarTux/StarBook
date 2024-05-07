@@ -59,5 +59,6 @@ public final class StarBookPlugin extends JavaPlugin {
         new CraftCommand(this).enable();
         new GetLocationCommand(this).enable();
         new OrbitCommand(this).enable();
+        new HighestCommand(this).enable();
     }
 }

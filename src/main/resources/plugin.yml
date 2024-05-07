@@ -233,6 +233,11 @@ commands:
     description: Orbit camera
     usage: /orbit
 
+  highest:
+    permission: starbook.highest
+    description: Print highest block levels
+    usage: /highest
+
 permissions:
   onlinelist.staff:
     default: op
@@ -379,5 +384,9 @@ permissions:
     description: Use /craft
 
   starbook.getlocation:
-    default: Op
+    default: op
     description: Use /getlocation
+
+  starbook.highest:
+    default: op
+    description: Use /highest
