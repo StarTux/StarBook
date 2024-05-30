@@ -107,12 +107,19 @@ final class ParticleCommand extends AbstractCommand {
             } else if (dataClass.equals(Particle.DustOptions.class)) {
                 try {
                     String[] toks = arg.split(",", 4);
-                    data = new Particle.DustOptions(org.bukkit.Color.fromRGB(Integer.parseInt(toks[0]),
-                                                                             Integer.parseInt(toks[1]),
-                                                                             Integer.parseInt(toks[2])),
+                    data = new Particle.DustOptions(Color.fromRGB(Integer.parseInt(toks[0]),
+                                                                  Integer.parseInt(toks[1]),
+                                                                  Integer.parseInt(toks[2])),
                                                     Float.parseFloat(toks[3]));
                 } catch (Exception e) {
-                    throw new StarBookCommandException("Bad dust options argument: " + arg);
+                    throw new StarBookCommandException("Bad DustOptions argument: " + arg);
+                }
+            } else if (dataClass.equals(Color.class)) {
+                try {
+                    String[] toks = arg.split(",", 3);
+                    data = Color.fromRGB(Integer.parseInt(toks[0]), Integer.parseInt(toks[1]), Integer.parseInt(toks[2]));
+                } catch (Exception e) {
+                    throw new StarBookCommandException("Bad org.bukkit.Color argument: " + arg);
                 }
             } else {
                 throw new StarBookCommandException("Unsupported data argument type: " + dataClass.getName());
