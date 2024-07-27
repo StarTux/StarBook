@@ -2,7 +2,7 @@ main: com.winthier.starbook.StarBookPlugin
 name: StarBook
 
 version: 0.1
-api-version: '1.20'
+api-version: '1.21'
 
 description: Collection of useful Commands
 author: StarTux
