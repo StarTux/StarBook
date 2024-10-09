@@ -157,10 +157,10 @@ final class SignEditCommand extends AbstractCommand implements Listener {
                 .build();
             player.sendMessage(message);
         } else {
-            player.openSign(sign);
+            Bukkit.getScheduler().runTask(StarBookPlugin.getInstance(), () -> player.openSign(sign));
             Component message = Component.text()
                 .append(tag).append(Component.space())
-                .append(Component.text("Editing sign " + entry.linum, NamedTextColor.YELLOW))
+                .append(Component.text("Editing sign", NamedTextColor.YELLOW))
                 .build();
             player.sendMessage(message);
         }
