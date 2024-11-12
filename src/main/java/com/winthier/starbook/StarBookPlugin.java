@@ -60,5 +60,6 @@ public final class StarBookPlugin extends JavaPlugin {
         new GetLocationCommand(this).enable();
         new OrbitCommand(this).enable();
         new HighestCommand(this).enable();
+        new GetOwnerCommand(this).enable();
     }
 }

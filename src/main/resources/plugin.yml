@@ -238,6 +238,11 @@ commands:
     description: Print highest block levels
     usage: /highest
 
+  getowner:
+    permission: starbook.getowner
+    description: Get owner of entity
+    usage: /getowner <uuid>
+
 permissions:
   onlinelist.staff:
     default: op
@@ -390,3 +395,7 @@ permissions:
   starbook.highest:
     default: op
     description: Use /highest
+
+  starbook.getowner:
+    default: op
+    description: Use /getowner
