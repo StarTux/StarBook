@@ -17,7 +17,7 @@ final class HealCommand extends AbstractCommand {
             target = c.player;
         }
         if (target == null) StarBookCommandException.playerExpected();
-        target.setHealth(target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+        target.setHealth(target.getAttribute(Attribute.MAX_HEALTH).getValue());
         c.sender.sendMessage(text(target.getName() + " was healed", GREEN));
     }
 }
