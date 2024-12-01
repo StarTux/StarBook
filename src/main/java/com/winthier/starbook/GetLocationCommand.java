@@ -37,7 +37,7 @@ public final class GetLocationCommand extends AbstractCommand<JavaPlugin> {
         final String intCoords = location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ();
         player.sendMessage(textOfChildren(text("Integer ", GRAY), text(intCoords, YELLOW))
                            .hoverEvent(text(intCoords, GRAY))
-                           .clickEvent(suggestCommand("/tp " + intCoords))
+                           .clickEvent(suggestCommand("/tp " + location.getBlockX() + " " + location.getBlockY() + " " + location.getBlockZ()))
                            .insertion(intCoords));
     }
 }
