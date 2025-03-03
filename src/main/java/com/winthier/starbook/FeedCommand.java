@@ -18,6 +18,7 @@ final class FeedCommand extends AbstractCommand {
         if (target == null) StarBookCommandException.playerExpected();
         target.setFoodLevel(20);
         target.setSaturation(20.0f);
+        target.setExhaustion(0f);
         c.sender.sendMessage(text(target.getName() + " was fed", GREEN));
     }
 }
