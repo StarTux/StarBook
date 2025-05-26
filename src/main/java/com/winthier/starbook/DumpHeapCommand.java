@@ -16,7 +16,7 @@ public final class DumpHeapCommand extends AbstractCommand {
     @Override
     public void onCommand(CommandContext c) {
         if (c.args.length != 1) {
-            throw StarBookCommandException.usage(c);
+            StarBookCommandException.usage(c);
         }
         boolean live;
         try {

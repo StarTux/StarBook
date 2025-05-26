@@ -11,7 +11,7 @@ public final class RestoreItemsCommand extends AbstractCommand {
     @Override
     public void onCommand(CommandContext c) {
         if (c.args.length < 2) {
-            throw StarBookCommandException.usage(c);
+            StarBookCommandException.usage(c);
         }
         Player target = Bukkit.getPlayerExact(c.args[0]);
         if (target == null) {
