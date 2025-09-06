@@ -13,6 +13,10 @@ softdepend: [WorldMarker]
 
 commands:
 
+  starbook:
+    permission: starbook.starbook
+    usage: '/starbook ...'
+
   slap:
     permission: starbook.slap
     usage: '/slap [-vhs] <player>'
@@ -247,6 +251,10 @@ permissions:
   onlinelist.staff:
     default: op
     description: Be highlighted as staff on the online list
+
+  starbook.starbook:
+    default: op
+    description: Use /starbook
 
   starbook.slap:
     default: op

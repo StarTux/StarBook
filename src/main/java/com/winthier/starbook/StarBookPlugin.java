@@ -10,6 +10,7 @@ public final class StarBookPlugin extends JavaPlugin {
 
     @Override public void onEnable() {
         instance = this;
+        new StarbookCommand(this).enable();
         getCommand("slap").setExecutor(new SlapCommand());
         getCommand("rocket").setExecutor(new RocketCommand());
         getCommand("spawnmob").setExecutor(new SpawnMobCommand(this));
